@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>2018-11-04-Jmeter录制脚本 | std::cout &lt;&lt; 百草神农 &lt;&lt; endl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ApacheJmeter5.0 录制脚本Jmeter脚本录制，一般有下面几种方式：  用badboy录制后导出 用jmeter自已直接录制 通过BlazeMeter录制后导出。     本篇只讲通过Jmeter自已录制。本篇录制基于5.0版本，和其他版本可能会有些出入。 录制过程 以GUI模式启动Jmeter 点击工具栏上模版按钮，打开模版选择页。     选择Recording模版，用录制模版在">
+<meta name="keywords" content="白盒|接口|自动化|C|GO|Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018-11-04-Jmeter录制脚本">
+<meta property="og:url" content="https://autophyte.github.io/2018/11/04/2018-11-04-Jmeter录制脚本/index.html">
+<meta property="og:site_name" content="std::cout &lt;&lt; 百草神农 &lt;&lt; endl">
+<meta property="og:description" content="ApacheJmeter5.0 录制脚本Jmeter脚本录制，一般有下面几种方式：  用badboy录制后导出 用jmeter自已直接录制 通过BlazeMeter录制后导出。     本篇只讲通过Jmeter自已录制。本篇录制基于5.0版本，和其他版本可能会有些出入。 录制过程 以GUI模式启动Jmeter 点击工具栏上模版按钮，打开模版选择页。     选择Recording模版，用录制模版在">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/templates_button.png">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/templates.png">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/Jietu20181104-template_in_tesplan.jpg">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/Jietu20181104-recording_set_parameter.jpg">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/Jietu20181104-enable_element.png">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/Jietu20181104-record_proxy.png">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/Jietu20181104-ca.png">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/Jietu20181104-open_ca_manager.png">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/Jietu20181104-import_ca.png">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/Jietu20181104-assert_install.png">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/Jietu20181104-firefox_proxy.png">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/Jietu20181104-firefox_set_prox.png">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/Jietu20181104-firefox_recording.png">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/Jietu20181104-recording_result.png">
+<meta property="og:updated_time" content="2019-05-22T08:11:10.789Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018-11-04-Jmeter录制脚本">
+<meta name="twitter:description" content="ApacheJmeter5.0 录制脚本Jmeter脚本录制，一般有下面几种方式：  用badboy录制后导出 用jmeter自已直接录制 通过BlazeMeter录制后导出。     本篇只讲通过Jmeter自已录制。本篇录制基于5.0版本，和其他版本可能会有些出入。 录制过程 以GUI模式启动Jmeter 点击工具栏上模版按钮，打开模版选择页。     选择Recording模版，用录制模版在">
+<meta name="twitter:image" content="https://autophyte.github.io/img/jmeter/templates_button.png">
+  
+    <link rel="alternate" href="/atom.xml" title="std::cout &lt;&lt; 百草神农 &lt;&lt; endl" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">std::cout &lt;&lt; 百草神农 &lt;&lt; endl</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">这是张振飞在github上写下的一些东西</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://autophyte.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2018-11-04-Jmeter录制脚本" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/2018-11-04-Jmeter录制脚本/" class="article-date">
+  <time datetime="2018-11-03T16:00:00.000Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2018-11-04-Jmeter录制脚本
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="ApacheJmeter5-0-录制脚本"><a href="#ApacheJmeter5-0-录制脚本" class="headerlink" title="ApacheJmeter5.0 录制脚本"></a>ApacheJmeter5.0 录制脚本</h2><p>Jmeter脚本录制，一般有下面几种方式：</p>
+<ol>
+<li>用badboy录制后导出</li>
+<li>用jmeter自已直接录制</li>
+<li>通过BlazeMeter录制后导出。   </li>
+</ol>
+<p>本篇只讲通过Jmeter自已录制。本篇录制基于5.0版本，和其他版本可能会有些出入。</p>
+<h3 id="录制过程"><a href="#录制过程" class="headerlink" title="录制过程"></a>录制过程</h3><ol>
+<li>以GUI模式启动Jmeter</li>
+<li>点击工具栏上模版按钮，打开模版选择页。<br> <img src="/img/jmeter/templates_button.png" alt="模版按钮" title="模版按钮">   </li>
+<li>选择Recording模版，用录制模版在新工程创建一个录制项目.<br> <img src="/img/jmeter/templates.png" alt="模版页" title="模版按钮"></li>
+<li>测试计划会变成这样子。<br> <img src="/img/jmeter/Jietu20181104-template_in_tesplan.jpg" alt="模版计划" title="录制脚本"></li>
+<li>然后在“HTTP Request Defaults”元件中填入网址（或者IP地址），路径等信息。<br><img src="/img/jmeter/Jietu20181104-recording_set_parameter.jpg" alt="填入基本信息" title="http基本信息"></li>
+<li>如果“HTTP(S) Test Script Recorder”元件是被禁用的，需要启用.<br> <img src="/img/jmeter/Jietu20181104-enable_element.png" alt="启用元件" title="http基本信息"></li>
+<li>确认“HTTP(S) Test Script Recorder”中配置是不可用，主要看端口号是否有其他程户占用，开启代理服务器。<br> <img src="/img/jmeter/Jietu20181104-record_proxy.png" alt="开启代理服务器" title="开启代理服务器"></li>
+<li>点击启动后会生成一个证书（bin/ApacheJMeterTemporaryRootCA.crt），弹出一个对话框告诉我们证书生成了。<br> <img src="/img/jmeter/Jietu20181104-ca.png" alt="证书" title="开启代理服务器"></li>
+<li>在浏览器中安装这个证，以Firefox为例<ul>
+<li>在地址栏中输入“about:preferences#privacy”回车<br><img src="/img/jmeter/Jietu20181104-open_ca_manager.png" alt="证书" title="Firefox安装证书"></li>
+<li>在打开的设置页面中，Certificates下面，点击“View Certificates”</li>
+<li>点击import安装上刚才的证书<br><img src="/img/jmeter/Jietu20181104-import_ca.png" alt="证书" title="Firefox安装证书"></li>
+<li>确认安装<br><img src="/img/jmeter/Jietu20181104-assert_install.png" alt="证书" title="Firefox安装证书"></li>
+</ul>
+</li>
+<li>在浏览器中设置代理服务器为Jmeter<ul>
+<li>在地址栏中输入“about:preferences”回车</li>
+<li>搜索“proxy”<br><img src="/img/jmeter/Jietu20181104-firefox_proxy.png" alt="代理" title="Firefox设置代理"></li>
+<li>在弹出的框中设置IP、端口号，和Jmeter中想同即可。<br><img src="/img/jmeter/Jietu20181104-firefox_set_prox.png" alt="代理" title="Firefox设置代理"></li>
+</ul>
+</li>
+<li>浏览器中打开需要录制的网站，进行操作，jmeter会记录下所有的操作（step7中已开启代理服务器）<br><img src="/img/jmeter/Jietu20181104-firefox_recording.png" alt="录制" title="Firefox录制"></li>
+<li>录制动作完成后，点击“停止”按钮结束录制</li>
+<li>完成后，可以在Recing Controller下面查看录制结果，如果有不需要动作，也可以删除或修改。<br><img src="/img/jmeter/Jietu20181104-recording_result.png" alt="录制" title="Firefox录制"></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://autophyte.github.io/2018/11/04/2018-11-04-Jmeter录制脚本/" data-id="cjvyz6kx0000560qnt3o34hj9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/11/08/2018-11-08-Jmeter各Element介绍1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2018-11-08-Jmeter各Element介绍1
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/11/03/2018-11-03-Jmeter分布式测试/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2018-11-03-Jmeter分布式测试</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/05/22/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/01/2019-04-01-Python接口自动化测试工程模板/">2019-04-01-Python接口自动化测试工程模板</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/29/2019-03-29-gitlfs存储大文件/">2019-03-29-gitlfs存储大文件</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/16/2019-03-16-PYTHON实现RSA_AES混合加密2/">2019-03-16-PYTHON实现RSA_AES混合加密2</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/15/2019-03-15-PYTHON实现RSA_AES混合加密/">2019-03-15-PYTHON实现RSA_AES混合加密</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Freedom Zhang(张振飞)<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

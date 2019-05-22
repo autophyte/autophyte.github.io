@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>2019-04-01-Python接口自动化测试工程模板 | std::cout &lt;&lt; 百草神农 &lt;&lt; endl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用Python进行接口自动化测试工程组织模板进行接口测试的时候，我们有很多工具可以使用，但是更加灵活可控的，仍然是自己写代码进行测试。这篇是介绍一个使用Python进行接口自动化测试的工程组织模板，从原来一个“Wallet”项目中精简而来，所以代码中含有很多wallet这个单词的变量或类，在自己工程中注意改名字 代码组织结构 各主要目录说明 \cases：这个目录中存放所有测试用例相关文档，如规">
+<meta name="keywords" content="白盒|接口|自动化|C|GO|Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019-04-01-Python接口自动化测试工程模板">
+<meta property="og:url" content="https://autophyte.github.io/2019/04/01/2019-04-01-Python接口自动化测试工程模板/index.html">
+<meta property="og:site_name" content="std::cout &lt;&lt; 百草神农 &lt;&lt; endl">
+<meta property="og:description" content="使用Python进行接口自动化测试工程组织模板进行接口测试的时候，我们有很多工具可以使用，但是更加灵活可控的，仍然是自己写代码进行测试。这篇是介绍一个使用Python进行接口自动化测试的工程组织模板，从原来一个“Wallet”项目中精简而来，所以代码中含有很多wallet这个单词的变量或类，在自己工程中注意改名字 代码组织结构 各主要目录说明 \cases：这个目录中存放所有测试用例相关文档，如规">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://autophyte.github.io/img/test/framework_project.png">
+<meta property="og:updated_time" content="2019-05-22T08:11:10.821Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2019-04-01-Python接口自动化测试工程模板">
+<meta name="twitter:description" content="使用Python进行接口自动化测试工程组织模板进行接口测试的时候，我们有很多工具可以使用，但是更加灵活可控的，仍然是自己写代码进行测试。这篇是介绍一个使用Python进行接口自动化测试的工程组织模板，从原来一个“Wallet”项目中精简而来，所以代码中含有很多wallet这个单词的变量或类，在自己工程中注意改名字 代码组织结构 各主要目录说明 \cases：这个目录中存放所有测试用例相关文档，如规">
+<meta name="twitter:image" content="https://autophyte.github.io/img/test/framework_project.png">
+  
+    <link rel="alternate" href="/atom.xml" title="std::cout &lt;&lt; 百草神农 &lt;&lt; endl" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">std::cout &lt;&lt; 百草神农 &lt;&lt; endl</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">这是张振飞在github上写下的一些东西</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://autophyte.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2019-04-01-Python接口自动化测试工程模板" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/01/2019-04-01-Python接口自动化测试工程模板/" class="article-date">
+  <time datetime="2019-03-31T16:00:00.000Z" itemprop="datePublished">2019-04-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2019-04-01-Python接口自动化测试工程模板
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="使用Python进行接口自动化测试工程组织模板"><a href="#使用Python进行接口自动化测试工程组织模板" class="headerlink" title="使用Python进行接口自动化测试工程组织模板"></a>使用Python进行接口自动化测试工程组织模板</h2><p>进行接口测试的时候，我们有很多工具可以使用，但是更加灵活可控的，仍然是自己写代码进行测试。这篇是介绍一个使用Python进行接口自动化测试的工程组织模板，从原来一个“Wallet”项目中精简而来，所以代码中含有很多wallet这个单词的变量或类，在自己工程中注意改名字</p>
+<h3 id="代码组织结构"><a href="#代码组织结构" class="headerlink" title="代码组织结构"></a>代码组织结构</h3><p><img src="/img/test/framework_project.png" alt="代码组织结构" title="结构"></p>
+<h3 id="各主要目录说明"><a href="#各主要目录说明" class="headerlink" title="各主要目录说明"></a>各主要目录说明</h3><ol>
+<li><strong>\cases</strong>：这个目录中存放所有测试用例相关文档，如规划多少测试用例，测试用例描述等，以方便其他参与人员，可以根据文档去写case实现代码</li>
+<li><strong>\config</strong>：这个目录下存放各种配置文件，最好可以区分不同的文件（需要在读取配置文件的代码中支持），对于不同的需要/作用的配置使用不同的文件区分</li>
+<li><strong>\src</strong>：所有代码文件都在这个目录下</li>
+<li><strong>\src\cases</strong>：所有测试用例实现文件存放在这个目录下</li>
+<li><strong>\src\cases\base.py</strong>：这个问价下封装一个基类（如TestWallet），这个基类继承自unittest.TestCase，实现当前工程所有测试用例可能会使用到的一些公共函数，如登陆，注册，获取获取验证吗，检查点检查等等</li>
+<li><strong>\src\cases\case_*.py</strong>：约定cases目录下所有以case_开头的文件为测试用例实现文件，每一个文件中一个测试用例，测试用例继承自TestWallet。如果是直接继承自unittest.TestCase，那么对于工程公共函数，将需要在每一个测试用例中都去实现</li>
+<li><strong>\db</strong>：这个目录下封装数据库操作相关函数</li>
+<li><strong>\utils</strong>：这个目录下封装一些基本公共函数，类库等，如md5计算，加解密函数，配置文件读取，单利模式装饰器等等杂项</li>
+<li><strong>\reports</strong>：这个目录下，存放测试后生成的测试报告</li>
+<li><strong>\logs</strong>：这个目录下存放测试过程中生成的日志文件</li>
+<li><strong>\run.py</strong>：这个文件中，运行所有需要测试的测试用例</li>
+</ol>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>相关代码可以看作者<a href="https://github.com/autophyte/test_framework" title="test_framework" target="_blank" rel="noopener">Github</a>上项目</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://autophyte.github.io/2019/04/01/2019-04-01-Python接口自动化测试工程模板/" data-id="cjvyz6kx8000c60qnfuwlqhfd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/22/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/03/29/2019-03-29-gitlfs存储大文件/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2019-03-29-gitlfs存储大文件</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/05/22/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/01/2019-04-01-Python接口自动化测试工程模板/">2019-04-01-Python接口自动化测试工程模板</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/29/2019-03-29-gitlfs存储大文件/">2019-03-29-gitlfs存储大文件</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/16/2019-03-16-PYTHON实现RSA_AES混合加密2/">2019-03-16-PYTHON实现RSA_AES混合加密2</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/15/2019-03-15-PYTHON实现RSA_AES混合加密/">2019-03-15-PYTHON实现RSA_AES混合加密</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Freedom Zhang(张振飞)<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

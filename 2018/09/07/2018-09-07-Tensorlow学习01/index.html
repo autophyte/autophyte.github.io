@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>2018-09-07-Tensorlow学习01 | std::cout &lt;&lt; 百草神农 &lt;&lt; endl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Tensorflow基础（1）名词解释 张量（Tensor）： TensorFlow的数据流图由节点和边组成。张量代表的数据流图的边。任意维度的数据统称为张量 残差：实际观察值与训练的估值之间的差 向前传播：张量在数据流图中从前向后流动一遍，为一次向前传播 反向传播：残差从后向前流动一遍就完成一次反向传播  Tensorflow设计理念TensorFlod的设计理念有两个方面  TensorFlo">
+<meta name="keywords" content="白盒|接口|自动化|C|GO|Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018-09-07-Tensorlow学习01">
+<meta property="og:url" content="https://autophyte.github.io/2018/09/07/2018-09-07-Tensorlow学习01/index.html">
+<meta property="og:site_name" content="std::cout &lt;&lt; 百草神农 &lt;&lt; endl">
+<meta property="og:description" content="Tensorflow基础（1）名词解释 张量（Tensor）： TensorFlow的数据流图由节点和边组成。张量代表的数据流图的边。任意维度的数据统称为张量 残差：实际观察值与训练的估值之间的差 向前传播：张量在数据流图中从前向后流动一遍，为一次向前传播 反向传播：残差从后向前流动一遍就完成一次反向传播  Tensorflow设计理念TensorFlod的设计理念有两个方面  TensorFlo">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://autophyte.github.io/img/tensors_flowing.gif">
+<meta property="og:updated_time" content="2019-05-22T08:11:10.771Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018-09-07-Tensorlow学习01">
+<meta name="twitter:description" content="Tensorflow基础（1）名词解释 张量（Tensor）： TensorFlow的数据流图由节点和边组成。张量代表的数据流图的边。任意维度的数据统称为张量 残差：实际观察值与训练的估值之间的差 向前传播：张量在数据流图中从前向后流动一遍，为一次向前传播 反向传播：残差从后向前流动一遍就完成一次反向传播  Tensorflow设计理念TensorFlod的设计理念有两个方面  TensorFlo">
+<meta name="twitter:image" content="https://autophyte.github.io/img/tensors_flowing.gif">
+  
+    <link rel="alternate" href="/atom.xml" title="std::cout &lt;&lt; 百草神农 &lt;&lt; endl" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">std::cout &lt;&lt; 百草神农 &lt;&lt; endl</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">这是张振飞在github上写下的一些东西</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://autophyte.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2018-09-07-Tensorlow学习01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/07/2018-09-07-Tensorlow学习01/" class="article-date">
+  <time datetime="2018-09-06T16:00:00.000Z" itemprop="datePublished">2018-09-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2018-09-07-Tensorlow学习01
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Tensorflow基础（1）"><a href="#Tensorflow基础（1）" class="headerlink" title="Tensorflow基础（1）"></a>Tensorflow基础（1）</h1><h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><ul>
+<li>张量（Tensor）： TensorFlow的数据流图由节点和边组成。张量代表的数据流图的边。任意维度的数据统称为<strong>张量</strong></li>
+<li>残差：实际观察值与训练的估值之间的差</li>
+<li>向前传播：张量在数据流图中从前向后流动一遍，为一次向前传播</li>
+<li>反向传播：残差从后向前流动一遍就完成一次反向传播</li>
+</ul>
+<h2 id="Tensorflow设计理念"><a href="#Tensorflow设计理念" class="headerlink" title="Tensorflow设计理念"></a>Tensorflow设计理念</h2><p>TensorFlod的设计理念有两个方面</p>
+<ol>
+<li><p>TensorFlow是符号式编程，如</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t = 8 + 9</span><br><span class="line">print(t)</span><br></pre></td></tr></table></figure>
+<p> 在传统的编程中，这样的代码将会直接执行，但在TensorFlow中：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">t = tf.add(8, 9)</span><br><span class="line">print(t)</span><br></pre></td></tr></table></figure>
+<p> 这个输出为<code>Tensor(&quot;Add:0&quot;, shape=(), dtype=int32)</code>，实际上只是定义了一个操作，但没有运行</p>
+</li>
+<li><p>TensorFlow中涉及的运算都要放在图中，而图的运行只会发生在会话（session）中。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">a = tf.constant([1.0, 2.0])</span><br><span class="line">b = tf.constant([3.0, 4.0])</span><br><span class="line">c = a * b</span><br><span class="line"></span><br><span class="line">sess = tf.Session()</span><br><span class="line">print(sess.run(c))</span><br><span class="line">sess.close()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编程模型<br>3.1 边<br>TensorFlow的边有两种连接关系：数据依赖（实线）和控制依赖（虚线）。控制依赖可用于控制操作的运行，这类边上没有数据流过，但源节点必须在目的节点开始前执行完成。常用代码如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.Graph.control_dependencies(control_inputs)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>3.2 张量支持的数据类型<br>Tensorflow的张量支持下面所有数据类型<br>|数据类型|Python类型|描术|<br>|:–|:–|:–|<br>|DT_FLOAT|tf.float32|32位浮点|<br>|DT_DOUBLE|tf.float64|64位浮点|<br>|DT_INT64|tf.int64|64位整型|<br>|DT_INT32|tf.int32|32位整型|<br>|DT_INT16|tf.int61|16位整型|<br>|DT_INT8|tf.int8|8位整型|<br>|DT_UINT8|tf.uint8|8位无符号整型|<br>|DT_STRING|tf.string|字符串|<br>|DT_BOOL|tf.bool|布尔|<br>|DT_COMPLEX64|tf.complex64|复数，两个32位浮点分别表示实部和虚部|<br>|DT_QINT32|tf.qint32|用于量化操作的32位整型|<br>|DT_QINT8|tf.qint8|用于量化操作的位整型|<br>|DT_QUINT8|tf.quint8|用于量化操作的8位无符号整型|</p>
+<ol start="4">
+<li>编程模型：<br>TensorFlow计算过程如下：<ul>
+<li>从输入开始，经过reshape后往前传播</li>
+<li>流经ReLu层（隐层），这里会有两个参数Wh1和bh1,在输出前使用ReLu激活函数作非线性处理</li>
+<li>流经Logit（输出层），学习两个参数Wsm和bsm</li>
+<li>使用Softmax来计算输出结果中和个类别的概率分布</li>
+<li>用交叉熵灭度量源样本的概率分布和输出结果的概率分布间的相似性</li>
+<li>计算梯度，这里需要参Wh1/bh1/Wsm/bsm，以及交叉熵后的结果</li>
+<li>进入SGD训练，也就是反向传播过程，从上向下的计算每层的参数，并依次更新<br>流如下图<img src="/img/tensors_flowing.gif" alt="TensorFlow流"></li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://autophyte.github.io/2018/09/07/2018-09-07-Tensorlow学习01/" data-id="cjvyz6kwv000160qnsdeef490" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/11/02/2018-11-02-Jmeter分布式测试配置/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2018-11-02-Jmeter分布式测试配置
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/09/03/2018-09-03-Flask.WSGI.nginx(1)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2018-09-03-Flask.WSGI.nginx(1)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/05/22/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/01/2019-04-01-Python接口自动化测试工程模板/">2019-04-01-Python接口自动化测试工程模板</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/29/2019-03-29-gitlfs存储大文件/">2019-03-29-gitlfs存储大文件</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/16/2019-03-16-PYTHON实现RSA_AES混合加密2/">2019-03-16-PYTHON实现RSA_AES混合加密2</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/15/2019-03-15-PYTHON实现RSA_AES混合加密/">2019-03-15-PYTHON实现RSA_AES混合加密</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Freedom Zhang(张振飞)<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

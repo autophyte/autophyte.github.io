@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>2019-03-16-PYTHON实现RSA_AES混合加密2 | std::cout &lt;&lt; 百草神农 &lt;&lt; endl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Python3 RSA+AES混合加密（二）——加检验前文(Python实现rsa_aes混合加密)中已经实现了RSA+AES混合加密，但是这个加密是单向且没有进行安全校验的，也意味着，任何人都可以伪装成发送者向接收着发送伪装的信息，因为公钥是公开的。改进的方式就是发送方使用自已的么钥对数据进行签名 我们假定服务方名称为server，用户方为client 一般逻辑（与前文稍有不同，注意粉红色的地方">
+<meta name="keywords" content="白盒|接口|自动化|C|GO|Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019-03-16-PYTHON实现RSA_AES混合加密2">
+<meta property="og:url" content="https://autophyte.github.io/2019/03/16/2019-03-16-PYTHON实现RSA_AES混合加密2/index.html">
+<meta property="og:site_name" content="std::cout &lt;&lt; 百草神农 &lt;&lt; endl">
+<meta property="og:description" content="Python3 RSA+AES混合加密（二）——加检验前文(Python实现rsa_aes混合加密)中已经实现了RSA+AES混合加密，但是这个加密是单向且没有进行安全校验的，也意味着，任何人都可以伪装成发送者向接收着发送伪装的信息，因为公钥是公开的。改进的方式就是发送方使用自已的么钥对数据进行签名 我们假定服务方名称为server，用户方为client 一般逻辑（与前文稍有不同，注意粉红色的地方">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://autophyte.github.io/img/Python/python_rsa_aes_result2.png">
+<meta property="og:updated_time" content="2019-05-22T08:11:10.809Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2019-03-16-PYTHON实现RSA_AES混合加密2">
+<meta name="twitter:description" content="Python3 RSA+AES混合加密（二）——加检验前文(Python实现rsa_aes混合加密)中已经实现了RSA+AES混合加密，但是这个加密是单向且没有进行安全校验的，也意味着，任何人都可以伪装成发送者向接收着发送伪装的信息，因为公钥是公开的。改进的方式就是发送方使用自已的么钥对数据进行签名 我们假定服务方名称为server，用户方为client 一般逻辑（与前文稍有不同，注意粉红色的地方">
+<meta name="twitter:image" content="https://autophyte.github.io/img/Python/python_rsa_aes_result2.png">
+  
+    <link rel="alternate" href="/atom.xml" title="std::cout &lt;&lt; 百草神农 &lt;&lt; endl" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">std::cout &lt;&lt; 百草神农 &lt;&lt; endl</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">这是张振飞在github上写下的一些东西</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://autophyte.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2019-03-16-PYTHON实现RSA_AES混合加密2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/16/2019-03-16-PYTHON实现RSA_AES混合加密2/" class="article-date">
+  <time datetime="2019-03-15T16:00:00.000Z" itemprop="datePublished">2019-03-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2019-03-16-PYTHON实现RSA_AES混合加密2
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Python3-RSA-AES混合加密（二）——加检验"><a href="#Python3-RSA-AES混合加密（二）——加检验" class="headerlink" title="Python3 RSA+AES混合加密（二）——加检验"></a>Python3 RSA+AES混合加密（二）——加检验</h2><p><a href="https://autophyte.github.io/2019/03/15/PYTHON%E5%AE%9E%E7%8E%B0RSA_AES%E6%B7%B7%E5%90%88%E5%8A%A0%E5%AF%86.html">前文(Python实现rsa_aes混合加密)</a>中已经实现了RSA+AES混合加密，但是这个加密是单向且没有进行安全校验的，也意味着，任何人都可以伪装成发送者向接收着发送伪装的信息，因为公钥是公开的。改进的方式就是发送方使用自已的么钥对数据进行签名</p>
+<p>我们假定服务方名称为server，用户方为client</p>
+<h3 id="一般逻辑（与前文稍有不同，注意粉红色的地方）"><a href="#一般逻辑（与前文稍有不同，注意粉红色的地方）" class="headerlink" title="一般逻辑（与前文稍有不同，注意粉红色的地方）"></a>一般逻辑（与<a href="https://autophyte.github.io/2019/03/15/PYTHON%E5%AE%9E%E7%8E%B0RSA_AES%E6%B7%B7%E5%90%88%E5%8A%A0%E5%AF%86.html">前文</a>稍有不同，注意粉红色的地方）</h3><h4 id="加密过程（以server为例）"><a href="#加密过程（以server为例）" class="headerlink" title="加密过程（以server为例）"></a>加密过程（以server为例）</h4><ol>
+<li>准备好client的RSA公钥（注意，server使用client公钥：client_key_rsa_pub），用于对AES的密钥加密</li>
+<li><font color="Hotpink">准备好server的RSA私钥（server_key_rsa_pri），用于对数据进行签名</font></li>
+<li><font color="Hotpink">使用server_key_rsa_pri对原始数据进行签名得到sign</font></li>
+<li>随机生成AES加密密钥：key_aes_rand（这个会经过RSA加密发送给接收方）</li>
+<li>使用key_aes_rand对需要发送的数据msg进行AES加密（加密时需要对数据进行填充），得到encrypted_msg</li>
+<li>第3步aes加密后的数据有些是不可见数据，网络传输时可能会出错，此时会再进一步进行base64编码，得到base64ed_encrypted_msg</li>
+<li>对key_aes_rand使用key_rsa_pub进行RSA加密、base64，得到base64ed_encrypted_key_aes_rand</li>
+<li>把<font color="Hotpink">sign</font>、base64ed_encrypted_msg和base64ed_encrypted_key_aes_rand发送给接收方即可</li>
+</ol>
+<h4 id="解密过程"><a href="#解密过程" class="headerlink" title="解密过程"></a>解密过程</h4><ol>
+<li>准备好client端自已RSA私钥(client_key_rsa_pri)，用于对AES的密钥进行解密</li>
+<li><font color="Hotpink">准备好server的RSA公钥（server_key_rsa_pub），用于对进行签名校验</font></li>
+<li>对接收到的数据拆分，得到<font color="Hotpink">sign</font>、base64ed_encrypted_msg和base64ed_encrypted_key_aes_rand</li>
+<li>对base64ed_encrypted_key_aes_rand进行base64解密，得到encrypted_key_aes_rand</li>
+<li>对encrypted_key_aes_rand，使用RSA私钥key_rsa_pri解密，得到key_aes_rand</li>
+<li>对base64ed_encrypted_msg进行base64解密，得到encrypted_msg</li>
+<li>对encrypted_msg，使用key_aes_rand进行AES解密得到msg</li>
+<li><font color="Hotpink">使用server_key_rsa_pub对encrypted_msg和sign进行签名校验，校验成功说明不是伪造的数据</font>
+
+
+</li>
+</ol>
+<h3 id="上代码"><a href="#上代码" class="headerlink" title="上代码"></a>上代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># Crypto安装命令：`pip3 install -i https://pypi.douban.com/simple pycryptodome`</span></span><br><span class="line"><span class="keyword">from</span> Crypto <span class="keyword">import</span> Random</span><br><span class="line"><span class="keyword">from</span> Crypto.Hash <span class="keyword">import</span> SHA256</span><br><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line"><span class="keyword">from</span> Crypto.Signature <span class="keyword">import</span> PKCS1_v1_5</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> PKCS1_v1_5 <span class="keyword">as</span> Cipher_pkcs1_v1_5</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># AES根据16位对齐(即AES128)</span></span><br><span class="line">BLOCK_SIZE = <span class="number">16</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 伪随机数生成器</span></span><br><span class="line">random_generator = Random.new().read</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RSAAES</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># 这里注意，发送方需要配置：发送方密钥，接收方公钥</span></span><br><span class="line">        <span class="comment"># 接收方需要配置：接收方密钥，发送方公钥</span></span><br><span class="line">        self.key_private = <span class="string">b""</span>  <span class="comment"># 此为发送方私钥</span></span><br><span class="line">        self.key_public = <span class="string">b""</span>  <span class="comment"># 此为发送方公钥</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pad</span><span class="params">(s: bytes)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> s + (BLOCK_SIZE - len(s) % BLOCK_SIZE) * \</span><br><span class="line">                chr(BLOCK_SIZE - len(s) % BLOCK_SIZE).encode()</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">unpad</span><span class="params">(s: bytes)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> s[:-ord(s[len(s) - <span class="number">1</span>:])]</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_random_aes_key</span><span class="params">(key_size: int = <span class="number">16</span>)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        生成随机密钥</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> base64.b64encode(os.urandom(int(key_size/<span class="number">4</span>*<span class="number">3</span>)))</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decode_base64</span><span class="params">(data)</span>:</span></span><br><span class="line">        missing_padding = <span class="number">4</span> - len(data) % <span class="number">4</span></span><br><span class="line">        <span class="keyword">if</span> missing_padding:</span><br><span class="line">            data += <span class="string">b'='</span> * <span class="number">3</span></span><br><span class="line">        <span class="keyword">return</span> base64.urlsafe_b64decode(data)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">encode_base64</span><span class="params">(data)</span>:</span></span><br><span class="line">        data = base64.urlsafe_b64encode(data)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">            <span class="keyword">if</span> data.endswith(<span class="string">b'='</span>):</span><br><span class="line">                data = data[:<span class="number">-1</span>]</span><br><span class="line">        <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sign_rsa</span><span class="params">(self, message: bytes)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        非对称签名（此函发送方调用）</span></span><br><span class="line"><span class="string">        :param message: 原始消息</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        signer = PKCS1_v1_5.new(RSA.importKey(self.key_private))</span><br><span class="line">        signature = signer.sign(SHA256.new(message))</span><br><span class="line">        <span class="keyword">return</span> self.encode_base64(signature)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">verify_rsa</span><span class="params">(self, message: bytes, signature: bytes)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        非对称验签（此函数接收方调用）</span></span><br><span class="line"><span class="string">        :param message: 原始消息</span></span><br><span class="line"><span class="string">        :param signature: 签名信息</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        verifier = PKCS1_v1_5.new(RSA.importKey(self.key_public))</span><br><span class="line">        signature = signature.rstrip(<span class="string">b''</span>)</span><br><span class="line">        <span class="keyword">if</span> verifier.verify(SHA256.new(message), self.decode_base64(signature)):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">encrypt</span><span class="params">(self, msg: bytes)</span>:</span></span><br><span class="line">        <span class="comment"># 生成随机AES密钥</span></span><br><span class="line">        key_aes_rand = self.get_random_aes_key(BLOCK_SIZE)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 对原始信息进行AES加密再base64（需要网络传输选择urlsafe_b64encode）</span></span><br><span class="line">        encrypted_msg = AES.new(</span><br><span class="line">            key_aes_rand, AES.MODE_ECB).encrypt(self.pad(msg))</span><br><span class="line">        base64ed_encrypted_msg = base64.urlsafe_b64encode(encrypted_msg)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 对AES随机密钥进行RSA加密</span></span><br><span class="line">        encrypted_key_aes_rand = Cipher_pkcs1_v1_5.new(</span><br><span class="line">            RSA.importKey(self.key_public)).encrypt(key_aes_rand)</span><br><span class="line"></span><br><span class="line">        base64ed_encrypted_key_aes_rand = base64.urlsafe_b64encode(</span><br><span class="line">            encrypted_key_aes_rand)</span><br><span class="line"></span><br><span class="line">        sign = self.sign_rsa(msg)</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="string">"sign"</span>: sign.decode(),</span><br><span class="line">            <span class="string">"msg"</span>: base64ed_encrypted_msg.decode(),</span><br><span class="line">            <span class="string">"key"</span>: base64ed_encrypted_key_aes_rand.decode()</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">(self, source: dict)</span>:</span></span><br><span class="line">        <span class="comment"># 对接收到的数据拆分</span></span><br><span class="line">        sign, base64ed_encrypted_msg, base64ed_encrypted_key_aes_rand = \</span><br><span class="line">            source[<span class="string">"sign"</span>].encode(), source[<span class="string">"msg"</span>].encode(),\</span><br><span class="line">            source[<span class="string">"key"</span>].encode()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 对base64ed_encrypted_key_aes_rand进行base64解密</span></span><br><span class="line">        encrypted_key_aes_rand = base64.urlsafe_b64decode(</span><br><span class="line">            base64ed_encrypted_key_aes_rand)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 对encrypted_key_aes_rand，使用RSA私钥key_rsa_pri解密，得到key_aes_rand</span></span><br><span class="line">        key_aes_rand = Cipher_pkcs1_v1_5.new(</span><br><span class="line">            RSA.importKey(self.key_private)).decrypt(</span><br><span class="line">            encrypted_key_aes_rand, random_generator)</span><br><span class="line"></span><br><span class="line">        encrypted_msg = base64.urlsafe_b64decode(base64ed_encrypted_msg)</span><br><span class="line">        msg = self.unpad(AES.new(key_aes_rand, AES.MODE_ECB).decrypt(</span><br><span class="line">            encrypted_msg))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">assert</span> self.verify_rsa(msg, sign)</span><br><span class="line">        <span class="keyword">return</span> msg</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sender</span><span class="params">(RSAAES)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.key_public = <span class="string">b"""-----BEGIN PUBLIC KEY-----</span></span><br><span class="line"><span class="string">MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDW1aA3SG/czhFO+57bFVIMx390</span></span><br><span class="line"><span class="string">TMWXUY1ZTHW6gXTaK1gBfd7rHVaxLhmOsfIBaxBFfXg6lOfBQ+9mOZDY0LPzRRP2</span></span><br><span class="line"><span class="string">1pmW+DW/QvrAO1xL1t04zKzPNkslCpjQ3fSwwIyJnfQsRQxUxUv9j/OJdWh97XNc</span></span><br><span class="line"><span class="string">K4EyACqRC9eO9vJ18QIDAQAB</span></span><br><span class="line"><span class="string">-----END PUBLIC KEY-----"""</span></span><br><span class="line">        self.key_private = <span class="string">b"""-----BEGIN PUBLIC KEY-----</span></span><br><span class="line"><span class="string">MIICXQIBAAKBgQCsgzVEoL6Mwj92VH/ERMmyjC4dmG31WDAedALib1Z3mVCKOk5n</span></span><br><span class="line"><span class="string">azTWJESgDp9UFV18LBveeEA1JRg5lk1wXRNShQ4A/q6FzIZ+vTB7FbXJC4vXzeq5</span></span><br><span class="line"><span class="string">wor8Zj1j6JqQvz8sDnfvvdQqGfm3Rque51LWxeEcd+vRRDgLYqvsbwapDQIDAQAB</span></span><br><span class="line"><span class="string">AoGAF5aFNRIJm/N/e+2H3s1NCuXR9GgAOPjK848HSfDRUN8cvRnF2Kw2+ETTQVNe</span></span><br><span class="line"><span class="string">g7+8HZtmYB/vH5Un38/mXMPNPVRJK925kLC2/Qv2hzIX9x3KLzMeYpJ8FyE3MmWi</span></span><br><span class="line"><span class="string">bHiKVOOB/cZ0LMQtjFgRYx8R162yJ9JiZ6/ddlMIlaf8kWECQQDwV6xC2VtAM8ZG</span></span><br><span class="line"><span class="string">2mnL6RkkCywZ4ubsatO6SGiAq+4Y7uEtHgoc6f/rs9ftrQhcm+1lcY4julWmv5wn</span></span><br><span class="line"><span class="string">ysY1SWw5AkEAt8BMBfvHUpiMU2F9g/0MEoveqQssxeFDOz70z8EYNYDYo/Yg7GwH</span></span><br><span class="line"><span class="string">mmUN1tESzPcclYyCZocSP2tm5wjIRt/LdQJBAONeHZG0LHZFRKsczv9fyi/l/deT</span></span><br><span class="line"><span class="string">Z2B7A0f0XiB0BjBCNHXJOEn4OOqTXY/0pLdvr5rLXWuBSKwSErk2RGJ+zkkCQCuv</span></span><br><span class="line"><span class="string">hyOBCZFkfTAxpGKl3aHnKQethXaCKLbEL/XYpYXK3TaWBJvQzznwvoqM6Fhcg6o2</span></span><br><span class="line"><span class="string">XqY7hKYZRby1xM+80yUCQQCFFLfjxTpVFXtExUKYHDMiREVOcOgfdiigBCztcC4W</span></span><br><span class="line"><span class="string">W/YB6P7Tm9rGIapw2QqBRaHnAaeHmACKvdtnb1csdNA4</span></span><br><span class="line"><span class="string">-----END PUBLIC KEY-----"""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Receiver</span><span class="params">(RSAAES)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.key_private = <span class="string">b"""-----BEGIN RSA PRIVATE KEY-----</span></span><br><span class="line"><span class="string">MIICWwIBAAKBgQDW1aA3SG/czhFO+57bFVIMx390TMWXUY1ZTHW6gXTaK1gBfd7r</span></span><br><span class="line"><span class="string">HVaxLhmOsfIBaxBFfXg6lOfBQ+9mOZDY0LPzRRP21pmW+DW/QvrAO1xL1t04zKzP</span></span><br><span class="line"><span class="string">NkslCpjQ3fSwwIyJnfQsRQxUxUv9j/OJdWh97XNcK4EyACqRC9eO9vJ18QIDAQAB</span></span><br><span class="line"><span class="string">AoGARzKGZbaJ7AFsVw1TY4PjV1Izo9VgPnp2f7uz4IV6tmWwRX5I3F6IFoa9TZRy</span></span><br><span class="line"><span class="string">LD970FZ5UTYmwDQa03lhzu5g/t4MBGZ+dEJ7hmcR4PJuLZSl59E2TzkEo9hE3DQ7</span></span><br><span class="line"><span class="string">bq4wSIeBcY61hiwGf8tCnWetJbAvj+HS29HIB8sl1fu0jekCQQDgwiJm3HkgkoNq</span></span><br><span class="line"><span class="string">mx5WliKvcGi+/eB9FXar9jn6762+mkge7htZbrM4tpIHl+5Vx+bn8E159FTcmgCS</span></span><br><span class="line"><span class="string">My/WCb37AkEA9LJbn9GLvxupAcXq35snnq5xkNAsgHJHQaeu/VT0T2Gz5pUO3iB4</span></span><br><span class="line"><span class="string">GLpWlia/E9eIDWj399Zs089AT72dAab0AwJAPtTmqxy9W+a5iEbe/1OvVJ43GhV8</span></span><br><span class="line"><span class="string">+VrTtxT5dnYkeyFEQilMSf8RaSxYvHizrxVYLsTV098DDjybJkPa/pnwmwJAXeJk</span></span><br><span class="line"><span class="string">5y/l92AseyKt2DdWfzqdFhvZRzsRfe5RZJ+I0UBCXxEH0FAS5CHygM/C9mD2sXZ5</span></span><br><span class="line"><span class="string">1ZxuyuG04iN1LyIYcwJAULISlX5ZR8y+V6B1E/vndPu4BdfX5QORqzIwTAWsAt8k</span></span><br><span class="line"><span class="string">uMsm5ubz+EEf4klTSVLhRZrxquVnTaBgiib6ngc9iA==</span></span><br><span class="line"><span class="string">-----END RSA PRIVATE KEY-----"""</span></span><br><span class="line">        self.key_public = <span class="string">b"""-----BEGIN RSA PRIVATE KEY-----</span></span><br><span class="line"><span class="string">MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCsgzVEoL6Mwj92VH/ERMmyjC4d</span></span><br><span class="line"><span class="string">mG31WDAedALib1Z3mVCKOk5nazTWJESgDp9UFV18LBveeEA1JRg5lk1wXRNShQ4A</span></span><br><span class="line"><span class="string">/q6FzIZ+vTB7FbXJC4vXzeq5wor8Zj1j6JqQvz8sDnfvvdQqGfm3Rque51LWxeEc</span></span><br><span class="line"><span class="string">d+vRRDgLYqvsbwapDQIDAQAB</span></span><br><span class="line"><span class="string">-----END RSA PRIVATE KEY-----"""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    <span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line">    sender, receiver = Sender(), Receiver()</span><br><span class="line"></span><br><span class="line">    message = <span class="string">"这是一个server主动发送给client的测试数据"</span></span><br><span class="line">    print(<span class="string">"原始数据： &#123;origin_msg&#125;"</span>.format(origin_msg=message))</span><br><span class="line">    value = sender.encrypt(message.encode(<span class="string">"utf-8"</span>))</span><br><span class="line">    print(<span class="string">"密文数据： &#123;encrypt_msg&#125;"</span>.format(</span><br><span class="line">        encrypt_msg=json.dumps(value, indent=<span class="number">4</span>)))</span><br><span class="line">    msg = receiver.decrypt(value)</span><br><span class="line">    print(<span class="string">"解密数据： &#123;decrypt_msg&#125;"</span>.format(decrypt_msg=msg.decode(<span class="string">"utf-8"</span>)))</span><br><span class="line"></span><br><span class="line">    print(<span class="string">"\n\n"</span>)</span><br><span class="line">    message = <span class="string">"这是一个client返回给server的信息"</span></span><br><span class="line">    print(<span class="string">"原始数据： &#123;origin_msg&#125;"</span>.format(origin_msg=message))</span><br><span class="line">    value = receiver.encrypt(message.encode(<span class="string">"utf-8"</span>))</span><br><span class="line">    print(<span class="string">"密文数据： &#123;encrypt_msg&#125;"</span>.format(</span><br><span class="line">        encrypt_msg=json.dumps(value, indent=<span class="number">4</span>)))</span><br><span class="line">    msg = sender.decrypt(value)</span><br><span class="line">    print(<span class="string">"解密数据： &#123;decrypt_msg&#125;"</span>.format(decrypt_msg=msg.decode(<span class="string">"utf-8"</span>)))</span><br></pre></td></tr></table></figure>
+<h3 id="运行上面代码"><a href="#运行上面代码" class="headerlink" title="运行上面代码"></a>运行上面代码</h3><p><img src="/img/Python/python_rsa_aes_result2.png" alt="RSA/AES混合加密"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://autophyte.github.io/2019/03/16/2019-03-16-PYTHON实现RSA_AES混合加密2/" data-id="cjvyz6kxd000d60qng8o0pt7h" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/03/29/2019-03-29-gitlfs存储大文件/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2019-03-29-gitlfs存储大文件
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/03/15/2019-03-15-PYTHON实现RSA_AES混合加密/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2019-03-15-PYTHON实现RSA_AES混合加密</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/05/22/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/01/2019-04-01-Python接口自动化测试工程模板/">2019-04-01-Python接口自动化测试工程模板</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/29/2019-03-29-gitlfs存储大文件/">2019-03-29-gitlfs存储大文件</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/16/2019-03-16-PYTHON实现RSA_AES混合加密2/">2019-03-16-PYTHON实现RSA_AES混合加密2</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/15/2019-03-15-PYTHON实现RSA_AES混合加密/">2019-03-15-PYTHON实现RSA_AES混合加密</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Freedom Zhang(张振飞)<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
