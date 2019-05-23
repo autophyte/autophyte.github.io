@@ -5,23 +5,23 @@
   
 
   
-  <title>2018-11-08-Jmeter各Element介绍1 | std::cout &lt;&lt; 百草神农 &lt;&lt; endl</title>
+  <title>ApacheJmeter各Element介绍（一）：TestPlan | std::cout &lt;&lt; 百草神农 &lt;&lt; endl</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ApacheJmeter各Element介绍（一）：TestPlanTestPlan介绍TestPlan是Jmeter测试用例的“根”，我们所有的测试过程都在TestPlan中进行，每一个TestPlan可以看作是一个“项目”，其它所有element都必须在TestPlan下。Jmeter启动时，我们所看到的就是TestPlan。     TestPlan中有一个选项“Functional Tes">
-<meta name="keywords" content="白盒|接口|自动化|C|GO|Python">
+  <meta name="description" content="TestPlan介绍TestPlan是Jmeter测试用例的“根”，我们所有的测试过程都在TestPlan中进行，每一个TestPlan可以看作是一个“项目”，其它所有element都必须在TestPlan下。Jmeter启动时，我们所看到的就是TestPlan。     TestPlan中有一个选项“Functional Test Mode”，这个选项默认时未被选中的。 如果是作功能测试，或者进">
+<meta name="keywords" content="Jmeter,测试,性能测试,压力测试">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2018-11-08-Jmeter各Element介绍1">
+<meta property="og:title" content="ApacheJmeter各Element介绍（一）：TestPlan">
 <meta property="og:url" content="https://autophyte.github.io/2018/11/08/2018-11-08-Jmeter各Element介绍1/index.html">
 <meta property="og:site_name" content="std::cout &lt;&lt; 百草神农 &lt;&lt; endl">
-<meta property="og:description" content="ApacheJmeter各Element介绍（一）：TestPlanTestPlan介绍TestPlan是Jmeter测试用例的“根”，我们所有的测试过程都在TestPlan中进行，每一个TestPlan可以看作是一个“项目”，其它所有element都必须在TestPlan下。Jmeter启动时，我们所看到的就是TestPlan。     TestPlan中有一个选项“Functional Tes">
+<meta property="og:description" content="TestPlan介绍TestPlan是Jmeter测试用例的“根”，我们所有的测试过程都在TestPlan中进行，每一个TestPlan可以看作是一个“项目”，其它所有element都必须在TestPlan下。Jmeter启动时，我们所看到的就是TestPlan。     TestPlan中有一个选项“Functional Test Mode”，这个选项默认时未被选中的。 如果是作功能测试，或者进">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://autophyte.github.io/img/jmeter/JmeterElements_TestPlan.png">
 <meta property="og:image" content="https://autophyte.github.io/img/jmeter/JmeterElements_TestPlan_checkbox.png">
 <meta property="og:image" content="https://autophyte.github.io/img/jmeter/JmeterElements_TestPlan_variable.png">
-<meta property="og:updated_time" content="2019-05-22T08:11:10.793Z">
+<meta property="og:updated_time" content="2019-04-10T02:08:48.026Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2018-11-08-Jmeter各Element介绍1">
-<meta name="twitter:description" content="ApacheJmeter各Element介绍（一）：TestPlanTestPlan介绍TestPlan是Jmeter测试用例的“根”，我们所有的测试过程都在TestPlan中进行，每一个TestPlan可以看作是一个“项目”，其它所有element都必须在TestPlan下。Jmeter启动时，我们所看到的就是TestPlan。     TestPlan中有一个选项“Functional Tes">
+<meta name="twitter:title" content="ApacheJmeter各Element介绍（一）：TestPlan">
+<meta name="twitter:description" content="TestPlan介绍TestPlan是Jmeter测试用例的“根”，我们所有的测试过程都在TestPlan中进行，每一个TestPlan可以看作是一个“项目”，其它所有element都必须在TestPlan下。Jmeter启动时，我们所看到的就是TestPlan。     TestPlan中有一个选项“Functional Test Mode”，这个选项默认时未被选中的。 如果是作功能测试，或者进">
 <meta name="twitter:image" content="https://autophyte.github.io/img/jmeter/JmeterElements_TestPlan.png">
   
     <link rel="alternate" href="/atom.xml" title="std::cout &lt;&lt; 百草神农 &lt;&lt; endl" type="application/atom+xml">
@@ -87,7 +87,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      2018-11-08-Jmeter各Element介绍1
+      ApacheJmeter各Element介绍（一）：TestPlan
     </h1>
   
 
@@ -95,7 +95,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="ApacheJmeter各Element介绍（一）：TestPlan"><a href="#ApacheJmeter各Element介绍（一）：TestPlan" class="headerlink" title="ApacheJmeter各Element介绍（一）：TestPlan"></a>ApacheJmeter各Element介绍（一）：TestPlan</h2><h3 id="TestPlan介绍"><a href="#TestPlan介绍" class="headerlink" title="TestPlan介绍"></a>TestPlan介绍</h3><p>TestPlan是Jmeter测试用例的“根”，我们所有的测试过程都在TestPlan中进行，每一个TestPlan可以看作是一个“项目”，其它所有element都必须在TestPlan下。Jmeter启动时，我们所看到的就是TestPlan。<br><img src="/img/jmeter/JmeterElements_TestPlan.png" alt="TestPlan" title="TestPlan">   </p>
+        <h3 id="TestPlan介绍"><a href="#TestPlan介绍" class="headerlink" title="TestPlan介绍"></a>TestPlan介绍</h3><p>TestPlan是Jmeter测试用例的“根”，我们所有的测试过程都在TestPlan中进行，每一个TestPlan可以看作是一个“项目”，其它所有element都必须在TestPlan下。Jmeter启动时，我们所看到的就是TestPlan。<br><img src="/img/jmeter/JmeterElements_TestPlan.png" alt="TestPlan" title="TestPlan">   </p>
 <ul>
 <li>TestPlan中有一个选项“Functional Test Mode”，这个选项默认时未被选中的。<ul>
 <li>如果是作功能测试，或者进行调试的话，可以将这个选项打开。</li>
@@ -126,6 +126,8 @@
       <a data-url="https://autophyte.github.io/2018/11/08/2018-11-08-Jmeter各Element介绍1/" data-id="cjvyzfk7y0008bsqnyjtn6asv" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
+
     </footer>
   </div>
   
@@ -136,7 +138,7 @@
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          2018-11-09-Jmeter各Element介绍2
+          ApacheJmeter各Element介绍（二）：Thread Group
         
       </div>
     </a>
@@ -144,7 +146,7 @@
   
     <a href="/2018/11/04/2018-11-04-Jmeter录制脚本/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">2018-11-04-Jmeter录制脚本</div>
+      <div class="article-nav-title">ApacheJmeter5.0 录制脚本</div>
     </a>
   
 </nav>
@@ -160,9 +162,23 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/加解密/">加解密</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Jmeter/" style="font-size: 17.5px;">Jmeter</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/加解密/" style="font-size: 12.5px;">加解密</a> <a href="/tags/压力测试/" style="font-size: 17.5px;">压力测试</a> <a href="/tags/性能测试/" style="font-size: 17.5px;">性能测试</a> <a href="/tags/测试/" style="font-size: 20px;">测试</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -181,23 +197,23 @@
       <ul>
         
           <li>
-            <a href="/2019/04/01/2019-04-01-Python接口自动化测试工程模板/">2019-04-01-Python接口自动化测试工程模板</a>
+            <a href="/2019/04/17/2019-04-17-Centos7下安装docker以及基于docker的数据库/">Centos7下安装docker以及基于docker的数据库</a>
           </li>
         
           <li>
-            <a href="/2019/03/29/2019-03-29-gitlfs存储大文件/">2019-03-29-gitlfs存储大文件</a>
+            <a href="/2019/04/16/2019-04-16-Jmeter性能测试实例/">Jmeter性能测试实例</a>
           </li>
         
           <li>
-            <a href="/2019/03/16/2019-03-16-PYTHON实现RSA_AES混合加密2/">2019-03-16-PYTHON实现RSA_AES混合加密2</a>
+            <a href="/2019/04/12/2019-04-12-Jmeter各Element介绍6/">Jmeter各Element介绍6：随机控制器、随机顺序控制器、Runtime控制器</a>
           </li>
         
           <li>
-            <a href="/2019/03/15/2019-03-15-PYTHON实现RSA_AES混合加密/">2019-03-15-PYTHON实现RSA_AES混合加密</a>
+            <a href="/2019/04/11/2019-04-11-Jmeter各Element介绍5/">Jmeter各Element介绍5：交错控制器</a>
           </li>
         
           <li>
-            <a href="/2018/11/09/2018-11-09-Jmeter各Element介绍2/">2018-11-09-Jmeter各Element介绍2</a>
+            <a href="/2019/04/10/2019-04-10-Jmeter各Element介绍4/">Jmeter各Element介绍4：ForEach控制器</a>
           </li>
         
       </ul>

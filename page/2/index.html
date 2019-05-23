@@ -67,6 +67,427 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2018-11-09-Jmeter各Element介绍2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/09/2018-11-09-Jmeter各Element介绍2/" class="article-date">
+  <time datetime="2018-11-08T16:00:00.000Z" itemprop="datePublished">2018-11-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/09/2018-11-09-Jmeter各Element介绍2/">ApacheJmeter各Element介绍（二）：Thread Group</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Thread-Group（线程组）介绍"><a href="#Thread-Group（线程组）介绍" class="headerlink" title="Thread Group（线程组）介绍"></a>Thread Group（线程组）介绍</h3><ol>
+<li>Thread Group是测试的起点，也就是说，<a href="https://autophyte.github.io/2018/11/08/Jmeter%E5%90%84Element%E4%BB%8B%E7%BB%8D1.html">TestPlan</a>下面必须要有Thread Group才可以开始测试。   </li>
+<li>Thread Group中设置的Thread的数量，也就是Jmeter模拟的用户数量，所以，Thread Group可以被看成是虚拟用户池。   </li>
+<li>Thread Group中每一个Thread完全独立的运行线程组下面的所有测试。多个线程模拟并发访问。   </li>
+<li>测试所需要的controller和sampler都必须放在Thread Group下。   </li>
+<li>其他的，如Listener可以直接放在<a href="https://autophyte.github.io/2018/11/08/Jmeter%E5%90%84Element%E4%BB%8B%E7%BB%8D1.html">TestPlan</a>下（listener放在Test Plan下和放在Thread Group下时，作用于不同）   </li>
+<li>右键点击<a href="https://autophyte.github.io/2018/11/08/Jmeter%E5%90%84Element%E4%BB%8B%E7%BB%8D1.html">TestPlan</a>-&gt;Add-&gt;Threads(Users)-&gt;Thread Group，可以给<a href="https://autophyte.github.io/2018/11/08/Jmeter%E5%90%84Element%E4%BB%8B%E7%BB%8D1.html">TestPlan</a>添加一个Thread Group<br><img src="/img/jmeter/JmeterElements_ThreadGroup_add.png" alt="添加ThreadGroup">   </li>
+<li>每一个<a href="https://autophyte.github.io/2018/11/08/Jmeter%E5%90%84Element%E4%BB%8B%E7%BB%8D1.html">TestPlan</a>下可以放多个Thread Group，这些Thread Group的执行顺序可以在<a href="https://autophyte.github.io/2018/11/08/Jmeter%E5%90%84Element%E4%BB%8B%E7%BB%8D1.html">TestPlan</a>中控制   </li>
+</ol>
+<h3 id="Thread-Group配置"><a href="#Thread-Group配置" class="headerlink" title="Thread Group配置"></a>Thread Group配置</h3><ol>
+<li>Numbers of Threads(users): 设置线程组需要开启的线程的数量（也就是需要模拟的用户的数量）<br><img src="/img/jmeter/JmeterElements_TestPlan_config.png" alt="ThreadGroup配置"></li>
+<li>Ramp-Up Period(in seconds): 增加压力持续时间（可以理解成，多长时间以后所有线程开始全力加压）<ul>
+<li>这一条是指Numbers of Threads中设定的所有线程，在多长时间内全部开始给服务器加压</li>
+<li>如果设定需要启动100个线程，而Ramp-Up Period设定为20，那么意味着，每秒钟有5个线程开始工作</li>
+<li>Ramp-Up Period需要设置的足够大，以保证能够将大量的线程完全开始工作，同时必须设置的足够小，以确保最后一个线程开始工作时，第一个线程的工作还没有完全做完</li>
+<li>在模拟大用户量测试时，如果Ramp-Up Period设置过小，短时间内会给服务器较大的压力，有可能会导致服务器过载。</li>
+</ul>
+</li>
+<li>Loop Count：设置<strong>每一个</strong>线程的循环次数<ul>
+<li>勾选Forver时，启动一个死循环测试</li>
+<li>注意的是，这个设置的是每一个线程的循环次数，所以总的requests数量因该是：“线程总数 <em> 循环次数 </em> 每个线程组请求数量”</li>
+</ul>
+</li>
+<li>Delay Thread creation until needed：勾选这个选项以后，只有在线程需要开始工作的时候，才会开启线程<br><img src="/img/jmeter/JmeterElements_TestPlan_config_delay.png" alt="ThreadGroup配置"><ul>
+<li>如果不勾选这个选项，那么线程组启动的时候，就会将所有需要的线程全部创建（但是否给全部开始工作，需要看Ramp-Up Period的设置）</li>
+<li>勾选这个选项，因为延缓了线程创建时间，所以，在开始的时候资源占用明显小于未勾选时</li>
+<li>勾选这个选项以后，在后台可以看到，随着时间的推移，jmeter的线程数量呈线性增加的，而不勾选时，测试启动时，后台中已经存在大量jmeter线程。</li>
+<li>这个选项默认是未勾选的</li>
+</ul>
+</li>
+<li>Scheduler：Jmeter还提供了一个调度器，可以用来控制线程在测试开始后，延迟多长时间启动，持续多长时间<br><img src="/img/jmeter/JmeterElements_TestPlan_config_schedule.png" alt="ThreadGroup配置"></li>
+<li>Thread Group中，也可以配置当取样器出错时的动作，默认为继续测试<br><img src="/img/jmeter/JmeterElements_TestPlan_config_onerror.png" alt="ThreadGroup配置"><ul>
+<li>Continue：如果出错，继续执行。线程会将后续的动作执行完成（如果后面的动作不依赖当前出错的动作，后面的测试仍然有意义的）</li>
+<li>Start Next Thread Loop：线程会忽略后续动作，之际开始下一个循环</li>
+<li>Stop Trhead：直接停止当前线程</li>
+<li>Stop Test：在执行完后续动作以后，结束测试。意味着线程动作列表中，错误动作后面的动作还会做，直到当前循环完成，再结束测试</li>
+<li>Stop Test Now：立刻停止测试，错误的动作后面的动作也不要做了</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://autophyte.github.io/2018/11/09/2018-11-09-Jmeter各Element介绍2/" data-id="cjvyzfk7x0007bsqnk4ill23o" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2018-11-08-Jmeter各Element介绍1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/08/2018-11-08-Jmeter各Element介绍1/" class="article-date">
+  <time datetime="2018-11-07T16:00:00.000Z" itemprop="datePublished">2018-11-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/08/2018-11-08-Jmeter各Element介绍1/">ApacheJmeter各Element介绍（一）：TestPlan</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="TestPlan介绍"><a href="#TestPlan介绍" class="headerlink" title="TestPlan介绍"></a>TestPlan介绍</h3><p>TestPlan是Jmeter测试用例的“根”，我们所有的测试过程都在TestPlan中进行，每一个TestPlan可以看作是一个“项目”，其它所有element都必须在TestPlan下。Jmeter启动时，我们所看到的就是TestPlan。<br><img src="/img/jmeter/JmeterElements_TestPlan.png" alt="TestPlan" title="TestPlan">   </p>
+<ul>
+<li>TestPlan中有一个选项“Functional Test Mode”，这个选项默认时未被选中的。<ul>
+<li>如果是作功能测试，或者进行调试的话，可以将这个选项打开。</li>
+<li>当这个选项被选中的时候，Jmeter会记录所有request请求值等数据（需要记录哪些数据，可以在listener人Configuration中设置），这些数据会被写入到你的listener中设置的文件中。</li>
+<li>这个功能被打开是会严重影响性能，且随着requests数量增加，日志占用空间会骤增，所以，在做性能测试，压力测试以及负载测试的时候，最好不要打开这个选项</li>
+<li>如果在listener中没有设置存储的文件的话，即便勾选了这个选项，这个选项也是不起作用的   </li>
+</ul>
+</li>
+</ul>
+<p><img src="/img/jmeter/JmeterElements_TestPlan_checkbox.png" alt="TestPlan" title="TestPlan">      </p>
+<ul>
+<li>TestPlan中可以添加多个线程组<ul>
+<li>在TestPlan中如果没有勾选“Run Thread Groups consecutively”（默认未勾选），所有线程组是并行执行的。</li>
+<li>如果期望一个Thread Group执行完成后，再执行另一个，确保已经勾选了这个选项。</li>
+<li>如果一个TestPlan中只有一个线程组，可以忽略这条   </li>
+</ul>
+</li>
+<li>TestPlan中间还有一个区域是用户自定义变量区域，在这里可以定义一些需要的变量，这些变量都是全局变量（对当前TestPlan来说）   </li>
+</ul>
+<p><img src="/img/jmeter/JmeterElements_TestPlan_variable.png" alt="TestPlan" title="TestPlan">     </p>
+<ul>
+<li>如果有额外的一些jar库需要导入到测试中，在TestPlan下面有一个“Add directory or jar to classpath”的功能，可以在这里添加所需要的额外的包</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://autophyte.github.io/2018/11/08/2018-11-08-Jmeter各Element介绍1/" data-id="cjvyzfk7y0008bsqnyjtn6asv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2018-11-04-Jmeter录制脚本" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/2018-11-04-Jmeter录制脚本/" class="article-date">
+  <time datetime="2018-11-03T16:00:00.000Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/2018-11-04-Jmeter录制脚本/">ApacheJmeter5.0 录制脚本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Jmeter脚本录制，一般有下面几种方式：</p>
+<ol>
+<li>用badboy录制后导出</li>
+<li>用jmeter自已直接录制</li>
+<li>通过BlazeMeter录制后导出。   </li>
+</ol>
+<p>本篇只讲通过Jmeter自已录制。本篇录制基于5.0版本，和其他版本可能会有些出入。</p>
+<h3 id="录制过程"><a href="#录制过程" class="headerlink" title="录制过程"></a>录制过程</h3><ol>
+<li>以GUI模式启动Jmeter</li>
+<li>点击工具栏上模版按钮，打开模版选择页。<br> <img src="/img/jmeter/templates_button.png" alt="模版按钮" title="模版按钮">   </li>
+<li>选择Recording模版，用录制模版在新工程创建一个录制项目.<br> <img src="/img/jmeter/templates.png" alt="模版页" title="模版按钮"></li>
+<li>测试计划会变成这样子。<br> <img src="/img/jmeter/Jietu20181104-template_in_tesplan.jpg" alt="模版计划" title="录制脚本"></li>
+<li>然后在“HTTP Request Defaults”元件中填入网址（或者IP地址），路径等信息。<br><img src="/img/jmeter/Jietu20181104-recording_set_parameter.jpg" alt="填入基本信息" title="http基本信息"></li>
+<li>如果“HTTP(S) Test Script Recorder”元件是被禁用的，需要启用.<br> <img src="/img/jmeter/Jietu20181104-enable_element.png" alt="启用元件" title="http基本信息"></li>
+<li>确认“HTTP(S) Test Script Recorder”中配置是不可用，主要看端口号是否有其他程户占用，开启代理服务器。<br> <img src="/img/jmeter/Jietu20181104-record_proxy.png" alt="开启代理服务器" title="开启代理服务器"></li>
+<li>点击启动后会生成一个证书（bin/ApacheJMeterTemporaryRootCA.crt），弹出一个对话框告诉我们证书生成了。<br> <img src="/img/jmeter/Jietu20181104-ca.png" alt="证书" title="开启代理服务器"></li>
+<li>在浏览器中安装这个证，以Firefox为例<ul>
+<li>在地址栏中输入“about:preferences#privacy”回车<br><img src="/img/jmeter/Jietu20181104-open_ca_manager.png" alt="证书" title="Firefox安装证书"></li>
+<li>在打开的设置页面中，Certificates下面，点击“View Certificates”</li>
+<li>点击import安装上刚才的证书<br><img src="/img/jmeter/Jietu20181104-import_ca.png" alt="证书" title="Firefox安装证书"></li>
+<li>确认安装<br><img src="/img/jmeter/Jietu20181104-assert_install.png" alt="证书" title="Firefox安装证书"></li>
+</ul>
+</li>
+<li>在浏览器中设置代理服务器为Jmeter<ul>
+<li>在地址栏中输入“about:preferences”回车</li>
+<li>搜索“proxy”<br><img src="/img/jmeter/Jietu20181104-firefox_proxy.png" alt="代理" title="Firefox设置代理"></li>
+<li>在弹出的框中设置IP、端口号，和Jmeter中想同即可。<br><img src="/img/jmeter/Jietu20181104-firefox_set_prox.png" alt="代理" title="Firefox设置代理"></li>
+</ul>
+</li>
+<li>浏览器中打开需要录制的网站，进行操作，jmeter会记录下所有的操作（step7中已开启代理服务器）<br><img src="/img/jmeter/Jietu20181104-firefox_recording.png" alt="录制" title="Firefox录制"></li>
+<li>录制动作完成后，点击“停止”按钮结束录制</li>
+<li>完成后，可以在Recing Controller下面查看录制结果，如果有不需要动作，也可以删除或修改。<br><img src="/img/jmeter/Jietu20181104-recording_result.png" alt="录制" title="Firefox录制"></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://autophyte.github.io/2018/11/04/2018-11-04-Jmeter录制脚本/" data-id="cjvyzfk7v0005bsqn9sgk237m" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2018-11-03-Jmeter分布式测试" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/03/2018-11-03-Jmeter分布式测试/" class="article-date">
+  <time datetime="2018-11-02T16:00:00.000Z" itemprop="datePublished">2018-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/03/2018-11-03-Jmeter分布式测试/">Jmeter分布式测试（二）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="开始分布式测试"><a href="#开始分布式测试" class="headerlink" title="开始分布式测试"></a>开始分布式测试</h3><p>前面的文章，我们已经完成Jmeter分布式测试相关<a href="https://autophyte.github.io/2018/11/02/Jmeter%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%8B%E8%AF%95%E9%85%8D%E7%BD%AE.html">配置</a>，现在准备开始做分布式测试（注意，不需要将testplan手动复制到每一个slave机器上，master会自动分发）。</p>
+<ol>
+<li>在GUI模式中准备脚本(请参考<a href="https://autophyte.github.io/2018/11/02/Jmeter%E5%90%AF%E5%8A%A8.html">ApacheJmeter的运行模式</a>)。</li>
+<li>在所有需要用到的slave机器上启动jmeter服务器模式<br> <img src="/img/jmeter/start_jmeter_server.png" alt="服务器模式截图" title="Jmeter5.0 服务器模式"></li>
+<li>在Master中以GUI方式启动jmeter</li>
+<li><p>Master中添加聚合报告的listener<br> <img src="/img/jmeter/jmeter_add_aggregate_listener.png" alt="Master添加聚合报告的listener" title="Jmeter5.0 添加聚合报告的listener"><br> <img src="/img/jmeter/jmeter_aggregate_report.png" alt="Master添加聚合报告的listener" title="Jmeter5.0 添加聚合报告的listener"></p>
+</li>
+<li><p>在Master中启动远程机器测试（也可以直接点击Remote Start All开启已经配置的所有Slave机器）<br> <img src="/img/jmeter/jemter_start_remote_test.png" alt="Master开启Remote Test" title="Jmeter5.0 启动远程测试"></p>
+</li>
+<li><p>在Master中聚合报告中可以看到已经又测试数据过来<br> <img src="/img/jmeter/jmeter_aggregate_report_data.png" alt="Master聚合报告数据" title="Jmeter5.0 Master聚合报告数据"></p>
+</li>
+<li><p>在Slave机器中应该可以看到下面这样的信息，表示测试已经启动<br> <img src="/img/jmeter/remote_startedpng.png" alt="Slave测试开启" title="Jmeter5.0 测试开始"></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://autophyte.github.io/2018/11/03/2018-11-03-Jmeter分布式测试/" data-id="cjvyzfk7u0004bsqnzyufmeu7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2018-11-02-Jmeter启动" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/02/2018-11-02-Jmeter启动/" class="article-date">
+  <time datetime="2018-11-01T16:00:00.000Z" itemprop="datePublished">2018-11-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/02/2018-11-02-Jmeter启动/">ApacheJmeter的运行模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Jmeter测试时有3种启动方式：GUI模式，非GUI模式，服务器模式。另外还有1种使用现有jtl文件（csv文件）专门用来生成报告的模式</p>
+<ul>
+<li><p>GUI模式</p>
+<ul>
+<li>多用于编写/修改测试计划，debug测试计划，或者查看报告，不要用于实际测试，因为其会消耗更多的资源</li>
+<li>windows下运行Jmeter\bin\jmeter.bat命令启动GUI模式</li>
+<li>linux运行Jmeter/bin/jmeter.sh命令<br><img src="/img/jmeter/jmeter_gui.png" alt="GUI模式截图" title="Jmeter5.0 GUI模式"></li>
+</ul>
+</li>
+<li><p>非GUI模式</p>
+<ul>
+<li>测试时推荐使用非GUI模式，资源占用率最小</li>
+<li><p>运行下面命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -n 使用非GUI模式式启动jmeter</span></span><br><span class="line"><span class="comment"># -t 指定需要运行的测试计划的脚本，后面需紧根脚本名，如testplan.jmx</span></span><br><span class="line"><span class="comment"># -l 指定生成的日志（产生报告需要用到的日志文件）名称，后面需要接日志文件名，如testresult.jtl</span></span><br><span class="line">jmeter -n -t testplan.jmx -l testresult.jtl</span><br><span class="line"><span class="comment"># 如果配置好了远程机器地址，可以通过下面这条命令，以非GUI方式启全部远程机器</span></span><br><span class="line"><span class="comment"># jmeter -n -t testplan.jmx -r</span></span><br><span class="line"><span class="comment"># 或者以下面这个面令指定启动服务器</span></span><br><span class="line"><span class="comment"># jmeter -n -t testplan.jmx -R xx.xx.xx.xx, zz.zz.zz.zz, ...</span></span><br></pre></td></tr></table></figure>
+<p><img src="/img/jmeter/jmeter_non_gui.png" alt="非GUI模式截图" title="Jmeter5.0 非GUI模式"></p>
+</li>
+</ul>
+</li>
+<li><p>服务器模式<br>很多时候我们受负载机性能限制，负载机没法提供足够的压力，这时候我们需要使用多台机器同时给目标机提供压力，这时就需要用到服务器模式启动</p>
+<ul>
+<li>在Slave机器上启动Jmeter/bin/jmeter-server</li>
+<li>在Master机器上启动Jmeter\bin\jmeter.bat</li>
+<li>在Master机器，JmeterGUI中，Run-&gt;Remote Start菜单中会列出配置的所有远程机器（Slave机器）</li>
+<li><p>配置服务器模式，可以参照商议篇：<a href="https://autophyte.github.io/2018/11/02/Jmeter%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%8B%E8%AF%95%E9%85%8D%E7%BD%AE.html">Apachejmeter分布式测试配置</a>   </p>
+<p><img src="/img/jmeter/start_jmeter_server.png" alt="服务器模式截图" title="Jmeter5.0 服务器模式"></p>
+</li>
+</ul>
+</li>
+<li><p>生成HTML报告</p>
+<ul>
+<li>生成HTML报告，使用下面的命令<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -g 指定使用现有的结果文件（testresult.jtl），参数后面紧跟结果文件名称</span></span><br><span class="line"><span class="comment"># -o 指定存放报告的目录，目录可以不存在。如果目录存在，目录必须时空目录</span></span><br><span class="line">jmeter -g testresult.jtl -o reportPath</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://autophyte.github.io/2018/11/02/2018-11-02-Jmeter启动/" data-id="cjvyzfk7w0006bsqndiueyyft" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2018-11-02-Jmeter分布式测试配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/02/2018-11-02-Jmeter分布式测试配置/" class="article-date">
+  <time datetime="2018-11-01T16:00:00.000Z" itemprop="datePublished">2018-11-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/02/2018-11-02-Jmeter分布式测试配置/">Jmeter分布式测试（一）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用ApacheJmeter进行分布式测试前需要注意：</p>
+<ol>
+<li>Jmeter分布式测试消耗资要大于非GUI模式</li>
+<li>Jmeter测试计划会分发到每个Slave上，jmeter没有类似负载均衡的机制，每台Slave上提供的用户数是相同的。就是说如果脚本中设定1000个户，用了6个Slave，那么共有6000个用户，且平均分配在每个Slave上</li>
+<li>Master收集测试信息压力同样很大，如果开启的Slave数量太多，master有可能承受不了</li>
+</ol>
+<h3 id="Jmeter分布式测试"><a href="#Jmeter分布式测试" class="headerlink" title="Jmeter分布式测试"></a>Jmeter分布式测试</h3><p>搭建Jmeter完成分布式测试，需要机器满足下面几个条件：</p>
+<ul>
+<li>确保客户端（提供负载的机器）可以正常连接服务器（防火墙/网段设置等）</li>
+<li>确保所有客户端的java/jemeter版本相同。版本不同，有可能会出错</li>
+<li>Jmeter RMI默认使用动态端口，所以Slave上如果有防火墙，最好将端口号设置为固定端口</li>
+<li>Jmeter 4.0以后RMI默认使用SSL传输，需要配置或者禁用SSL<br><img src="/img/jmeter/distributed.png" alt="主从模型" title="主从模型：原于jmeter管网"></li>
+</ul>
+<h3 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h3><ul>
+<li>Master：控制其他测试机器的机器。用户之际操作的机器。在master上以GUI模式运行Jmeter，一般不直提供负载</li>
+<li>Slave：远程机器，提供负载的机器，运行jmeter-server。可以有多个。和master通过RMI通讯</li>
+<li>Target：测试目标机器<br><img src="/img/jmeter/distributed_names.png" alt="名词解释" title="Master和Slave关系图：原于jmeter管网"></li>
+</ul>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ul>
+<li><p>禁用RMI的SSL，修改Slave机器上“jmeter\bin\user.prorerties”文件</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># user.prorerties</span><br><span class="line">server.rmi.ssl.disable=true</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置RMI SSL（如果不禁用SSL，需要进行下面的配置）</p>
+<ul>
+<li>运行Master上面“jemter\bin\create-rmi-keystore.bat”(linux上create-rmi-keystore.sh)</li>
+<li>回复一些问题（可以使用默认值）</li>
+<li>脚本会在Master的“jemter\bin\”下面生成一个key文件：rmi_keystore.jks</li>
+<li>将这个文件复制到所有Slave机的“jemter\bin\”目录下</li>
+</ul>
+</li>
+<li><p>让Slave机器RMI使用固定端口，修改修改Slave机器上jmeter\bin\user.prorerties文件</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># user.prorerties</span></span><br><span class="line">server.rmi.localport=44242</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在Master上配置远程机器，修改“jmeter\bin\user.prorerties”文件，配置远程机器以后，GUI模式启动Jmeter才可以看到相应的远程机器</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加下面这一行,ip地址为Slave机器ip地址,如果有多台,用英文逗号分隔</span></span><br><span class="line"><span class="attr">remote_hosts</span>=<span class="number">172.16</span>.<span class="number">3.138</span></span><br></pre></td></tr></table></figure>
+<p><img src="/img/jmeter/jemter_start_remote_test.png" alt="名词解释" title="远程机器启动方式"></p>
+</li>
+<li><p>多个网卡配置<br>  有多个网卡时，必须指定网卡，否则会很可能会出现RMI通讯时并不是你期望的网卡，导致测试失败   </p>
+<ul>
+<li><p>windows下修改jmeter\bin\jmeter.bat</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 172.16.2.39为需要使绑定的ip地址</span><br><span class="line">set rmi_host=-Djava.rmi.server.hostname=172.16.2.39</span><br><span class="line"># 在ARGS后面追加%rmi_host%</span><br><span class="line">set ARGS=%ARGS% %rmi_host%</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>linux服务器下修改jmeter/bin/jmeter_server</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 去掉下面这一行前#符号，并修改为自已想要的ip地址</span></span><br><span class="line">RMI_HOST_DEF=-Djava.rmi.server.hostname=xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://autophyte.github.io/2018/11/02/2018-11-02-Jmeter分布式测试配置/" data-id="cjvyzfk7t0003bsqnnsa1w64b" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2018-09-07-Tensorlow学习01" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/09/07/2018-09-07-Tensorlow学习01/" class="article-date">
@@ -81,7 +502,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/07/2018-09-07-Tensorlow学习01/">2018-09-07-Tensorlow学习01</a>
+      <a class="article-title" href="/2018/09/07/2018-09-07-Tensorlow学习01/">Tensorflow基础（1）</a>
     </h1>
   
 
@@ -89,7 +510,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Tensorflow基础（1）"><a href="#Tensorflow基础（1）" class="headerlink" title="Tensorflow基础（1）"></a>Tensorflow基础（1）</h1><h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><ul>
+        <h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><ul>
 <li>张量（Tensor）： TensorFlow的数据流图由节点和边组成。张量代表的数据流图的边。任意维度的数据统称为<strong>张量</strong></li>
 <li>残差：实际观察值与训练的估值之间的差</li>
 <li>向前传播：张量在数据流图中从前向后流动一遍，为一次向前传播</li>
@@ -130,6 +551,8 @@
       <a data-url="https://autophyte.github.io/2018/09/07/2018-09-07-Tensorlow学习01/" data-id="cjvyzfk7k0000bsqnjup0bm9d" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tensorflow/">Tensorflow</a></li></ul>
+
     </footer>
   </div>
   
@@ -151,7 +574,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/03/2018-09-03-Flask.WSGI.nginx(1)/">2018-09-03-Flask.WSGI.nginx(1)</a>
+      <a class="article-title" href="/2018/09/03/2018-09-03-Flask.WSGI.nginx(1)/">服务器，web框架，wsgi，ngix关系疏理</a>
     </h1>
   
 
@@ -159,7 +582,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="服务器，web框架，wsgi，ngix关系疏理"><a href="#服务器，web框架，wsgi，ngix关系疏理" class="headerlink" title="服务器，web框架，wsgi，ngix关系疏理"></a>服务器，web框架，wsgi，ngix关系疏理</h2><p>用python开发服务器，小打小闹的，花些时间将一些东西疏理一下</p>
+        <p>用python开发服务器，小打小闹的，花些时间将一些东西疏理一下</p>
 <h3 id="各组件作用"><a href="#各组件作用" class="headerlink" title="各组件作用"></a>各组件作用</h3><h4 id="服务器、web框架和wsgi关系图"><a href="#服务器、web框架和wsgi关系图" class="headerlink" title="服务器、web框架和wsgi关系图"></a>服务器、web框架和wsgi关系图</h4><p><img src="/img/20180904_struct_001.jpg" alt="web服务器，web框架与 WSGI 的三层关系" title="服务器、web框架和wsgi关系图"></p>
 <h4 id="web框架-应用服务器"><a href="#web框架-应用服务器" class="headerlink" title="web框架/应用服务器"></a>web框架/应用服务器</h4><ul>
 <li>主要用于方便开发人员开发服务器应用程序。HTTP请求的动态数据，由web框架提供</li>
@@ -183,6 +606,8 @@
       <a data-url="https://autophyte.github.io/2018/09/03/2018-09-03-Flask.WSGI.nginx(1)/" data-id="cjvyzfk7q0001bsqn6ze9ter8" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
+
     </footer>
   </div>
   
@@ -204,7 +629,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/02/2018-09-02-nginx负载均衡配置/">2018-09-02-nginx负载均衡配置</a>
+      <a class="article-title" href="/2018/09/02/2018-09-02-nginx负载均衡配置/">nginx配置负载均衡</a>
     </h1>
   
 
@@ -212,7 +637,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="nginx配置负载均衡"><a href="#nginx配置负载均衡" class="headerlink" title="nginx配置负载均衡"></a>nginx配置负载均衡</h2><p>nginx配置负载均衡，使用upstream模块以及负载均衡模块</p>
+        <p>nginx配置负载均衡，使用upstream模块以及负载均衡模块</p>
 <h3 id="upstream模块"><a href="#upstream模块" class="headerlink" title="upstream模块"></a>upstream模块</h3><p>upstream(上游)可以说仍然是nginx的handle模块，但是upstream不自已产生内容，而是转发请求到配置的后端服务器得到内容。</p>
 <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">	# 这个配置文件将www.myserver.com均衡到本地不同端口上，也可以均衡至不同机器上</span><br><span class="line">	upstream backserver &#123;</span><br><span class="line">		# iphash  # 指定为ip哈希算法</span><br><span class="line">		server 127.0.0.1:8000 weight=3;  # 带权重的轮询</span><br><span class="line">		server 127.0.0.1:8001;  # 轮询</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	server &#123;</span><br><span class="line">		listen 80;</span><br><span class="line">		server_name www.myserver.com;</span><br><span class="line">		location / &#123;</span><br><span class="line">			proxy_pass http://backserver;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="配置说明"><a href="#配置说明" class="headerlink" title="配置说明"></a>配置说明</h3><ol>
@@ -226,6 +651,8 @@
       <a data-url="https://autophyte.github.io/2018/09/02/2018-09-02-nginx负载均衡配置/" data-id="cjvyzfk7s0002bsqntcymqjo6" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
+
     </footer>
   </div>
   
@@ -248,9 +675,23 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/加解密/">加解密</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Jmeter/" style="font-size: 17.5px;">Jmeter</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/加解密/" style="font-size: 12.5px;">加解密</a> <a href="/tags/压力测试/" style="font-size: 17.5px;">压力测试</a> <a href="/tags/性能测试/" style="font-size: 17.5px;">性能测试</a> <a href="/tags/测试/" style="font-size: 20px;">测试</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -269,23 +710,23 @@
       <ul>
         
           <li>
-            <a href="/2019/04/01/2019-04-01-Python接口自动化测试工程模板/">2019-04-01-Python接口自动化测试工程模板</a>
+            <a href="/2019/04/17/2019-04-17-Centos7下安装docker以及基于docker的数据库/">Centos7下安装docker以及基于docker的数据库</a>
           </li>
         
           <li>
-            <a href="/2019/03/29/2019-03-29-gitlfs存储大文件/">2019-03-29-gitlfs存储大文件</a>
+            <a href="/2019/04/16/2019-04-16-Jmeter性能测试实例/">Jmeter性能测试实例</a>
           </li>
         
           <li>
-            <a href="/2019/03/16/2019-03-16-PYTHON实现RSA_AES混合加密2/">2019-03-16-PYTHON实现RSA_AES混合加密2</a>
+            <a href="/2019/04/12/2019-04-12-Jmeter各Element介绍6/">Jmeter各Element介绍6：随机控制器、随机顺序控制器、Runtime控制器</a>
           </li>
         
           <li>
-            <a href="/2019/03/15/2019-03-15-PYTHON实现RSA_AES混合加密/">2019-03-15-PYTHON实现RSA_AES混合加密</a>
+            <a href="/2019/04/11/2019-04-11-Jmeter各Element介绍5/">Jmeter各Element介绍5：交错控制器</a>
           </li>
         
           <li>
-            <a href="/2018/11/09/2018-11-09-Jmeter各Element介绍2/">2018-11-09-Jmeter各Element介绍2</a>
+            <a href="/2019/04/10/2019-04-10-Jmeter各Element介绍4/">Jmeter各Element介绍4：ForEach控制器</a>
           </li>
         
       </ul>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Jmeter各Element介绍5：交错控制器 | std::cout &lt;&lt; 百草神农 &lt;&lt; endl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="交错控制器介绍交错控制器（官方文档），被线程访问时时，会交替的、让其下的其他组件轮流被执行（按顺序），每执行一个组件，越过其他子组件，直接退出交错组件；等下一次被秩代时，会执行另一个子组件，往复循环。如下图，多次访问interleave_main时，实际上baidu和qq是交替执行的  这玩意儿有啥用这玩意比较适合，有一个或多个接口（功能）需要在其他接口中交错出现时，比如清除动作/日志动作；或者多">
+<meta name="keywords" content="Jmeter,测试,性能测试,压力测试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jmeter各Element介绍5：交错控制器">
+<meta property="og:url" content="https://autophyte.github.io/2019/04/11/2019-04-11-Jmeter各Element介绍5/index.html">
+<meta property="og:site_name" content="std::cout &lt;&lt; 百草神农 &lt;&lt; endl">
+<meta property="og:description" content="交错控制器介绍交错控制器（官方文档），被线程访问时时，会交替的、让其下的其他组件轮流被执行（按顺序），每执行一个组件，越过其他子组件，直接退出交错组件；等下一次被秩代时，会执行另一个子组件，往复循环。如下图，多次访问interleave_main时，实际上baidu和qq是交替执行的  这玩意儿有啥用这玩意比较适合，有一个或多个接口（功能）需要在其他接口中交错出现时，比如清除动作/日志动作；或者多">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/JmeterElements_controllers_interleave.png">
+<meta property="og:updated_time" content="2019-04-12T02:03:07.980Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jmeter各Element介绍5：交错控制器">
+<meta name="twitter:description" content="交错控制器介绍交错控制器（官方文档），被线程访问时时，会交替的、让其下的其他组件轮流被执行（按顺序），每执行一个组件，越过其他子组件，直接退出交错组件；等下一次被秩代时，会执行另一个子组件，往复循环。如下图，多次访问interleave_main时，实际上baidu和qq是交替执行的  这玩意儿有啥用这玩意比较适合，有一个或多个接口（功能）需要在其他接口中交错出现时，比如清除动作/日志动作；或者多">
+<meta name="twitter:image" content="https://autophyte.github.io/img/jmeter/JmeterElements_controllers_interleave.png">
+  
+    <link rel="alternate" href="/atom.xml" title="std::cout &lt;&lt; 百草神农 &lt;&lt; endl" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">std::cout &lt;&lt; 百草神农 &lt;&lt; endl</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">这是张振飞在github上写下的一些东西</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://autophyte.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2019-04-11-Jmeter各Element介绍5" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/11/2019-04-11-Jmeter各Element介绍5/" class="article-date">
+  <time datetime="2019-04-11T09:35:48.000Z" itemprop="datePublished">2019-04-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Jmeter各Element介绍5：交错控制器
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="交错控制器介绍"><a href="#交错控制器介绍" class="headerlink" title="交错控制器介绍"></a>交错控制器介绍</h3><p>交错控制器（<a href="https://jmeter.apache.org/usermanual/component_reference.html#Interleave_Controller" target="_blank" rel="noopener">官方文档</a>），被线程访问时时，会交替的、让其下的其他组件轮流被执行（按顺序），每执行一个组件，越过其他子组件，直接退出交错组件；等下一次被秩代时，会执行另一个子组件，往复循环。如下图，多次访问interleave_main时，实际上baidu和qq是交替执行的</p>
+<p><img src="/img/jmeter/JmeterElements_controllers_interleave.png" alt="交错控制器" title="interleave controll"></p>
+<h3 id="这玩意儿有啥用"><a href="#这玩意儿有啥用" class="headerlink" title="这玩意儿有啥用"></a>这玩意儿有啥用</h3><p>这玩意比较适合，有一个或多个接口（功能）需要在其他接口中交错出现时，比如清除动作/日志动作；或者多个相似场景但是初始化方式不同等状况</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://autophyte.github.io/2019/04/11/2019-04-11-Jmeter各Element介绍5/" data-id="cjw002h9l0004noqnz596iqv5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/12/2019-04-12-Jmeter各Element介绍6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Jmeter各Element介绍6：随机控制器、随机顺序控制器、Runtime控制器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/10/2019-04-10-Jmeter各Element介绍4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Jmeter各Element介绍4：ForEach控制器</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/加解密/">加解密</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Jmeter/" style="font-size: 17.5px;">Jmeter</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/加解密/" style="font-size: 12.5px;">加解密</a> <a href="/tags/压力测试/" style="font-size: 17.5px;">压力测试</a> <a href="/tags/性能测试/" style="font-size: 17.5px;">性能测试</a> <a href="/tags/测试/" style="font-size: 20px;">测试</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/17/2019-04-17-Centos7下安装docker以及基于docker的数据库/">Centos7下安装docker以及基于docker的数据库</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/16/2019-04-16-Jmeter性能测试实例/">Jmeter性能测试实例</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/12/2019-04-12-Jmeter各Element介绍6/">Jmeter各Element介绍6：随机控制器、随机顺序控制器、Runtime控制器</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/11/2019-04-11-Jmeter各Element介绍5/">Jmeter各Element介绍5：交错控制器</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/10/2019-04-10-Jmeter各Element介绍4/">Jmeter各Element介绍4：ForEach控制器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Freedom Zhang(张振飞)<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

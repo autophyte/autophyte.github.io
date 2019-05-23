@@ -5,22 +5,23 @@
   
 
   
-  <title>2018-11-02-Jmeter分布式测试配置 | std::cout &lt;&lt; 百草神农 &lt;&lt; endl</title>
+  <title>Jmeter分布式测试（一） | std::cout &lt;&lt; 百草神农 &lt;&lt; endl</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Jmeter分布式测试（一）使用ApacheJmeter进行分布式测试前需要注意：  Jmeter分布式测试消耗资要大于非GUI模式 Jmeter测试计划会分发到每个Slave上，jmeter没有类似负载均衡的机制，每台Slave上提供的用户数是相同的。就是说如果脚本中设定1000个户，用了6个Slave，那么共有6000个用户，且平均分配在每个Slave上 Master收集测试信息压力同样很大，">
-<meta name="keywords" content="白盒|接口|自动化|C|GO|Python">
+  <meta name="description" content="使用ApacheJmeter进行分布式测试前需要注意：  Jmeter分布式测试消耗资要大于非GUI模式 Jmeter测试计划会分发到每个Slave上，jmeter没有类似负载均衡的机制，每台Slave上提供的用户数是相同的。就是说如果脚本中设定1000个户，用了6个Slave，那么共有6000个用户，且平均分配在每个Slave上 Master收集测试信息压力同样很大，如果开启的Slave数量太多">
+<meta name="keywords" content="Jmeter,测试,性能测试,压力测试">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2018-11-02-Jmeter分布式测试配置">
+<meta property="og:title" content="Jmeter分布式测试（一）">
 <meta property="og:url" content="https://autophyte.github.io/2018/11/02/2018-11-02-Jmeter分布式测试配置/index.html">
 <meta property="og:site_name" content="std::cout &lt;&lt; 百草神农 &lt;&lt; endl">
-<meta property="og:description" content="Jmeter分布式测试（一）使用ApacheJmeter进行分布式测试前需要注意：  Jmeter分布式测试消耗资要大于非GUI模式 Jmeter测试计划会分发到每个Slave上，jmeter没有类似负载均衡的机制，每台Slave上提供的用户数是相同的。就是说如果脚本中设定1000个户，用了6个Slave，那么共有6000个用户，且平均分配在每个Slave上 Master收集测试信息压力同样很大，">
+<meta property="og:description" content="使用ApacheJmeter进行分布式测试前需要注意：  Jmeter分布式测试消耗资要大于非GUI模式 Jmeter测试计划会分发到每个Slave上，jmeter没有类似负载均衡的机制，每台Slave上提供的用户数是相同的。就是说如果脚本中设定1000个户，用了6个Slave，那么共有6000个用户，且平均分配在每个Slave上 Master收集测试信息压力同样很大，如果开启的Slave数量太多">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://autophyte.github.io/img/jmeter/distributed.png">
 <meta property="og:image" content="https://autophyte.github.io/img/jmeter/distributed_names.png">
-<meta property="og:updated_time" content="2019-05-22T08:11:10.776Z">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/jemter_start_remote_test.png">
+<meta property="og:updated_time" content="2019-04-10T02:09:32.325Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2018-11-02-Jmeter分布式测试配置">
-<meta name="twitter:description" content="Jmeter分布式测试（一）使用ApacheJmeter进行分布式测试前需要注意：  Jmeter分布式测试消耗资要大于非GUI模式 Jmeter测试计划会分发到每个Slave上，jmeter没有类似负载均衡的机制，每台Slave上提供的用户数是相同的。就是说如果脚本中设定1000个户，用了6个Slave，那么共有6000个用户，且平均分配在每个Slave上 Master收集测试信息压力同样很大，">
+<meta name="twitter:title" content="Jmeter分布式测试（一）">
+<meta name="twitter:description" content="使用ApacheJmeter进行分布式测试前需要注意：  Jmeter分布式测试消耗资要大于非GUI模式 Jmeter测试计划会分发到每个Slave上，jmeter没有类似负载均衡的机制，每台Slave上提供的用户数是相同的。就是说如果脚本中设定1000个户，用了6个Slave，那么共有6000个用户，且平均分配在每个Slave上 Master收集测试信息压力同样很大，如果开启的Slave数量太多">
 <meta name="twitter:image" content="https://autophyte.github.io/img/jmeter/distributed.png">
   
     <link rel="alternate" href="/atom.xml" title="std::cout &lt;&lt; 百草神农 &lt;&lt; endl" type="application/atom+xml">
@@ -86,7 +87,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      2018-11-02-Jmeter分布式测试配置
+      Jmeter分布式测试（一）
     </h1>
   
 
@@ -94,7 +95,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Jmeter分布式测试（一）"><a href="#Jmeter分布式测试（一）" class="headerlink" title="Jmeter分布式测试（一）"></a>Jmeter分布式测试（一）</h2><p>使用ApacheJmeter进行分布式测试前需要注意：</p>
+        <p>使用ApacheJmeter进行分布式测试前需要注意：</p>
 <ol>
 <li>Jmeter分布式测试消耗资要大于非GUI模式</li>
 <li>Jmeter测试计划会分发到每个Slave上，jmeter没有类似负载均衡的机制，每台Slave上提供的用户数是相同的。就是说如果脚本中设定1000个户，用了6个Slave，那么共有6000个用户，且平均分配在每个Slave上</li>
@@ -128,10 +129,18 @@
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># user.prorerties</span></span><br><span class="line">server.rmi.localport=44242</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在Master上配置远程机器，修改“jmeter\bin\user.prorerties”文件，配置远程机器以后，GUI模式启动Jmeter才可以看到相应的远程机器</p>
-  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">	<span class="comment"># 添加下面这一行,ip地址为Slave机器ip地址,如果有多台,用英文逗号分隔</span></span><br><span class="line">	remote_hosts=172.16.3.138</span><br><span class="line">	```   </span><br><span class="line">	![名词解释](/img/jmeter/jemter_start_remote_test.png "远程机器启动方式")</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">+ 多个网卡配置   </span><br><span class="line">	有多个网卡时，必须指定网卡，否则会很可能会出现RMI通讯时并不是你期望的网卡，导致测试失败   </span><br><span class="line"></span><br><span class="line">	- windows下修改jmeter\bin\jmeter.bat</span><br></pre></td></tr></table></figure>
-<h1 id="172-16-2-39为需要使绑定的ip地址"><a href="#172-16-2-39为需要使绑定的ip地址" class="headerlink" title="172.16.2.39为需要使绑定的ip地址"></a>172.16.2.39为需要使绑定的ip地址</h1><p>  set rmi_host=-Djava.rmi.server.hostname=172.16.2.39</p>
-<h1 id="在ARGS后面追加-rmi-host"><a href="#在ARGS后面追加-rmi-host" class="headerlink" title="在ARGS后面追加%rmi_host%"></a>在ARGS后面追加%rmi_host%</h1><p>  set ARGS=%ARGS% %rmi_host%</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- linux服务器下修改jmeter/bin/jmeter_server</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line"># 去掉下面这一行前#符号，并修改为自已想要的ip地址</span><br><span class="line">RMI_HOST_DEF=-Djava.rmi.server.hostname=xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加下面这一行,ip地址为Slave机器ip地址,如果有多台,用英文逗号分隔</span></span><br><span class="line"><span class="attr">remote_hosts</span>=<span class="number">172.16</span>.<span class="number">3.138</span></span><br></pre></td></tr></table></figure>
+<p><img src="/img/jmeter/jemter_start_remote_test.png" alt="名词解释" title="远程机器启动方式"></p>
+</li>
+<li><p>多个网卡配置<br>  有多个网卡时，必须指定网卡，否则会很可能会出现RMI通讯时并不是你期望的网卡，导致测试失败   </p>
+<ul>
+<li><p>windows下修改jmeter\bin\jmeter.bat</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 172.16.2.39为需要使绑定的ip地址</span><br><span class="line">set rmi_host=-Djava.rmi.server.hostname=172.16.2.39</span><br><span class="line"># 在ARGS后面追加%rmi_host%</span><br><span class="line">set ARGS=%ARGS% %rmi_host%</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>linux服务器下修改jmeter/bin/jmeter_server</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 去掉下面这一行前#符号，并修改为自已想要的ip地址</span></span><br><span class="line">RMI_HOST_DEF=-Djava.rmi.server.hostname=xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 </li>
 </ul>
 
@@ -141,6 +150,8 @@
       <a data-url="https://autophyte.github.io/2018/11/02/2018-11-02-Jmeter分布式测试配置/" data-id="cjvyzfk7t0003bsqnnsa1w64b" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
+
     </footer>
   </div>
   
@@ -151,7 +162,7 @@
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          2018-11-02-Jmeter启动
+          ApacheJmeter的运行模式
         
       </div>
     </a>
@@ -159,7 +170,7 @@
   
     <a href="/2018/09/07/2018-09-07-Tensorlow学习01/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">2018-09-07-Tensorlow学习01</div>
+      <div class="article-nav-title">Tensorflow基础（1）</div>
     </a>
   
 </nav>
@@ -175,9 +186,23 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/加解密/">加解密</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Jmeter/" style="font-size: 17.5px;">Jmeter</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/加解密/" style="font-size: 12.5px;">加解密</a> <a href="/tags/压力测试/" style="font-size: 17.5px;">压力测试</a> <a href="/tags/性能测试/" style="font-size: 17.5px;">性能测试</a> <a href="/tags/测试/" style="font-size: 20px;">测试</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -196,23 +221,23 @@
       <ul>
         
           <li>
-            <a href="/2019/04/01/2019-04-01-Python接口自动化测试工程模板/">2019-04-01-Python接口自动化测试工程模板</a>
+            <a href="/2019/04/17/2019-04-17-Centos7下安装docker以及基于docker的数据库/">Centos7下安装docker以及基于docker的数据库</a>
           </li>
         
           <li>
-            <a href="/2019/03/29/2019-03-29-gitlfs存储大文件/">2019-03-29-gitlfs存储大文件</a>
+            <a href="/2019/04/16/2019-04-16-Jmeter性能测试实例/">Jmeter性能测试实例</a>
           </li>
         
           <li>
-            <a href="/2019/03/16/2019-03-16-PYTHON实现RSA_AES混合加密2/">2019-03-16-PYTHON实现RSA_AES混合加密2</a>
+            <a href="/2019/04/12/2019-04-12-Jmeter各Element介绍6/">Jmeter各Element介绍6：随机控制器、随机顺序控制器、Runtime控制器</a>
           </li>
         
           <li>
-            <a href="/2019/03/15/2019-03-15-PYTHON实现RSA_AES混合加密/">2019-03-15-PYTHON实现RSA_AES混合加密</a>
+            <a href="/2019/04/11/2019-04-11-Jmeter各Element介绍5/">Jmeter各Element介绍5：交错控制器</a>
           </li>
         
           <li>
-            <a href="/2018/11/09/2018-11-09-Jmeter各Element介绍2/">2018-11-09-Jmeter各Element介绍2</a>
+            <a href="/2019/04/10/2019-04-10-Jmeter各Element介绍4/">Jmeter各Element介绍4：ForEach控制器</a>
           </li>
         
       </ul>

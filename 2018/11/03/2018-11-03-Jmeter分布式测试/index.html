@@ -5,15 +5,15 @@
   
 
   
-  <title>2018-11-03-Jmeter分布式测试 | std::cout &lt;&lt; 百草神农 &lt;&lt; endl</title>
+  <title>Jmeter分布式测试（二） | std::cout &lt;&lt; 百草神农 &lt;&lt; endl</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Jmeter分布式测试（二）开始分布式测试前面的文章，我们已经完成Jmeter分布式测试相关配置，现在准备开始做分布式测试（注意，不需要将testplan手动复制到每一个slave机器上，master会自动分发）。  在GUI模式中准备脚本(请参考ApacheJmeter的运行模式)。 在所有需要用到的slave机器上启动jmeter服务器模式  在Master中以GUI方式启动jmeter Ma">
-<meta name="keywords" content="白盒|接口|自动化|C|GO|Python">
+  <meta name="description" content="开始分布式测试前面的文章，我们已经完成Jmeter分布式测试相关配置，现在准备开始做分布式测试（注意，不需要将testplan手动复制到每一个slave机器上，master会自动分发）。  在GUI模式中准备脚本(请参考ApacheJmeter的运行模式)。 在所有需要用到的slave机器上启动jmeter服务器模式  在Master中以GUI方式启动jmeter Master中添加聚合报告的li">
+<meta name="keywords" content="Jmeter,测试,性能测试,压力测试">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2018-11-03-Jmeter分布式测试">
+<meta property="og:title" content="Jmeter分布式测试（二）">
 <meta property="og:url" content="https://autophyte.github.io/2018/11/03/2018-11-03-Jmeter分布式测试/index.html">
 <meta property="og:site_name" content="std::cout &lt;&lt; 百草神农 &lt;&lt; endl">
-<meta property="og:description" content="Jmeter分布式测试（二）开始分布式测试前面的文章，我们已经完成Jmeter分布式测试相关配置，现在准备开始做分布式测试（注意，不需要将testplan手动复制到每一个slave机器上，master会自动分发）。  在GUI模式中准备脚本(请参考ApacheJmeter的运行模式)。 在所有需要用到的slave机器上启动jmeter服务器模式  在Master中以GUI方式启动jmeter Ma">
+<meta property="og:description" content="开始分布式测试前面的文章，我们已经完成Jmeter分布式测试相关配置，现在准备开始做分布式测试（注意，不需要将testplan手动复制到每一个slave机器上，master会自动分发）。  在GUI模式中准备脚本(请参考ApacheJmeter的运行模式)。 在所有需要用到的slave机器上启动jmeter服务器模式  在Master中以GUI方式启动jmeter Master中添加聚合报告的li">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://autophyte.github.io/img/jmeter/start_jmeter_server.png">
 <meta property="og:image" content="https://autophyte.github.io/img/jmeter/jmeter_add_aggregate_listener.png">
@@ -21,10 +21,10 @@
 <meta property="og:image" content="https://autophyte.github.io/img/jmeter/jemter_start_remote_test.png">
 <meta property="og:image" content="https://autophyte.github.io/img/jmeter/jmeter_aggregate_report_data.png">
 <meta property="og:image" content="https://autophyte.github.io/img/jmeter/remote_startedpng.png">
-<meta property="og:updated_time" content="2019-05-22T08:11:10.784Z">
+<meta property="og:updated_time" content="2019-04-10T02:09:08.810Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2018-11-03-Jmeter分布式测试">
-<meta name="twitter:description" content="Jmeter分布式测试（二）开始分布式测试前面的文章，我们已经完成Jmeter分布式测试相关配置，现在准备开始做分布式测试（注意，不需要将testplan手动复制到每一个slave机器上，master会自动分发）。  在GUI模式中准备脚本(请参考ApacheJmeter的运行模式)。 在所有需要用到的slave机器上启动jmeter服务器模式  在Master中以GUI方式启动jmeter Ma">
+<meta name="twitter:title" content="Jmeter分布式测试（二）">
+<meta name="twitter:description" content="开始分布式测试前面的文章，我们已经完成Jmeter分布式测试相关配置，现在准备开始做分布式测试（注意，不需要将testplan手动复制到每一个slave机器上，master会自动分发）。  在GUI模式中准备脚本(请参考ApacheJmeter的运行模式)。 在所有需要用到的slave机器上启动jmeter服务器模式  在Master中以GUI方式启动jmeter Master中添加聚合报告的li">
 <meta name="twitter:image" content="https://autophyte.github.io/img/jmeter/start_jmeter_server.png">
   
     <link rel="alternate" href="/atom.xml" title="std::cout &lt;&lt; 百草神农 &lt;&lt; endl" type="application/atom+xml">
@@ -90,7 +90,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      2018-11-03-Jmeter分布式测试
+      Jmeter分布式测试（二）
     </h1>
   
 
@@ -98,7 +98,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Jmeter分布式测试（二）"><a href="#Jmeter分布式测试（二）" class="headerlink" title="Jmeter分布式测试（二）"></a>Jmeter分布式测试（二）</h2><h3 id="开始分布式测试"><a href="#开始分布式测试" class="headerlink" title="开始分布式测试"></a>开始分布式测试</h3><p>前面的文章，我们已经完成Jmeter分布式测试相关<a href="https://autophyte.github.io/2018/11/02/Jmeter%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%8B%E8%AF%95%E9%85%8D%E7%BD%AE.html">配置</a>，现在准备开始做分布式测试（注意，不需要将testplan手动复制到每一个slave机器上，master会自动分发）。</p>
+        <h3 id="开始分布式测试"><a href="#开始分布式测试" class="headerlink" title="开始分布式测试"></a>开始分布式测试</h3><p>前面的文章，我们已经完成Jmeter分布式测试相关<a href="https://autophyte.github.io/2018/11/02/Jmeter%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%8B%E8%AF%95%E9%85%8D%E7%BD%AE.html">配置</a>，现在准备开始做分布式测试（注意，不需要将testplan手动复制到每一个slave机器上，master会自动分发）。</p>
 <ol>
 <li>在GUI模式中准备脚本(请参考<a href="https://autophyte.github.io/2018/11/02/Jmeter%E5%90%AF%E5%8A%A8.html">ApacheJmeter的运行模式</a>)。</li>
 <li>在所有需要用到的slave机器上启动jmeter服务器模式<br> <img src="/img/jmeter/start_jmeter_server.png" alt="服务器模式截图" title="Jmeter5.0 服务器模式"></li>
@@ -119,6 +119,8 @@
       <a data-url="https://autophyte.github.io/2018/11/03/2018-11-03-Jmeter分布式测试/" data-id="cjvyzfk7u0004bsqnzyufmeu7" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
+
     </footer>
   </div>
   
@@ -129,7 +131,7 @@
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          2018-11-04-Jmeter录制脚本
+          ApacheJmeter5.0 录制脚本
         
       </div>
     </a>
@@ -137,7 +139,7 @@
   
     <a href="/2018/11/02/2018-11-02-Jmeter启动/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">2018-11-02-Jmeter启动</div>
+      <div class="article-nav-title">ApacheJmeter的运行模式</div>
     </a>
   
 </nav>
@@ -153,9 +155,23 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/加解密/">加解密</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Jmeter/" style="font-size: 17.5px;">Jmeter</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/加解密/" style="font-size: 12.5px;">加解密</a> <a href="/tags/压力测试/" style="font-size: 17.5px;">压力测试</a> <a href="/tags/性能测试/" style="font-size: 17.5px;">性能测试</a> <a href="/tags/测试/" style="font-size: 20px;">测试</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -174,23 +190,23 @@
       <ul>
         
           <li>
-            <a href="/2019/04/01/2019-04-01-Python接口自动化测试工程模板/">2019-04-01-Python接口自动化测试工程模板</a>
+            <a href="/2019/04/17/2019-04-17-Centos7下安装docker以及基于docker的数据库/">Centos7下安装docker以及基于docker的数据库</a>
           </li>
         
           <li>
-            <a href="/2019/03/29/2019-03-29-gitlfs存储大文件/">2019-03-29-gitlfs存储大文件</a>
+            <a href="/2019/04/16/2019-04-16-Jmeter性能测试实例/">Jmeter性能测试实例</a>
           </li>
         
           <li>
-            <a href="/2019/03/16/2019-03-16-PYTHON实现RSA_AES混合加密2/">2019-03-16-PYTHON实现RSA_AES混合加密2</a>
+            <a href="/2019/04/12/2019-04-12-Jmeter各Element介绍6/">Jmeter各Element介绍6：随机控制器、随机顺序控制器、Runtime控制器</a>
           </li>
         
           <li>
-            <a href="/2019/03/15/2019-03-15-PYTHON实现RSA_AES混合加密/">2019-03-15-PYTHON实现RSA_AES混合加密</a>
+            <a href="/2019/04/11/2019-04-11-Jmeter各Element介绍5/">Jmeter各Element介绍5：交错控制器</a>
           </li>
         
           <li>
-            <a href="/2018/11/09/2018-11-09-Jmeter各Element介绍2/">2018-11-09-Jmeter各Element介绍2</a>
+            <a href="/2019/04/10/2019-04-10-Jmeter各Element介绍4/">Jmeter各Element介绍4：ForEach控制器</a>
           </li>
         
       </ul>

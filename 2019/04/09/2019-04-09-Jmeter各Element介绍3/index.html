@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>ApacheJmeter各Element介绍（三）：循环控制器和while控制器 | std::cout &lt;&lt; 百草神农 &lt;&lt; endl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="学习jmeter最好的方式还是去看官方方档 控制器（controllers)Jmeter控制有两种控制器：逻辑控制器（Logical Controllers）和取样器（Samplers），Jmeter靠各种控制的组合来驱动测试 逻辑控制器逻辑控制器让用户组织，控制虚拟用户的时间/顺序/次数等。逻辑控制器控制被其包裏的所有控制器 简单控制器简单控制器，实际上没有任何作用，仅让测试人员组织其他控制器而">
+<meta name="keywords" content="Jmeter,测试,性能测试,压力测试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ApacheJmeter各Element介绍（三）：循环控制器和while控制器">
+<meta property="og:url" content="https://autophyte.github.io/2019/04/09/2019-04-09-Jmeter各Element介绍3/index.html">
+<meta property="og:site_name" content="std::cout &lt;&lt; 百草神农 &lt;&lt; endl">
+<meta property="og:description" content="学习jmeter最好的方式还是去看官方方档 控制器（controllers)Jmeter控制有两种控制器：逻辑控制器（Logical Controllers）和取样器（Samplers），Jmeter靠各种控制的组合来驱动测试 逻辑控制器逻辑控制器让用户组织，控制虚拟用户的时间/顺序/次数等。逻辑控制器控制被其包裏的所有控制器 简单控制器简单控制器，实际上没有任何作用，仅让测试人员组织其他控制器而">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/JmeterElements_controllers_simple_controller.png">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/JmeterElements_controllers_loop_controller.png">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/JmeterElements_controllers_while_controller.png">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/JmeterElements_controllers_while_controller2.png">
+<meta property="og:updated_time" content="2019-04-10T06:44:44.687Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ApacheJmeter各Element介绍（三）：循环控制器和while控制器">
+<meta name="twitter:description" content="学习jmeter最好的方式还是去看官方方档 控制器（controllers)Jmeter控制有两种控制器：逻辑控制器（Logical Controllers）和取样器（Samplers），Jmeter靠各种控制的组合来驱动测试 逻辑控制器逻辑控制器让用户组织，控制虚拟用户的时间/顺序/次数等。逻辑控制器控制被其包裏的所有控制器 简单控制器简单控制器，实际上没有任何作用，仅让测试人员组织其他控制器而">
+<meta name="twitter:image" content="https://autophyte.github.io/img/jmeter/JmeterElements_controllers_simple_controller.png">
+  
+    <link rel="alternate" href="/atom.xml" title="std::cout &lt;&lt; 百草神农 &lt;&lt; endl" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">std::cout &lt;&lt; 百草神农 &lt;&lt; endl</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">这是张振飞在github上写下的一些东西</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://autophyte.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2019-04-09-Jmeter各Element介绍3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/09/2019-04-09-Jmeter各Element介绍3/" class="article-date">
+  <time datetime="2019-04-09T05:29:00.000Z" itemprop="datePublished">2019-04-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ApacheJmeter各Element介绍（三）：循环控制器和while控制器
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>学习jmeter最好的方式还是去看<a href="https://jmeter.apache.org/usermanual/get-started.html" target="_blank" rel="noopener">官方方档</a></p>
+<h1 id="控制器（controllers"><a href="#控制器（controllers" class="headerlink" title="控制器（controllers)"></a>控制器（controllers)</h1><p>Jmeter控制有两种控制器：逻辑控制器（Logical Controllers）和取样器（Samplers），Jmeter靠各种控制的组合来驱动测试</p>
+<h1 id="逻辑控制器"><a href="#逻辑控制器" class="headerlink" title="逻辑控制器"></a>逻辑控制器</h1><p>逻辑控制器让用户组织，控制虚拟用户的时间/顺序/次数等。逻辑控制器控制被其包裏的所有控制器</p>
+<h2 id="简单控制器"><a href="#简单控制器" class="headerlink" title="简单控制器"></a>简单控制器</h2><p>简单控制器，实际上没有任何作用，仅让测试人员<strong>组织其他控制器</strong>而已，如下图，将http-get-1、http-get-2分别放在No.1和No.2两个不同的简单控制器中和直接放在线程组下，在执行时没有任何区别（相当于C语言中直接使用一组大括号括出一个域<code>{}</code>的语句）。<br><img src="/img/jmeter/JmeterElements_controllers_simple_controller.png" alt="简单控制器" title="simple controller"></p>
+<h2 id="循环控制器"><a href="#循环控制器" class="headerlink" title="循环控制器"></a>循环控制器</h2><h3 id="循环控制器介绍"><a href="#循环控制器介绍" class="headerlink" title="循环控制器介绍"></a>循环控制器介绍</h3><p>循环控制器可控制其所包裹的其他控制器的执行次数。循环次数由测试人员指出（相当于C语言中<code>for (int loop=5; loop&gt;0; --loop) {}</code>的语句）。当线程组中只有某一个或某一些请求需要多次运行时，此时可以使用循环控制器。</p>
+<p>如下图，图中http-get-1，在线程组的一个循环内，将会被执行5次。如果钩选“永远”（即loop=-1）循环控制器将按死循环运行。<br><img src="/img/jmeter/JmeterElements_controllers_loop_controller.png" alt="循环控制器" title="loop controller"></p>
+<h3 id="这玩意有啥用"><a href="#这玩意有啥用" class="headerlink" title="这玩意有啥用"></a>这玩意有啥用</h3><p>循环控制器特别适用于明确知道需要运行多次（注意：次数明确知道）的场景</p>
+<h2 id="while控制器"><a href="#while控制器" class="headerlink" title="while控制器"></a>while控制器</h2><h3 id="while控制器介绍"><a href="#while控制器介绍" class="headerlink" title="while控制器介绍"></a>while控制器介绍</h3><p>while控制器，同样是控制它包裹的其他控制器循环。但它条件接受一个变量或函数，直到指定的条件为false时停止。</p>
+<p>while循环条件取值：</p>
+<ol>
+<li>为空时：当循环中最后一个取样器失败时，退出</li>
+<li>为字符串“LAST”时：当循环中最后一个取样器失败时，退出；但当while循环控制器前面一个采样器失败时，不会进入while循环</li>
+<li>为变量或其他函数：变量或函数返回值为false时退出while循环</li>
+</ol>
+<p>注意： <strong>while控制器和C语言中的while循环有些不同：jmeter while控制器条件会在进入循环后被检查一次，在循环语句完成后再被检查一次，一共检查两次，所以，如果条件中放入非幂等函数，可能会出错</strong>   </p>
+<p>使用C语言来模拟while控制器：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">condition</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//do somthing</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (condition()) &#123;</span><br><span class="line">	<span class="comment">//do somthing</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//正常do-while循环不需要调用下面这个判断，模拟jmeter while控制器时</span></span><br><span class="line">    <span class="keyword">if</span> (!condition()) &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>从上面伪代码中可以看出，每一个循环，都要检查两次condition，所以，condition为非幂等函数时请特别注意。   </p>
+<p>while控制器会通过一个变量来告诉我们当前循环次数，变量名规则为：<code>__jm__控制器名字__idx</code>，如下图，我们while控制器名字为“while1”，则变量名字是：<code>${__jm__while1__idx}</code>。循环次数从0开始计数。</p>
+<p><img src="/img/jmeter/JmeterElements_controllers_while_controller.png" alt="whil控制器" title="while controller"></p>
+<p>按照上图配置，我们运行jmeter，从下图的日志可以看出一个循环内流程如下：</p>
+<ol>
+<li>检查条件</li>
+<li>请求百度</li>
+<li>请求QQ</li>
+<li>再检查一次条件</li>
+</ol>
+<p><img src="/img/jmeter/JmeterElements_controllers_while_controller2.png" alt="whil控制器流程日志" title="while controller log"></p>
+<h3 id="这玩意有啥用-1"><a href="#这玩意有啥用-1" class="headerlink" title="这玩意有啥用"></a>这玩意有啥用</h3><p>While控制器比较适用于有循环运行需求，但是循环数数/条件是动态变化的、由其他接口或场景控制的状况。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://autophyte.github.io/2019/04/09/2019-04-09-Jmeter各Element介绍3/" data-id="cjw002h8s0000noqnsdcq2h60" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/10/2019-04-10-Jmeter各Element介绍4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Jmeter各Element介绍4：ForEach控制器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/01/2019-04-01-Python接口自动化测试工程模板/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">使用Python进行接口自动化测试工程组织模板</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/加解密/">加解密</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Jmeter/" style="font-size: 17.5px;">Jmeter</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/加解密/" style="font-size: 12.5px;">加解密</a> <a href="/tags/压力测试/" style="font-size: 17.5px;">压力测试</a> <a href="/tags/性能测试/" style="font-size: 17.5px;">性能测试</a> <a href="/tags/测试/" style="font-size: 20px;">测试</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/17/2019-04-17-Centos7下安装docker以及基于docker的数据库/">Centos7下安装docker以及基于docker的数据库</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/16/2019-04-16-Jmeter性能测试实例/">Jmeter性能测试实例</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/12/2019-04-12-Jmeter各Element介绍6/">Jmeter各Element介绍6：随机控制器、随机顺序控制器、Runtime控制器</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/11/2019-04-11-Jmeter各Element介绍5/">Jmeter各Element介绍5：交错控制器</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/10/2019-04-10-Jmeter各Element介绍4/">Jmeter各Element介绍4：ForEach控制器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Freedom Zhang(张振飞)<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

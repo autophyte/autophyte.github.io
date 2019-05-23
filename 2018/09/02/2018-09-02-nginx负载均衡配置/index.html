@@ -5,20 +5,20 @@
   
 
   
-  <title>2018-09-02-nginx负载均衡配置 | std::cout &lt;&lt; 百草神农 &lt;&lt; endl</title>
+  <title>nginx配置负载均衡 | std::cout &lt;&lt; 百草神农 &lt;&lt; endl</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="nginx配置负载均衡nginx配置负载均衡，使用upstream模块以及负载均衡模块 upstream模块upstream(上游)可以说仍然是nginx的handle模块，但是upstream不自已产生内容，而是转发请求到配置的后端服务器得到内容。 配置12345678910111213141516http &amp;#123;	# 这个配置文件将www.myserver.com均衡到本地不同端口上，也">
-<meta name="keywords" content="白盒|接口|自动化|C|GO|Python">
+  <meta name="description" content="nginx配置负载均衡，使用upstream模块以及负载均衡模块 upstream模块upstream(上游)可以说仍然是nginx的handle模块，但是upstream不自已产生内容，而是转发请求到配置的后端服务器得到内容。 配置12345678910111213141516http &amp;#123;	# 这个配置文件将www.myserver.com均衡到本地不同端口上，也可以均衡至不同机器上">
+<meta name="keywords" content="nginx">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2018-09-02-nginx负载均衡配置">
+<meta property="og:title" content="nginx配置负载均衡">
 <meta property="og:url" content="https://autophyte.github.io/2018/09/02/2018-09-02-nginx负载均衡配置/index.html">
 <meta property="og:site_name" content="std::cout &lt;&lt; 百草神农 &lt;&lt; endl">
-<meta property="og:description" content="nginx配置负载均衡nginx配置负载均衡，使用upstream模块以及负载均衡模块 upstream模块upstream(上游)可以说仍然是nginx的handle模块，但是upstream不自已产生内容，而是转发请求到配置的后端服务器得到内容。 配置12345678910111213141516http &amp;#123;	# 这个配置文件将www.myserver.com均衡到本地不同端口上，也">
+<meta property="og:description" content="nginx配置负载均衡，使用upstream模块以及负载均衡模块 upstream模块upstream(上游)可以说仍然是nginx的handle模块，但是upstream不自已产生内容，而是转发请求到配置的后端服务器得到内容。 配置12345678910111213141516http &amp;#123;	# 这个配置文件将www.myserver.com均衡到本地不同端口上，也可以均衡至不同机器上">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-22T08:11:10.762Z">
+<meta property="og:updated_time" content="2019-04-10T02:10:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2018-09-02-nginx负载均衡配置">
-<meta name="twitter:description" content="nginx配置负载均衡nginx配置负载均衡，使用upstream模块以及负载均衡模块 upstream模块upstream(上游)可以说仍然是nginx的handle模块，但是upstream不自已产生内容，而是转发请求到配置的后端服务器得到内容。 配置12345678910111213141516http &amp;#123;	# 这个配置文件将www.myserver.com均衡到本地不同端口上，也">
+<meta name="twitter:title" content="nginx配置负载均衡">
+<meta name="twitter:description" content="nginx配置负载均衡，使用upstream模块以及负载均衡模块 upstream模块upstream(上游)可以说仍然是nginx的handle模块，但是upstream不自已产生内容，而是转发请求到配置的后端服务器得到内容。 配置12345678910111213141516http &amp;#123;	# 这个配置文件将www.myserver.com均衡到本地不同端口上，也可以均衡至不同机器上">
   
     <link rel="alternate" href="/atom.xml" title="std::cout &lt;&lt; 百草神农 &lt;&lt; endl" type="application/atom+xml">
   
@@ -83,7 +83,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      2018-09-02-nginx负载均衡配置
+      nginx配置负载均衡
     </h1>
   
 
@@ -91,7 +91,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="nginx配置负载均衡"><a href="#nginx配置负载均衡" class="headerlink" title="nginx配置负载均衡"></a>nginx配置负载均衡</h2><p>nginx配置负载均衡，使用upstream模块以及负载均衡模块</p>
+        <p>nginx配置负载均衡，使用upstream模块以及负载均衡模块</p>
 <h3 id="upstream模块"><a href="#upstream模块" class="headerlink" title="upstream模块"></a>upstream模块</h3><p>upstream(上游)可以说仍然是nginx的handle模块，但是upstream不自已产生内容，而是转发请求到配置的后端服务器得到内容。</p>
 <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">	# 这个配置文件将www.myserver.com均衡到本地不同端口上，也可以均衡至不同机器上</span><br><span class="line">	upstream backserver &#123;</span><br><span class="line">		# iphash  # 指定为ip哈希算法</span><br><span class="line">		server 127.0.0.1:8000 weight=3;  # 带权重的轮询</span><br><span class="line">		server 127.0.0.1:8001;  # 轮询</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	server &#123;</span><br><span class="line">		listen 80;</span><br><span class="line">		server_name www.myserver.com;</span><br><span class="line">		location / &#123;</span><br><span class="line">			proxy_pass http://backserver;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="配置说明"><a href="#配置说明" class="headerlink" title="配置说明"></a>配置说明</h3><ol>
@@ -105,6 +105,8 @@
       <a data-url="https://autophyte.github.io/2018/09/02/2018-09-02-nginx负载均衡配置/" data-id="cjvyzfk7s0002bsqntcymqjo6" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
+
     </footer>
   </div>
   
@@ -115,7 +117,7 @@
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          2018-09-03-Flask.WSGI.nginx(1)
+          服务器，web框架，wsgi，ngix关系疏理
         
       </div>
     </a>
@@ -134,9 +136,23 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/加解密/">加解密</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Jmeter/" style="font-size: 17.5px;">Jmeter</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/加解密/" style="font-size: 12.5px;">加解密</a> <a href="/tags/压力测试/" style="font-size: 17.5px;">压力测试</a> <a href="/tags/性能测试/" style="font-size: 17.5px;">性能测试</a> <a href="/tags/测试/" style="font-size: 20px;">测试</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -155,23 +171,23 @@
       <ul>
         
           <li>
-            <a href="/2019/04/01/2019-04-01-Python接口自动化测试工程模板/">2019-04-01-Python接口自动化测试工程模板</a>
+            <a href="/2019/04/17/2019-04-17-Centos7下安装docker以及基于docker的数据库/">Centos7下安装docker以及基于docker的数据库</a>
           </li>
         
           <li>
-            <a href="/2019/03/29/2019-03-29-gitlfs存储大文件/">2019-03-29-gitlfs存储大文件</a>
+            <a href="/2019/04/16/2019-04-16-Jmeter性能测试实例/">Jmeter性能测试实例</a>
           </li>
         
           <li>
-            <a href="/2019/03/16/2019-03-16-PYTHON实现RSA_AES混合加密2/">2019-03-16-PYTHON实现RSA_AES混合加密2</a>
+            <a href="/2019/04/12/2019-04-12-Jmeter各Element介绍6/">Jmeter各Element介绍6：随机控制器、随机顺序控制器、Runtime控制器</a>
           </li>
         
           <li>
-            <a href="/2019/03/15/2019-03-15-PYTHON实现RSA_AES混合加密/">2019-03-15-PYTHON实现RSA_AES混合加密</a>
+            <a href="/2019/04/11/2019-04-11-Jmeter各Element介绍5/">Jmeter各Element介绍5：交错控制器</a>
           </li>
         
           <li>
-            <a href="/2018/11/09/2018-11-09-Jmeter各Element介绍2/">2018-11-09-Jmeter各Element介绍2</a>
+            <a href="/2019/04/10/2019-04-10-Jmeter各Element介绍4/">Jmeter各Element介绍4：ForEach控制器</a>
           </li>
         
       </ul>

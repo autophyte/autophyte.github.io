@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Jmeter性能测试实例 | std::cout &lt;&lt; 百草神农 &lt;&lt; endl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前面一段时间公司开发新网站，用于展示一些足球想关数据，网站由PHP7开发接口，使用node调用接口渲染页面，并由websocket发送实时事件信息。需要对网站做一个压力测试，考虑了一下，最终选用jmeter来完成这个测试。 接口 betcompany：一个简单的数据接口，获取支持的赔率数据的公司 matchday：获取比赛日信息 conerOddsDetail：单个比赛角球赔率信息 detaile">
+<meta name="keywords" content="Jmeter,测试,性能测试,压力测试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jmeter性能测试实例">
+<meta property="og:url" content="https://autophyte.github.io/2019/04/16/2019-04-16-Jmeter性能测试实例/index.html">
+<meta property="og:site_name" content="std::cout &lt;&lt; 百草神农 &lt;&lt; endl">
+<meta property="og:description" content="前面一段时间公司开发新网站，用于展示一些足球想关数据，网站由PHP7开发接口，使用node调用接口渲染页面，并由websocket发送实时事件信息。需要对网站做一个压力测试，考虑了一下，最终选用jmeter来完成这个测试。 接口 betcompany：一个简单的数据接口，获取支持的赔率数据的公司 matchday：获取比赛日信息 conerOddsDetail：单个比赛角球赔率信息 detaile">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/example/test_example_001.png">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/example/betcompany.png">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/example/competitions.png">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/example/conerOddsDetail.png">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/example/detailed.png">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/example/handicap.png">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/example/matchlist.png">
+<meta property="og:image" content="https://autophyte.github.io/img/jmeter/example/matchlist.png">
+<meta property="og:updated_time" content="2019-04-17T09:04:00.476Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jmeter性能测试实例">
+<meta name="twitter:description" content="前面一段时间公司开发新网站，用于展示一些足球想关数据，网站由PHP7开发接口，使用node调用接口渲染页面，并由websocket发送实时事件信息。需要对网站做一个压力测试，考虑了一下，最终选用jmeter来完成这个测试。 接口 betcompany：一个简单的数据接口，获取支持的赔率数据的公司 matchday：获取比赛日信息 conerOddsDetail：单个比赛角球赔率信息 detaile">
+<meta name="twitter:image" content="https://autophyte.github.io/img/jmeter/example/test_example_001.png">
+  
+    <link rel="alternate" href="/atom.xml" title="std::cout &lt;&lt; 百草神农 &lt;&lt; endl" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">std::cout &lt;&lt; 百草神农 &lt;&lt; endl</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">这是张振飞在github上写下的一些东西</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://autophyte.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2019-04-16-Jmeter性能测试实例" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/16/2019-04-16-Jmeter性能测试实例/" class="article-date">
+  <time datetime="2019-04-16T09:18:40.000Z" itemprop="datePublished">2019-04-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Jmeter性能测试实例
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前面一段时间公司开发新网站，用于展示一些足球想关数据，网站由PHP7开发接口，使用node调用接口渲染页面，并由websocket发送实时事件信息。需要对网站做一个压力测试，考虑了一下，最终选用jmeter来完成这个测试。</p>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><ul>
+<li>betcompany：一个简单的数据接口，获取支持的赔率数据的公司</li>
+<li>matchday：获取比赛日信息</li>
+<li>conerOddsDetail：单个比赛角球赔率信息</li>
+<li>detailed：单个比赛的详细信息</li>
+<li>handicap：所有盘口数据（这个接口计算量非常大，且为实时数据，对服务器CPU消耗会非常高）</li>
+<li>matchlist：所有比赛列表（这个接口的数据量比较大且服务器端计算压力也比较高，更多的是需要访问数据库的次数也很多）。</li>
+<li>matchlist_origin：所有比赛列表，因服务器架构设计原因，实际上处理借口是matchlist_origin，而matchlist是对matchlist_origin一次转发</li>
+</ul>
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><ol>
+<li>测试出在中等压力或低压力下测试接口响应速度</li>
+<li>测试出服务器并发能力</li>
+</ol>
+<h2 id="第一次测试"><a href="#第一次测试" class="headerlink" title="第一次测试"></a>第一次测试</h2><h3 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h3><p>每一个loop，对每一个接口作一次GET（两个GET之间随机sleep 1~500ms），共循环500次统计测试结果（此时handicap还没有开发完成）。</p>
+<p>从下图可以看出来，一开始测试的时候，无压力matchlist接口都在1秒以上，完全无法接受，甚至后面几个接口都有错误。</p>
+<p><img src="/img/jmeter/example/test_example_001.png" alt="第一次测试结果"></p>
+<h2 id="第二次测试"><a href="#第二次测试" class="headerlink" title="第二次测试"></a>第二次测试</h2><p>服务器开发对matchlist接口进行优化（合并）以后，我们单独对这个接口做一下压力测试。限定jmeter的QPS，单独测试接口性能。</p>
+<table>
+<thead>
+<tr>
+<th>限定QPS</th>
+<th>CPU使用率（约）</th>
+<th>平均相应时间</th>
+<th>服务器实际吞吐量（平均）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>40</td>
+<td>80%</td>
+<td>3244.59ms</td>
+<td>24.18/s</td>
+</tr>
+<tr>
+<td>20</td>
+<td>70%</td>
+<td>1001.85ms</td>
+<td>19.96/s</td>
+</tr>
+<tr>
+<td>15</td>
+<td>50%</td>
+<td>767.34ms</td>
+<td>14.99/s</td>
+</tr>
+</tbody>
+</table>
+<p>从上面表格中可以看出：</p>
+<ol>
+<li>第二次测试时，matchlist接口，实际处理能力差不多也就在20个/秒左右，再增加压力，实际并发能力并没有提高，而响应时间却大幅度提升。压力增加到40个请求每秒的时候，实际处理能力也只是增加了4个每秒，然而响应时间已经增加到3秒多（用户体验会很差），CPU已经到80%以上（服务器运维一般报警设置为70~80%）。</li>
+<li>请求数在15个一下时，并没有太高的服务起压力，而700多毫秒的速度和我们单个请求matchlist的响应速度基本相等</li>
+</ol>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>实际上第二次测试时，matchlist接口像比较第一次测试已经有很大的优化，但是仍然不能接受，并发能力太弱，20个用户就能把网站高挂掉。</p>
+<p>再次分析matchlist接口后发现，因为数据量很大，而且数据存储比较分散，这个接口需要多次请求数据库，并且还需要对数据进行一定量的计算，是导致这个接口慢的很大原因。还有原来设计也有一些不足，于是决定将很多分散的数据合并存储，并且更改架构，放弃原来转发机制等。</p>
+<h2 id="第三次测试"><a href="#第三次测试" class="headerlink" title="第三次测试"></a>第三次测试</h2><p>经过第二次测试以后，开发/SA再次花时间优化代码，以及服务器端配置，然后我们准备第三次测试。经过简单接以后发现matchlist接口性能确实有大幅度的提升，所以，此次测试方案选择所有接口开100个虚拟用户，每个用户不简隔的调用接口500次，共50000次（除handicap接口因为并发原因，未测完50000次），统计平均响应时间。具体测试数据如下表：</p>
+<table>
+<thead>
+<tr>
+<th>接口</th>
+<th>平均响应时间</th>
+<th>90th percentile</th>
+<th>吞吐量（个/秒）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>matchday</td>
+<td>3.76 ms</td>
+<td>4.00 ms</td>
+<td>495.56</td>
+</tr>
+<tr>
+<td>conerOddsDetail</td>
+<td>52.35 ms</td>
+<td>86.00 ms</td>
+<td>415.49</td>
+</tr>
+<tr>
+<td>detailed</td>
+<td>22.86 ms</td>
+<td>27.00 ms</td>
+<td>456.77</td>
+</tr>
+<tr>
+<td>handicap</td>
+<td>5391 ms</td>
+<td>7497 ms</td>
+<td>17.05</td>
+</tr>
+<tr>
+<td>matchlist</td>
+<td>308.7 ms</td>
+<td>890 ms</td>
+<td>200.01</td>
+</tr>
+<tr>
+<td>betcompany</td>
+<td>33.13 ms</td>
+<td>48.00 ms</td>
+<td>1063.44</td>
+</tr>
+</tbody>
+</table>
+<p>从表中我们可以看出，除了刚刚完成功能测试的handicap接口外，所有接口性能都已经大幅度提升，matchlist，也可以保证在CPU压力在80%以下，能够并发200个/秒，已经基本上可以符合要求了。但handicap仍然需要优化。</p>
+<p>handicap这个接口的优化的难点在于，其本身计算量非常大，特表消耗CPU资源，且需要返回实时数据。因为实时数据，所以原来并没有加缓存。</p>
+<h2 id="第四次测试"><a href="#第四次测试" class="headerlink" title="第四次测试"></a>第四次测试</h2><p>再次分析过需求以后，讨论后认为handicap这个实时数据其实可以加一个缓存，过期时间设定为1秒中，同时再配合一些其他的优化。matchlist接口同样加上缓存。开发再进一步优化代码，我们进行第四次测试(只对matchlist和handicap重新测试)</p>
+<table>
+<thead>
+<tr>
+<th>接口</th>
+<th>平均响应时间</th>
+<th>90th percentile</th>
+<th>吞吐量（个/秒）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>matchday</td>
+<td>3.50 ms</td>
+<td>5.00 ms</td>
+<td>495.56</td>
+</tr>
+<tr>
+<td>conerOddsDetail</td>
+<td>52.35 ms</td>
+<td>86.00 ms</td>
+<td>415.49</td>
+</tr>
+<tr>
+<td>detailed</td>
+<td>22.86 ms</td>
+<td>27.00 ms</td>
+<td>456.77</td>
+</tr>
+<tr>
+<td><font color="Hotpink">handicap</font></td>
+<td>80.53 ms</td>
+<td>142.00 ms</td>
+<td>373.43</td>
+</tr>
+<tr>
+<td><font color="Hotpink">matchlist</font></td>
+<td>145.17 ms</td>
+<td>453.00 ms</td>
+<td>403.44</td>
+</tr>
+<tr>
+<td>betcompany</td>
+<td>33.13 ms</td>
+<td>48.00 ms</td>
+<td>1063.44</td>
+</tr>
+</tbody>
+</table>
+<p>至此，所有接口基本上性能都已经达到预定目标</p>
+<p>下面时每一个接口的测试报告：</p>
+<p><img src="/img/jmeter/example/betcompany.png" alt="betcompany接口" title="betcompany"></p>
+<p><img src="/img/jmeter/example/competitions.png" alt="competitions接口" title="competitions"></p>
+<p><img src="/img/jmeter/example/conerOddsDetail.png" alt="conerOddsDetail接口" title="conerOddsDetail"></p>
+<p><img src="/img/jmeter/example/detailed.png" alt="detailed接口" title="detailed"></p>
+<p><img src="/img/jmeter/example/handicap.png" alt="handicap接口" title="handicap"></p>
+<p><img src="/img/jmeter/example/matchlist.png" alt="matchday接口" title="matchday"></p>
+<p><img src="/img/jmeter/example/matchlist.png" alt="matchlist接口" title="matchlist"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://autophyte.github.io/2019/04/16/2019-04-16-Jmeter性能测试实例/" data-id="cjw002h9o0005noqnni6rahhw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/17/2019-04-17-Centos7下安装docker以及基于docker的数据库/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Centos7下安装docker以及基于docker的数据库
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/12/2019-04-12-Jmeter各Element介绍6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Jmeter各Element介绍6：随机控制器、随机顺序控制器、Runtime控制器</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/加解密/">加解密</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Jmeter/" style="font-size: 17.5px;">Jmeter</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/加解密/" style="font-size: 12.5px;">加解密</a> <a href="/tags/压力测试/" style="font-size: 17.5px;">压力测试</a> <a href="/tags/性能测试/" style="font-size: 17.5px;">性能测试</a> <a href="/tags/测试/" style="font-size: 20px;">测试</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/17/2019-04-17-Centos7下安装docker以及基于docker的数据库/">Centos7下安装docker以及基于docker的数据库</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/16/2019-04-16-Jmeter性能测试实例/">Jmeter性能测试实例</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/12/2019-04-12-Jmeter各Element介绍6/">Jmeter各Element介绍6：随机控制器、随机顺序控制器、Runtime控制器</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/11/2019-04-11-Jmeter各Element介绍5/">Jmeter各Element介绍5：交错控制器</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/10/2019-04-10-Jmeter各Element介绍4/">Jmeter各Element介绍4：ForEach控制器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Freedom Zhang(张振飞)<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
