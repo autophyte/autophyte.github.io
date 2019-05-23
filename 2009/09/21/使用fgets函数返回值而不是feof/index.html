@@ -7,18 +7,18 @@
   
   <title>使用fgets函数返回值而不是feof | std::cout &lt;&lt; &#34;Page for Freedom.Zhang&#34; &lt;&lt; endl;</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="使用fgets函数返回值而不是feof今天在调试程序的时候，发现vector中多了一个数据。函数如下：  123456789101112131415161718void create_testcase::read_districtfiles()&amp;#123;		tstring::size_type pos=m_str_logpath.rfind(_T(&apos;//&apos;));				if (tstring::">
+  <meta name="description" content="本文原来发表在CSDN博客上面，CSDN上内容现在已迁出至github page上 今天在调试程序的时候，发现vector中多了一个数据。函数如下：  123456789101112131415161718void create_testcase::read_districtfiles()&amp;#123;		tstring::size_type pos=m_str_logpath.rfind(_T(">
 <meta name="keywords" content="CSDN迁移">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用fgets函数返回值而不是feof">
 <meta property="og:url" content="https://autophyte.github.io/2009/09/21/使用fgets函数返回值而不是feof/index.html">
 <meta property="og:site_name" content="std::cout &lt;&lt; &quot;Page for Freedom.Zhang&quot; &lt;&lt; endl;">
-<meta property="og:description" content="使用fgets函数返回值而不是feof今天在调试程序的时候，发现vector中多了一个数据。函数如下：  123456789101112131415161718void create_testcase::read_districtfiles()&amp;#123;		tstring::size_type pos=m_str_logpath.rfind(_T(&apos;//&apos;));				if (tstring::">
+<meta property="og:description" content="本文原来发表在CSDN博客上面，CSDN上内容现在已迁出至github page上 今天在调试程序的时候，发现vector中多了一个数据。函数如下：  123456789101112131415161718void create_testcase::read_districtfiles()&amp;#123;		tstring::size_type pos=m_str_logpath.rfind(_T(">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-23T02:48:45.787Z">
+<meta property="og:updated_time" content="2019-05-23T03:45:20.034Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用fgets函数返回值而不是feof">
-<meta name="twitter:description" content="使用fgets函数返回值而不是feof今天在调试程序的时候，发现vector中多了一个数据。函数如下：  123456789101112131415161718void create_testcase::read_districtfiles()&amp;#123;		tstring::size_type pos=m_str_logpath.rfind(_T(&apos;//&apos;));				if (tstring::">
+<meta name="twitter:description" content="本文原来发表在CSDN博客上面，CSDN上内容现在已迁出至github page上 今天在调试程序的时候，发现vector中多了一个数据。函数如下：  123456789101112131415161718void create_testcase::read_districtfiles()&amp;#123;		tstring::size_type pos=m_str_logpath.rfind(_T(">
   
     <link rel="alternate" href="/atom.xml" title="std::cout &lt;&lt; &#34;Page for Freedom.Zhang&#34; &lt;&lt; endl;" type="application/atom+xml">
   
@@ -91,7 +91,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="使用fgets函数返回值而不是feof"><a href="#使用fgets函数返回值而不是feof" class="headerlink" title="使用fgets函数返回值而不是feof"></a>使用fgets函数返回值而不是feof</h1><p>今天在调试程序的时候，发现vector中多了一个数据。函数如下： </p>
+        <p> <strong>本文原来发表在<a href="https://blog.csdn.net/autophyte" target="_blank" rel="noopener">CSDN</a>博客上面，CSDN上内容现在已迁出至<a href="https://autophyte.github.io">github page</a>上</strong></p>
+<p>今天在调试程序的时候，发现vector中多了一个数据。函数如下： </p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> create_testcase::read_districtfiles()</span><br><span class="line">&#123;</span><br><span class="line">		tstring::size_type pos=m_str_logpath.rfind(_T('//'));</span><br><span class="line">				<span class="keyword">if</span> (tstring::npos==pos) <span class="keyword">return</span>;</span><br><span class="line">		tstring str_name = m_str_logpath+m_str_logpath.substr(pos);</span><br><span class="line">		FILE *pinfile = _tfopen(str_name.c_str(), _T(<span class="string">"rt+, ccs=UTF-8"</span>));</span><br><span class="line">		<span class="keyword">if</span> (<span class="literal">NULL</span>==pinfile) <span class="keyword">return</span>;</span><br><span class="line">		TCHAR linex[MAX_PATH]=_T(<span class="string">""</span>);</span><br><span class="line">		tstring str_line, str_district, str_count;</span><br><span class="line">		<span class="keyword">while</span> (!feof(pinfile))</span><br><span class="line">		&#123;</span><br><span class="line">				_fgetts(linex, MAX_PATH, pinfile);</span><br><span class="line">				str_line = tstring(linex);</span><br><span class="line">				...;</span><br><span class="line">				m_name_vector.push_back(tspair(_ttoi(str_count.c_str()), str_district));</span><br><span class="line">		&#125;</span><br><span class="line">		fclose(pinfile);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>  加断点看看，最后一个元素重复了，再追，发现原来是文件最后一行被fgets()函数读了两遍。</p>
 <p> 查MSDN，feof，有这么一段话：<br>“The feof routine (implemented both as a function and as a macro) determines whether the end of stream has been passed. When the end of file is passed, read operations return an end-of-file indicator until the stream is closed or until rewind, fsetpos, fseek, or clearerr is called against it. </p>
@@ -115,7 +116,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2009/09/21/使用fgets函数返回值而不是feof/" data-id="cjw043lxf000x7cqnhr8dtrbv" class="article-share-link">Share</a>
+      <a data-url="https://autophyte.github.io/2009/09/21/使用fgets函数返回值而不是feof/" data-id="cjw045srg001maoqn1n8koedu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li></ul>
