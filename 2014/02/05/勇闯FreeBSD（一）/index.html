@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>勇闯FreeBSD（一） | std::cout &lt;&lt; &#34;Page for Freedom.Zhang&#34; &lt;&lt; endl;</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文原来发表在CSDN博客上面，CSDN上内容现在已迁出至github page上 人生在世，折腾二字 这是一个FreeBSD新人初用FreeBSD时所遇到的困难和解决方法的记录。开始时间是2014-02-25，但是文章是从2014-03-04开始写的，第一至第五都在2014-03-06重新编辑。  缘由 原来的老笔记本电脑是以前买的一个上上网本，新蓝NB-X20A，买回来后是没有装操作系统的，好">
+<meta name="keywords" content="CSDN迁移">
+<meta property="og:type" content="article">
+<meta property="og:title" content="勇闯FreeBSD（一）">
+<meta property="og:url" content="https://autophyte.github.io/2014/02/05/勇闯FreeBSD（一）/index.html">
+<meta property="og:site_name" content="std::cout &lt;&lt; &quot;Page for Freedom.Zhang&quot; &lt;&lt; endl;">
+<meta property="og:description" content="本文原来发表在CSDN博客上面，CSDN上内容现在已迁出至github page上 人生在世，折腾二字 这是一个FreeBSD新人初用FreeBSD时所遇到的困难和解决方法的记录。开始时间是2014-02-25，但是文章是从2014-03-04开始写的，第一至第五都在2014-03-06重新编辑。  缘由 原来的老笔记本电脑是以前买的一个上上网本，新蓝NB-X20A，买回来后是没有装操作系统的，好">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-23T03:31:37.970Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="勇闯FreeBSD（一）">
+<meta name="twitter:description" content="本文原来发表在CSDN博客上面，CSDN上内容现在已迁出至github page上 人生在世，折腾二字 这是一个FreeBSD新人初用FreeBSD时所遇到的困难和解决方法的记录。开始时间是2014-02-25，但是文章是从2014-03-04开始写的，第一至第五都在2014-03-06重新编辑。  缘由 原来的老笔记本电脑是以前买的一个上上网本，新蓝NB-X20A，买回来后是没有装操作系统的，好">
+  
+    <link rel="alternate" href="/atom.xml" title="std::cout &lt;&lt; &#34;Page for Freedom.Zhang&#34; &lt;&lt; endl;" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">std::cout &lt;&lt; &#34;Page for Freedom.Zhang&#34; &lt;&lt; endl;</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">以程序构筑世界 用代码编制未来</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://autophyte.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-勇闯FreeBSD（一）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/02/05/勇闯FreeBSD（一）/" class="article-date">
+  <time datetime="2014-02-05T02:10:21.000Z" itemprop="datePublished">2014-02-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      勇闯FreeBSD（一）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>本文原来发表在<a href="https://blog.csdn.net/autophyte" target="_blank" rel="noopener">CSDN</a>博客上面，CSDN上内容现在已迁出至<a href="https://autophyte.github.io">github page</a>上</strong></p>
+<h2 id="人生在世，折腾二字"><a href="#人生在世，折腾二字" class="headerlink" title="人生在世，折腾二字"></a>人生在世，折腾二字</h2><p> 这是一个FreeBSD新人初用FreeBSD时所遇到的困难和解决方法的记录。开始时间是2014-02-25，但是文章是从2014-03-04开始写的，第一至第五都在2014-03-06重新编辑。</p>
+<hr>
+<h2 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h2><p> 原来的老笔记本电脑是以前买的一个上上网本，<strong>新蓝NB-X20A</strong>，买回来后是没有装操作系统的，好像也不能说没有操作系统，因为装了DOS，你懂的！当时自已也没有想装盗版Win，那就装一个Linux玩玩，后来选的是Ubuntu（Gnome），用了几年，主要上上网，看看小说，流览下网页，也没有其它用处。其实我很喜欢Unix类操作系统的结构的，感觉结构比起Win来说好很多的，也清晰很多；最喜欢的是 <code>/home</code> 可以单独挂载一个分区，实现数和系统分开，因为我经常会把系统搞坏，重装之类是家常便饭。（题外话，装Gnome的Ubuntu要比WinXP占资源的多，老婆的同款装XP比我的Ubuntu流畅的不是一点半点）。后来买了iPad，电脑换了Mac，这个旧的也就没有用了，吃灰吃了很长时间，最近有点时间，又对FreeBSD感兴趄（刚开始是因为知道Mac是基于FreeBSD上面改来的，后来上论坛、看FreeBSD的handbook、看FreeBSD的价绍等文章，越来越对这个小恶魔有好感了），所以决定装个玩玩，然后就开始了一个艰难的旅程。</p>
+<p> 为什么用<strong>勇闯</strong>呢？因为从一开始就遇到困难，但我相信无论有多么的艰难，我一定闯得进去。</p>
+<p> 可能犯的错很多，也很低级，但还请SA的同学们和各路大神们鄙视的时候留点余地吧，不剩感激~</p>
+<hr>
+<h2 id="系统安装"><a href="#系统安装" class="headerlink" title="系统安装"></a>系统安装</h2><p> 话说，要安装，就要下一个安装件，FreeBSD官网上很容易找到，且提供了很多不同的安装方式；话说我们都知道本地安装要比网络快很多，尤其是在天朝这样的水管网络下，所以就下了个DVD的安装。在这里出现了第一个错误：<strong>FreeBSD官网提供的DVD的ISO文件是没有办法作成启动U盘的</strong>，在官网的价绍上是有说明的，要作U盘安装的，要下的是<strong>FreeBSD-10.0-RELEASE-amd64-memstick.img</strong>这个文件，这个才是U盘安装的境像，但悲剧的是我下的是DVD的，下载完成，查看U盘挂哪了 <code>ll
+ /dev/</code> ，然后就开始dd:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=./FreeBSD-10.0-RELEASE-amd64-DVD.iso of=/dev/disk1s1 bs=20480M conv=sync</span><br></pre></td></tr></table></figure>
+<p> 在这里出现了问题了，以前在dd时，bs的单位用都是小写，但是到了Mac下，小写不行了 <code>Invalid number</code>2m’` ，查资料才知道这个GNU dd的原因</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">If you see the error dd: Invalid number `1m’, you are using GNU dd. Use the same command but replace bs=1m with bs=1M</span><br></pre></td></tr></table></figure>
+<p> OK，等一段时间完成，插到新蓝上面，重启，准备装系，悲剧出现了，不能引导，刚开始以为是dd用的有问题，GOOGLE，找到了这样<a href="http://community.linuxmint.com/tutorial/view/744" target="_blank" rel="noopener">一句话</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Remember, don&apos;t include an integer for the USB drive, e.g. &apos;/dev/sdx1&apos;, as it would refer to the existing partition on that drive and not the drive itself.</span><br></pre></td></tr></table></figure>
+<p> OK，修改了重来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=./FreeBSD-10.0-RELEASE-amd64-DVD.iso of=/dev/disk1 bs=20480M conv=sync</span><br></pre></td></tr></table></figure>
+<p> ，等待完，再试，结果还是不能引导，然后上官网再看，才知道要用U盘，需（须）要下memstick.img的，而更加悲剧的是新蓝是没有光驱的，只能用U盘，所以重下。</p>
+<p> <strong>总结教训：</strong></p>
+<ul>
+<li>FreeBSD的官网上资料很多，也很全，安装前要仔细看。</li>
+<li>经验主义害死人，因为以前下Linux的DVD ISO都可以作U盘引导的<strong><em>以上动作完至2014-02-25， by Freedom Zhang</em></strong></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://autophyte.github.io/2014/02/05/勇闯FreeBSD（一）/" data-id="cjw03tawt0014w0qnqcszqumv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/02/27/勇闯FreeBSD（二）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          勇闯FreeBSD（二）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2009/09/21/32位XP下硬盘安装64位Win7 RTM/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">32位XP下硬盘安装64位Win7 RTM</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/加解密/">加解密</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSDN迁移/" style="font-size: 17.5px;">CSDN迁移</a> <a href="/tags/Jmeter/" style="font-size: 17.5px;">Jmeter</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/加解密/" style="font-size: 12.5px;">加解密</a> <a href="/tags/压力测试/" style="font-size: 17.5px;">压力测试</a> <a href="/tags/性能测试/" style="font-size: 17.5px;">性能测试</a> <a href="/tags/测试/" style="font-size: 20px;">测试</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">September 2009</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">November 2008</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/17/2019-04-17-Centos7下安装docker以及基于docker的数据库/">Centos7下安装docker以及基于docker的数据库</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/16/2019-04-16-Jmeter性能测试实例/">Jmeter性能测试实例</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/12/2019-04-12-Jmeter各Element介绍6/">Jmeter各Element介绍6：随机控制器、随机顺序控制器、Runtime控制器</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/11/2019-04-11-Jmeter各Element介绍5/">Jmeter各Element介绍5：交错控制器</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/10/2019-04-10-Jmeter各Element介绍4/">Jmeter各Element介绍4：ForEach控制器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Freedom Zhang(张振飞)<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

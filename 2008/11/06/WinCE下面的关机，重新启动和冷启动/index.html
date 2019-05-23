@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>WinCE下面的关机，重新启动和冷启动 | std::cout &lt;&lt; &#34;Page for Freedom.Zhang&#34; &lt;&lt; endl;</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="WinCE下面的关机，重新启动和冷启动本文地址：http://blog.csdn.net/autophyte/archive/2008/11/06/3240975.aspx1. 关机12345678/*       模拟power键按下实现关机，因为关机以后应用程序处理器将会断电，所以关机以后，无法通过此种方式重新开机。    */   void SuspendWinCE()   &amp;#123;">
+<meta name="keywords" content="CSDN迁移">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WinCE下面的关机，重新启动和冷启动">
+<meta property="og:url" content="https://autophyte.github.io/2008/11/06/WinCE下面的关机，重新启动和冷启动/index.html">
+<meta property="og:site_name" content="std::cout &lt;&lt; &quot;Page for Freedom.Zhang&quot; &lt;&lt; endl;">
+<meta property="og:description" content="WinCE下面的关机，重新启动和冷启动本文地址：http://blog.csdn.net/autophyte/archive/2008/11/06/3240975.aspx1. 关机12345678/*       模拟power键按下实现关机，因为关机以后应用程序处理器将会断电，所以关机以后，无法通过此种方式重新开机。    */   void SuspendWinCE()   &amp;#123;">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-23T02:52:36.384Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WinCE下面的关机，重新启动和冷启动">
+<meta name="twitter:description" content="WinCE下面的关机，重新启动和冷启动本文地址：http://blog.csdn.net/autophyte/archive/2008/11/06/3240975.aspx1. 关机12345678/*       模拟power键按下实现关机，因为关机以后应用程序处理器将会断电，所以关机以后，无法通过此种方式重新开机。    */   void SuspendWinCE()   &amp;#123;">
+  
+    <link rel="alternate" href="/atom.xml" title="std::cout &lt;&lt; &#34;Page for Freedom.Zhang&#34; &lt;&lt; endl;" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">std::cout &lt;&lt; &#34;Page for Freedom.Zhang&#34; &lt;&lt; endl;</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">以程序构筑世界 用代码编制未来</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://autophyte.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-WinCE下面的关机，重新启动和冷启动" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2008/11/06/WinCE下面的关机，重新启动和冷启动/" class="article-date">
+  <time datetime="2008-11-06T04:07:00.000Z" itemprop="datePublished">2008-11-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      WinCE下面的关机，重新启动和冷启动
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="WinCE下面的关机，重新启动和冷启动"><a href="#WinCE下面的关机，重新启动和冷启动" class="headerlink" title="WinCE下面的关机，重新启动和冷启动"></a>WinCE下面的关机，重新启动和冷启动</h1><h3 id="本文地址：http-blog-csdn-net-autophyte-archive-2008-11-06-3240975-aspx"><a href="#本文地址：http-blog-csdn-net-autophyte-archive-2008-11-06-3240975-aspx" class="headerlink" title="本文地址：http://blog.csdn.net/autophyte/archive/2008/11/06/3240975.aspx"></a>本文地址：<a href="http://blog.csdn.net/autophyte/archive/2008/11/06/3240975.aspx" target="_blank" rel="noopener">http://blog.csdn.net/autophyte/archive/2008/11/06/3240975.aspx</a></h3><h3 id="1-关机"><a href="#1-关机" class="headerlink" title="1. 关机"></a>1. 关机</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*   </span></span><br><span class="line"><span class="comment">    模拟power键按下实现关机，因为关机以后应用程序处理器将会断电，所以关机以后，无法通过此种方式重新开机。   </span></span><br><span class="line"><span class="comment"> */</span>   </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SuspendWinCE</span><span class="params">()</span>   </span></span><br><span class="line"><span class="function"></span>&#123;   </span><br><span class="line">	::keybd_event(VK_OFF, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);   </span><br><span class="line">	::keybd_event(VK_OFF, <span class="number">0</span>, KEYEVENTF_KEYUP, <span class="number">0</span>);   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-重启"><a href="#2-重启" class="headerlink" title="2. 重启"></a>2. 重启</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">   调用IOCTL_HAL_REBOOT来实现重新启动。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">BOOL <span class="title">WarmBoot</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> KernelIoControl(IOCTL_HAL_REBOOT, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-冷启动"><a href="#3-冷启动" class="headerlink" title="3. 冷启动"></a>3. 冷启动</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">   通过设置clear标志位，然后重新启动的方式实现冷启动。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ClearBoot</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	SetCleanRebootFlag();</span><br><span class="line">	KernelIoControl(IOCTL_HAL_REBOOT, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://autophyte.github.io/2008/11/06/WinCE下面的关机，重新启动和冷启动/" data-id="cjw03tawt0012w0qn55h3yh6t" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2008/11/07/在VS2005中设置Build Events/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          在VS2005中设置Build Events
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/加解密/">加解密</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSDN迁移/" style="font-size: 17.5px;">CSDN迁移</a> <a href="/tags/Jmeter/" style="font-size: 17.5px;">Jmeter</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/加解密/" style="font-size: 12.5px;">加解密</a> <a href="/tags/压力测试/" style="font-size: 17.5px;">压力测试</a> <a href="/tags/性能测试/" style="font-size: 17.5px;">性能测试</a> <a href="/tags/测试/" style="font-size: 20px;">测试</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">September 2009</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">November 2008</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/17/2019-04-17-Centos7下安装docker以及基于docker的数据库/">Centos7下安装docker以及基于docker的数据库</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/16/2019-04-16-Jmeter性能测试实例/">Jmeter性能测试实例</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/12/2019-04-12-Jmeter各Element介绍6/">Jmeter各Element介绍6：随机控制器、随机顺序控制器、Runtime控制器</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/11/2019-04-11-Jmeter各Element介绍5/">Jmeter各Element介绍5：交错控制器</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/10/2019-04-10-Jmeter各Element介绍4/">Jmeter各Element介绍4：ForEach控制器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Freedom Zhang(张振飞)<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

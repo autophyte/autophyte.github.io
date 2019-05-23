@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>STL中vector/list的几种赋值方法的速度比较 | std::cout &lt;&lt; &#34;Page for Freedom.Zhang&#34; &lt;&lt; endl;</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="因为工作中遇到要对比较大的vector以及list进行比较频繁的互相复制的动作，为了提高赋值速度，所以对几种赋值方式的耗时进行了一下对比。 本文原来发表在CSDN博客上面，CSDN上内容现在已迁出至github page上 测试代码：12345678910111213141516171819202122232425262728293031323334353637383940414243444546">
+<meta name="keywords" content="CSDN迁移">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL中vector&#x2F;list的几种赋值方法的速度比较">
+<meta property="og:url" content="https://autophyte.github.io/2008/11/08/STL中vector_list的几种赋值方法的速度比较/index.html">
+<meta property="og:site_name" content="std::cout &lt;&lt; &quot;Page for Freedom.Zhang&quot; &lt;&lt; endl;">
+<meta property="og:description" content="因为工作中遇到要对比较大的vector以及list进行比较频繁的互相复制的动作，为了提高赋值速度，所以对几种赋值方式的耗时进行了一下对比。 本文原来发表在CSDN博客上面，CSDN上内容现在已迁出至github page上 测试代码：12345678910111213141516171819202122232425262728293031323334353637383940414243444546">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://autophyte.github.io/img/cpp/csdn/vector_list.png">
+<meta property="og:updated_time" content="2019-05-23T03:28:14.667Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="STL中vector&#x2F;list的几种赋值方法的速度比较">
+<meta name="twitter:description" content="因为工作中遇到要对比较大的vector以及list进行比较频繁的互相复制的动作，为了提高赋值速度，所以对几种赋值方式的耗时进行了一下对比。 本文原来发表在CSDN博客上面，CSDN上内容现在已迁出至github page上 测试代码：12345678910111213141516171819202122232425262728293031323334353637383940414243444546">
+<meta name="twitter:image" content="https://autophyte.github.io/img/cpp/csdn/vector_list.png">
+  
+    <link rel="alternate" href="/atom.xml" title="std::cout &lt;&lt; &#34;Page for Freedom.Zhang&#34; &lt;&lt; endl;" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">std::cout &lt;&lt; &#34;Page for Freedom.Zhang&#34; &lt;&lt; endl;</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">以程序构筑世界 用代码编制未来</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://autophyte.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-STL中vector_list的几种赋值方法的速度比较" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2008/11/08/STL中vector_list的几种赋值方法的速度比较/" class="article-date">
+  <time datetime="2008-11-08T10:12:00.000Z" itemprop="datePublished">2008-11-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      STL中vector/list的几种赋值方法的速度比较
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>因为工作中遇到要对比较大的vector以及list进行比较频繁的互相复制的动作，为了提高赋值速度，所以对几种赋值方式的耗时进行了一下对比。</p>
+<p><strong>本文原来发表在<a href="https://blog.csdn.net/autophyte" target="_blank" rel="noopener">CSDN</a>博客上面，CSDN上内容现在已迁出至<a href="https://autophyte.github.io">github page</a>上</strong></p>
+<h2 id="测试代码："><a href="#测试代码：" class="headerlink" title="测试代码："></a>测试代码：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">"stdafx.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;Windows.h&gt;</span></span></span><br><span class="line">usingnamespacestd;</span><br><span class="line"></span><br><span class="line">typedefvector&lt;<span class="keyword">int</span>&gt;vType;</span><br><span class="line">typedeflist&lt;<span class="keyword">int</span>&gt;lType;</span><br><span class="line"></span><br><span class="line">constintTEST_MAX_LEN=<span class="number">100000</span>;</span><br><span class="line"></span><br><span class="line">int_tmain(intargc,_TCHAR*argv[])</span><br><span class="line">&#123;</span><br><span class="line">	vTypev1,v2;</span><br><span class="line">	lTypel1,l2;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//初始化v1和l1</span></span><br><span class="line">	<span class="keyword">for</span>(inti=<span class="number">0</span>;i&lt;TEST_MAX_LEN;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		v1.push_back(i);</span><br><span class="line">		l1.push_back(i);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//初始化计时器</span></span><br><span class="line">	LARGE_INTEGERtmp;</span><br><span class="line">	LARGE_INTEGERnSart;</span><br><span class="line">	LARGE_INTEGERnEnd;</span><br><span class="line"></span><br><span class="line">	QueryPerformanceFrequency(&amp;tmp);</span><br><span class="line"></span><br><span class="line">	intfreq=tmp.QuadPart;</span><br><span class="line">	<span class="keyword">if</span>(<span class="number">0</span>==freq)<span class="keyword">return</span><span class="number">-1</span>;</span><br><span class="line">	<span class="comment">//用赋值操作符赋值vector</span></span><br><span class="line">	&#123;</span><br><span class="line">		v2.clear();</span><br><span class="line">		QueryPerformanceCounter(&amp;nSart);</span><br><span class="line">		v2=v1;</span><br><span class="line">		QueryPerformanceCounter(&amp;nEnd);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">"用赋值操作符赋值vector:/t"</span></span><br><span class="line">			&lt;&lt;(nEnd.QuadPart-nSart.QuadPart)*<span class="number">1000000</span>/freq</span><br><span class="line">			&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//用赋值操作符赋值list</span></span><br><span class="line">	&#123;</span><br><span class="line">		l2.clear();</span><br><span class="line">		QueryPerformanceCounter(&amp;nSart);</span><br><span class="line">		l2=l1;</span><br><span class="line">		QueryPerformanceCounter(&amp;nEnd);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">"用赋值操作符赋值list:/t"</span></span><br><span class="line">			&lt;&lt;(nEnd.QuadPart-nSart.QuadPart)*<span class="number">1000000</span>/freq</span><br><span class="line">			&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//用assign给vector赋值</span></span><br><span class="line">	&#123;</span><br><span class="line">		v2.clear();</span><br><span class="line">		QueryPerformanceCounter(&amp;nSart);</span><br><span class="line">		v2.assign(v1.begin(),v1.end());</span><br><span class="line">		QueryPerformanceCounter(&amp;nEnd);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">"用assign给vector赋值:/t"</span></span><br><span class="line">			&lt;&lt;(nEnd.QuadPart-nSart.QuadPart)*<span class="number">1000000</span>/freq</span><br><span class="line">			&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//用assign给list赋值</span></span><br><span class="line">	&#123;</span><br><span class="line">		l2.clear();</span><br><span class="line">		QueryPerformanceCounter(&amp;nSart);</span><br><span class="line">		l2.assign(l1.begin(),l1.end());</span><br><span class="line">		QueryPerformanceCounter(&amp;nEnd);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">"用assign给list赋值:/t"</span></span><br><span class="line">			&lt;&lt;(nEnd.QuadPart-nSart.QuadPart)*<span class="number">1000000</span>/freq</span><br><span class="line">			&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//用copy算法给vector赋值（插入迭代器方式）</span></span><br><span class="line">	&#123;</span><br><span class="line">		v2.clear();</span><br><span class="line">		QueryPerformanceCounter(&amp;nSart);</span><br><span class="line">		copy(v1.begin(),v1.end(),inserter(v2,v2.begin()));</span><br><span class="line">		QueryPerformanceCounter(&amp;nEnd);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">"用copy算法给vector赋值（插入迭代器方式）"</span></span><br><span class="line">			&lt;&lt;(nEnd.QuadPart-nSart.QuadPart)*<span class="number">1000000</span>/freq</span><br><span class="line">			&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//用copy算法给list赋值（插入迭代器方式）</span></span><br><span class="line">	&#123;</span><br><span class="line">		l2.clear();</span><br><span class="line">		QueryPerformanceCounter(&amp;nSart);</span><br><span class="line">		copy(l1.begin(),l1.end(),inserter(l2,l2.begin()));</span><br><span class="line">		QueryPerformanceCounter(&amp;nEnd);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">"用copy算法给list赋值（插入迭代器方式）"</span></span><br><span class="line">			&lt;&lt;(nEnd.QuadPart-nSart.QuadPart)*<span class="number">1000000</span>/freq</span><br><span class="line">			&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//用copy算法给vector赋值（resize）</span></span><br><span class="line">	&#123;</span><br><span class="line">		v2.clear();</span><br><span class="line">		QueryPerformanceCounter(&amp;nSart);</span><br><span class="line">		v2.resize(v1.size());</span><br><span class="line">		copy(v1.begin(),v1.end(),v2.begin());</span><br><span class="line">		QueryPerformanceCounter(&amp;nEnd);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">"用copy算法给vector赋值（resize）"</span></span><br><span class="line">			&lt;&lt;(nEnd.QuadPart-nSart.QuadPart)*<span class="number">1000000</span>/freq</span><br><span class="line">			&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//用copy算法给list赋值（resize）</span></span><br><span class="line">	&#123;</span><br><span class="line">		l2.clear();</span><br><span class="line">		QueryPerformanceCounter(&amp;nSart);</span><br><span class="line">		l2.resize(l1.size());</span><br><span class="line">		copy(l1.begin(),l1.end(),l2.begin());</span><br><span class="line">		QueryPerformanceCounter(&amp;nEnd);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">"用copy算法给list赋值（resize）"</span></span><br><span class="line">			&lt;&lt;(nEnd.QuadPart-nSart.QuadPart)*<span class="number">1000000</span>/freq</span><br><span class="line">			&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//用assign给vector赋值(从list)</span></span><br><span class="line">	&#123;</span><br><span class="line">		v2.clear();</span><br><span class="line">		QueryPerformanceCounter(&amp;nSart);</span><br><span class="line">		v2.assign(l1.begin(),l1.end());</span><br><span class="line">		QueryPerformanceCounter(&amp;nEnd);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">"用assign给vector赋值(从list):/t"</span></span><br><span class="line">			&lt;&lt;(nEnd.QuadPart-nSart.QuadPart)*<span class="number">1000000</span>/freq</span><br><span class="line">			&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//用assign给list赋值(从vector)</span></span><br><span class="line">	&#123;</span><br><span class="line">		l2.clear();</span><br><span class="line">		QueryPerformanceCounter(&amp;nSart);</span><br><span class="line">		l2.assign(v1.begin(),v1.end());</span><br><span class="line">		QueryPerformanceCounter(&amp;nEnd);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">"用assign给list赋值(从vector):/t"</span></span><br><span class="line">			&lt;&lt;(nEnd.QuadPart-nSart.QuadPart)*<span class="number">1000000</span>/freq</span><br><span class="line">			&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	getchar();</span><br><span class="line">	return0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p><img src="/img/cpp/csdn/vector_list.png" alt="测试结果" title="STL中vector/list的几种赋值方法的速度比较"></p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><ol>
+<li>vector对于vector赋值方式中<ul>
+<li>assign的速度是最快的</li>
+<li>其次是resize以后用copy算法赋值</li>
+<li>而最先能够想到的赋值操作符，速度却并不快，只能够排名第三，目前还不知道这是为什么</li>
+<li>采用插入迭代器再用copy的方式是速度最慢的一种。</li>
+</ul>
+</li>
+<li>list对于list赋值<ul>
+<li>赋值操作符的速度是最快的</li>
+<li>其次是assign</li>
+<li>然后是采用resize的copy</li>
+<li>最后一位同样是采用插入迭代子方式的copy。</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://autophyte.github.io/2008/11/08/STL中vector_list的几种赋值方法的速度比较/" data-id="cjw03tawq000xw0qna0ljrwfi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2009/09/21/使用fgets函数返回值而不是feof/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          使用fgets函数返回值而不是feof
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2008/11/07/在VS2005中设置Build Events/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">在VS2005中设置Build Events</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/加解密/">加解密</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSDN迁移/" style="font-size: 17.5px;">CSDN迁移</a> <a href="/tags/Jmeter/" style="font-size: 17.5px;">Jmeter</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/加解密/" style="font-size: 12.5px;">加解密</a> <a href="/tags/压力测试/" style="font-size: 17.5px;">压力测试</a> <a href="/tags/性能测试/" style="font-size: 17.5px;">性能测试</a> <a href="/tags/测试/" style="font-size: 20px;">测试</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">September 2009</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">November 2008</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/17/2019-04-17-Centos7下安装docker以及基于docker的数据库/">Centos7下安装docker以及基于docker的数据库</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/16/2019-04-16-Jmeter性能测试实例/">Jmeter性能测试实例</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/12/2019-04-12-Jmeter各Element介绍6/">Jmeter各Element介绍6：随机控制器、随机顺序控制器、Runtime控制器</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/11/2019-04-11-Jmeter各Element介绍5/">Jmeter各Element介绍5：交错控制器</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/10/2019-04-10-Jmeter各Element介绍4/">Jmeter各Element介绍4：ForEach控制器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Freedom Zhang(张振飞)<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

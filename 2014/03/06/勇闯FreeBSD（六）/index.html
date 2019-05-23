@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>勇闯FreeBSD（六） | std::cout &lt;&lt; &#34;Page for Freedom.Zhang&#34; &lt;&lt; endl;</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文原来发表在CSDN博客上面，CSDN上内容现在已迁出至github page上 人生在世，折腾二字 战胜困难 不出所料，又出错了，跟上次错误一样，静下心来看下什么错误：下载不到 pciids-20131130.tar.xz 这个软件包，再看详细信息： 1234===&amp;gt; Verifying install for /usr/local/share/pciids/pci.ids in /us">
+<meta name="keywords" content="CSDN迁移">
+<meta property="og:type" content="article">
+<meta property="og:title" content="勇闯FreeBSD（六）">
+<meta property="og:url" content="https://autophyte.github.io/2014/03/06/勇闯FreeBSD（六）/index.html">
+<meta property="og:site_name" content="std::cout &lt;&lt; &quot;Page for Freedom.Zhang&quot; &lt;&lt; endl;">
+<meta property="og:description" content="本文原来发表在CSDN博客上面，CSDN上内容现在已迁出至github page上 人生在世，折腾二字 战胜困难 不出所料，又出错了，跟上次错误一样，静下心来看下什么错误：下载不到 pciids-20131130.tar.xz 这个软件包，再看详细信息： 1234===&amp;gt; Verifying install for /usr/local/share/pciids/pci.ids in /us">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-23T03:35:37.347Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="勇闯FreeBSD（六）">
+<meta name="twitter:description" content="本文原来发表在CSDN博客上面，CSDN上内容现在已迁出至github page上 人生在世，折腾二字 战胜困难 不出所料，又出错了，跟上次错误一样，静下心来看下什么错误：下载不到 pciids-20131130.tar.xz 这个软件包，再看详细信息： 1234===&amp;gt; Verifying install for /usr/local/share/pciids/pci.ids in /us">
+  
+    <link rel="alternate" href="/atom.xml" title="std::cout &lt;&lt; &#34;Page for Freedom.Zhang&#34; &lt;&lt; endl;" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">std::cout &lt;&lt; &#34;Page for Freedom.Zhang&#34; &lt;&lt; endl;</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">以程序构筑世界 用代码编制未来</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://autophyte.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-勇闯FreeBSD（六）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/03/06/勇闯FreeBSD（六）/" class="article-date">
+  <time datetime="2014-03-06T02:24:08.000Z" itemprop="datePublished">2014-03-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      勇闯FreeBSD（六）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>本文原来发表在<a href="https://blog.csdn.net/autophyte" target="_blank" rel="noopener">CSDN</a>博客上面，CSDN上内容现在已迁出至<a href="https://autophyte.github.io">github page</a>上</strong></p>
+<h2 id="人生在世，折腾二字"><a href="#人生在世，折腾二字" class="headerlink" title="人生在世，折腾二字"></a>人生在世，折腾二字</h2><hr>
+<h2 id="战胜困难"><a href="#战胜困难" class="headerlink" title="战胜困难"></a>战胜困难</h2><p> 不出所料，又出错了，跟上次错误一样，静下心来看下什么错误：下载不到 <code>pciids-20131130.tar.xz</code> 这个软件包，再看详细信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">===&gt; Verifying install for /usr/local/share/pciids/pci.ids in /usr/ports/misc/pciids</span><br><span class="line">===&gt; pciids-20131130 depends on file: /usr/local/sbin/pkg - found</span><br><span class="line">=&gt; pciids-20131130.tar.xz doesn&apos;t seem to exist in /usr/ports/distifiles/.</span><br><span class="line">=&gt; Attempting to fetch http://ftp.FreeBSD.org/pub/FreeBSD/ports/local-distfiles/sunpoet/piids-20131130.tar.xz</span><br></pre></td></tr></table></figure>
+<p> OK，就是说这个包所依赖的东西都OK啦，然后后面也把下载地址告诉了，好，我们去这个<a href="http://ftp.freebsd.org/pub/FreeBSD/ports/local-distfiles/sunpoet/" target="_blank" rel="noopener">ftp</a>看看，能找到pciids这个包，但是版本不对，有其它3个版本的（如20140222），OK，这样就好办了，找下这个版本包的distinfo和Makefile，下载下来，替换原来的两个文件，<a href="http://www.freshports.org/misc/pciids" target="_blank" rel="noopener">freshport</a>就有包的所有版本更新信息，也有diff文件。20140222对应的版本是<a href="http://svnweb.freebsd.org/ports?view=revision&amp;revision=345706" target="_blank" rel="noopener">可以在这里下</a>，当然也可以用一个一个的diff文件打回20131130，只要不嫌麻烦，而且重新打包，SHA也可能变化，还是直接换包比较简单。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/ports/misc/pciids</span><br><span class="line">mv ./Makefile ./Makefile.bk</span><br><span class="line">mv ./distinfo ./distinfo.bk</span><br><span class="line">mount -t msdosfs /dev/da0s1 /media</span><br><span class="line">cp /media/pciids/* ./</span><br><span class="line">cd /usr/ports/x11-wm/xfce4</span><br><span class="line">make install clean</span><br></pre></td></tr></table></figure>
+<p> <strong><em>以上动作完于2014-03-06， by Freedom Zhang</em></strong></p>
+<hr>
+<p> 待续……   </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://autophyte.github.io/2014/03/06/勇闯FreeBSD（六）/" data-id="cjw03tawz001hw0qn38ka5ej1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/03/07/勇闯FreeBSD（四）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          勇闯FreeBSD（四）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/03/05/勇闯FreeBSD（五）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">勇闯FreeBSD（五）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/加解密/">加解密</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSDN迁移/" style="font-size: 17.5px;">CSDN迁移</a> <a href="/tags/Jmeter/" style="font-size: 17.5px;">Jmeter</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/加解密/" style="font-size: 12.5px;">加解密</a> <a href="/tags/压力测试/" style="font-size: 17.5px;">压力测试</a> <a href="/tags/性能测试/" style="font-size: 17.5px;">性能测试</a> <a href="/tags/测试/" style="font-size: 20px;">测试</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">September 2009</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">November 2008</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/17/2019-04-17-Centos7下安装docker以及基于docker的数据库/">Centos7下安装docker以及基于docker的数据库</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/16/2019-04-16-Jmeter性能测试实例/">Jmeter性能测试实例</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/12/2019-04-12-Jmeter各Element介绍6/">Jmeter各Element介绍6：随机控制器、随机顺序控制器、Runtime控制器</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/11/2019-04-11-Jmeter各Element介绍5/">Jmeter各Element介绍5：交错控制器</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/10/2019-04-10-Jmeter各Element介绍4/">Jmeter各Element介绍4：ForEach控制器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Freedom Zhang(张振飞)<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

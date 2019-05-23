@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>勇闯FreeBSD（四） | std::cout &lt;&lt; &#34;Page for Freedom.Zhang&#34; &lt;&lt; endl;</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文原来发表在CSDN博客上面，CSDN上内容现在已迁出至github page上 人生在世，折腾二字 初入PC-BSD 下载PC-BSD时又范了一个错误，没有看清楚，先下了一个IA64的，结果不言而喻，没有法安装了，重新下。  PC-BSD（Mate Desktop，因为不喜欢KDE）安装没有什么新意，值得说的是PC-BSD前面分区的功能实在是弱爆了！但是安装很容易；网络配置也很顺利，没有出现问">
+<meta name="keywords" content="CSDN迁移">
+<meta property="og:type" content="article">
+<meta property="og:title" content="勇闯FreeBSD（四）">
+<meta property="og:url" content="https://autophyte.github.io/2014/03/07/勇闯FreeBSD（四）/index.html">
+<meta property="og:site_name" content="std::cout &lt;&lt; &quot;Page for Freedom.Zhang&quot; &lt;&lt; endl;">
+<meta property="og:description" content="本文原来发表在CSDN博客上面，CSDN上内容现在已迁出至github page上 人生在世，折腾二字 初入PC-BSD 下载PC-BSD时又范了一个错误，没有看清楚，先下了一个IA64的，结果不言而喻，没有法安装了，重新下。  PC-BSD（Mate Desktop，因为不喜欢KDE）安装没有什么新意，值得说的是PC-BSD前面分区的功能实在是弱爆了！但是安装很容易；网络配置也很顺利，没有出现问">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-23T03:32:24.520Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="勇闯FreeBSD（四）">
+<meta name="twitter:description" content="本文原来发表在CSDN博客上面，CSDN上内容现在已迁出至github page上 人生在世，折腾二字 初入PC-BSD 下载PC-BSD时又范了一个错误，没有看清楚，先下了一个IA64的，结果不言而喻，没有法安装了，重新下。  PC-BSD（Mate Desktop，因为不喜欢KDE）安装没有什么新意，值得说的是PC-BSD前面分区的功能实在是弱爆了！但是安装很容易；网络配置也很顺利，没有出现问">
+  
+    <link rel="alternate" href="/atom.xml" title="std::cout &lt;&lt; &#34;Page for Freedom.Zhang&#34; &lt;&lt; endl;" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">std::cout &lt;&lt; &#34;Page for Freedom.Zhang&#34; &lt;&lt; endl;</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">以程序构筑世界 用代码编制未来</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://autophyte.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-勇闯FreeBSD（四）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/03/07/勇闯FreeBSD（四）/" class="article-date">
+  <time datetime="2014-03-07T02:17:51.000Z" itemprop="datePublished">2014-03-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      勇闯FreeBSD（四）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>本文原来发表在<a href="https://blog.csdn.net/autophyte" target="_blank" rel="noopener">CSDN</a>博客上面，CSDN上内容现在已迁出至<a href="https://autophyte.github.io">github page</a>上</strong></p>
+<h2 id="人生在世，折腾二字"><a href="#人生在世，折腾二字" class="headerlink" title="人生在世，折腾二字"></a>人生在世，折腾二字</h2><hr>
+<h2 id="初入PC-BSD"><a href="#初入PC-BSD" class="headerlink" title="初入PC-BSD"></a>初入PC-BSD</h2><p> 下载PC-BSD时又范了一个错误，没有看清楚，先下了一个IA64的，结果不言而喻，没有法安装了，重新下。</p>
+<p> PC-BSD（Mate Desktop，因为不喜欢KDE）安装没有什么新意，值得说的是PC-BSD前面分区的功能实在是弱爆了！但是安装很容易；网络配置也很顺利，没有出现问题，但是问题不是没有，输入法上面就出现问题了。</p>
+<hr>
+<h2 id="不能输入中文的iBus输入法"><a href="#不能输入中文的iBus输入法" class="headerlink" title="不能输入中文的iBus输入法"></a>不能输入中文的iBus输入法</h2><p> PC-BSD安装安装完成是默安装了iBus的，但是没有添加ibus-pinyin，需要自已添加，但是添加后，出现了下面的问题：</p>
+<ol>
+<li>ibus-pinyin的首选项打不开</li>
+<li>用ctrl+space没有办法切换到汉语输入状态</li>
+<li><p>用鼠标可以切换，但是输入任字，都是英文的，且输入法图标会变回去。 GOOGLE，而且检查过Python的Version，都是最新的，检查配置文件~/.cshrc有这些语句（csh，所以配置文件是~/.cshrc）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">setenv XIM ibus</span><br><span class="line">setenv GTK_IM_MODULE xim</span><br><span class="line">setenv QT_IM_MODULE ibus</span><br><span class="line">setenv XMODIFIERS @im=ibus</span><br><span class="line">setenv XIM_ARGS &quot;--daemonize --xim&quot;</span><br></pre></td></tr></table></figure>
+<p>网上各种方法试了一大堆，还是没有搞定，甚至都装了fcitx用了，准备将ibus完全册除掉，突然看到右上角有个软件升级的提示，就升级了，没有升级好了以后，ibus能用了，果然如FAQ上说的：“升级，升级能解决大部分问题”。后来在一个邮件中看到好像这个是ibus1.4.9的bug，和FreeBSD没有关系。目前iBus还有个问题，没有光标根随，还不知道怎么弄，另一个问题是没有找五笔输入法。</p>
+<p><strong>心得：</strong></p>
+</li>
+</ol>
+<ul>
+<li>升级，升级能解决大部分问题</li>
+</ul>
+<hr>
+<h2 id="轻量级的Xfce"><a href="#轻量级的Xfce" class="headerlink" title="轻量级的Xfce"></a>轻量级的Xfce</h2><p> 问题基本已经搞定了，但是总觉得Gnome（虽然目前装的是Mate）太占用资源，所以想换成Xfce试下，这还是第一次装Xfce，以前所用的都是Gnome家族的，PC-BSD下安装Xfce还是很简单的，在包管理器里面有，选上就OK了。</p>
+<p> 切换到Xfce上面后，惊喜啊，流畅，感觉确实比Mate省资源的多，速度不是一个级别的啊；界面也很漂亮，而且可以用Gnome的主题；以前在Gnome（ubuntu）上面不敢使用的界面也敢用了，赞啊！后悔以没有早试下这个。如果以后没有什么问题的话，就用这个了。</p>
+<p> <strong>心得：</strong></p>
+<ul>
+<li>还是要不断的尝新，可能就会有惊喜<strong><em>以上动作完成至2014-03-03，by Freedom Zhang</em></strong></li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://autophyte.github.io/2014/03/07/勇闯FreeBSD（四）/" data-id="cjw03tax0001jw0qnxa4mpxxc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/09/02/2018-09-02-nginx负载均衡配置/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          nginx配置负载均衡
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/03/06/勇闯FreeBSD（六）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">勇闯FreeBSD（六）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/加解密/">加解密</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSDN迁移/" style="font-size: 17.5px;">CSDN迁移</a> <a href="/tags/Jmeter/" style="font-size: 17.5px;">Jmeter</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/加解密/" style="font-size: 12.5px;">加解密</a> <a href="/tags/压力测试/" style="font-size: 17.5px;">压力测试</a> <a href="/tags/性能测试/" style="font-size: 17.5px;">性能测试</a> <a href="/tags/测试/" style="font-size: 20px;">测试</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">September 2009</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">November 2008</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/17/2019-04-17-Centos7下安装docker以及基于docker的数据库/">Centos7下安装docker以及基于docker的数据库</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/16/2019-04-16-Jmeter性能测试实例/">Jmeter性能测试实例</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/12/2019-04-12-Jmeter各Element介绍6/">Jmeter各Element介绍6：随机控制器、随机顺序控制器、Runtime控制器</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/11/2019-04-11-Jmeter各Element介绍5/">Jmeter各Element介绍5：交错控制器</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/10/2019-04-10-Jmeter各Element介绍4/">Jmeter各Element介绍4：ForEach控制器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Freedom Zhang(张振飞)<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
