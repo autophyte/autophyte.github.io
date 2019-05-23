@@ -5,27 +5,19 @@
   
 
   
-  <title>Jmeter分布式测试（二） | 百草神农殿</title>
+  <title>Tag: WinCE | 百草神农殿</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="开始分布式测试前面的文章，我们已经完成Jmeter分布式测试相关配置，现在准备开始做分布式测试（注意，不需要将testplan手动复制到每一个slave机器上，master会自动分发）。  在GUI模式中准备脚本(请参考ApacheJmeter的运行模式)。 在所有需要用到的slave机器上启动jmeter服务器模式  在Master中以GUI方式启动jmeter Master中添加聚合报告的li">
-<meta name="keywords" content="Jmeter,测试,性能测试,压力测试">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Jmeter分布式测试（二）">
-<meta property="og:url" content="https://autophyte.github.io/2018/11/03/2018-11-03-Jmeter分布式测试/index.html">
+  <meta name="description" content="这是张振飞在github上写下学些笔记">
+<meta name="keywords" content="白盒|接口|自动化|C|GO|Python">
+<meta property="og:type" content="website">
+<meta property="og:title" content="百草神农殿">
+<meta property="og:url" content="https://autophyte.github.io/tags/WinCE/index.html">
 <meta property="og:site_name" content="百草神农殿">
-<meta property="og:description" content="开始分布式测试前面的文章，我们已经完成Jmeter分布式测试相关配置，现在准备开始做分布式测试（注意，不需要将testplan手动复制到每一个slave机器上，master会自动分发）。  在GUI模式中准备脚本(请参考ApacheJmeter的运行模式)。 在所有需要用到的slave机器上启动jmeter服务器模式  在Master中以GUI方式启动jmeter Master中添加聚合报告的li">
+<meta property="og:description" content="这是张振飞在github上写下学些笔记">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://autophyte.github.io/img/jmeter/start_jmeter_server.png">
-<meta property="og:image" content="https://autophyte.github.io/img/jmeter/jmeter_add_aggregate_listener.png">
-<meta property="og:image" content="https://autophyte.github.io/img/jmeter/jmeter_aggregate_report.png">
-<meta property="og:image" content="https://autophyte.github.io/img/jmeter/jemter_start_remote_test.png">
-<meta property="og:image" content="https://autophyte.github.io/img/jmeter/jmeter_aggregate_report_data.png">
-<meta property="og:image" content="https://autophyte.github.io/img/jmeter/remote_startedpng.png">
-<meta property="og:updated_time" content="2019-04-10T02:09:08.810Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jmeter分布式测试（二）">
-<meta name="twitter:description" content="开始分布式测试前面的文章，我们已经完成Jmeter分布式测试相关配置，现在准备开始做分布式测试（注意，不需要将testplan手动复制到每一个slave机器上，master会自动分发）。  在GUI模式中准备脚本(请参考ApacheJmeter的运行模式)。 在所有需要用到的slave机器上启动jmeter服务器模式  在Master中以GUI方式启动jmeter Master中添加聚合报告的li">
-<meta name="twitter:image" content="https://autophyte.github.io/img/jmeter/start_jmeter_server.png">
+<meta name="twitter:title" content="百草神农殿">
+<meta name="twitter:description" content="这是张振飞在github上写下学些笔记">
   
     <link rel="alternate" href="/atom.xml" title="百草神农殿" type="application/atom+xml">
   
@@ -76,76 +68,40 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-2018-11-03-Jmeter分布式测试" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/11/03/2018-11-03-Jmeter分布式测试/" class="article-date">
-  <time datetime="2018-11-02T16:00:00.000Z" itemprop="datePublished">2018-11-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      Jmeter分布式测试（二）
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2008" class="archive-year">2008</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2008/11/06/WinCE下面的关机，重新启动和冷启动/" class="archive-article-date">
+  <time datetime="2008-11-06T04:07:00.000Z" itemprop="datePublished">Nov 6</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2008/11/06/WinCE下面的关机，重新启动和冷启动/">WinCE下面的关机，重新启动和冷启动</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="开始分布式测试"><a href="#开始分布式测试" class="headerlink" title="开始分布式测试"></a>开始分布式测试</h3><p>前面的文章，我们已经完成Jmeter分布式测试相关<a href="https://autophyte.github.io/2018/11/02/Jmeter%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%8B%E8%AF%95%E9%85%8D%E7%BD%AE.html">配置</a>，现在准备开始做分布式测试（注意，不需要将testplan手动复制到每一个slave机器上，master会自动分发）。</p>
-<ol>
-<li>在GUI模式中准备脚本(请参考<a href="https://autophyte.github.io/2018/11/02/Jmeter%E5%90%AF%E5%8A%A8.html">ApacheJmeter的运行模式</a>)。</li>
-<li>在所有需要用到的slave机器上启动jmeter服务器模式<br> <img src="/img/jmeter/start_jmeter_server.png" alt="服务器模式截图" title="Jmeter5.0 服务器模式"></li>
-<li>在Master中以GUI方式启动jmeter</li>
-<li><p>Master中添加聚合报告的listener<br> <img src="/img/jmeter/jmeter_add_aggregate_listener.png" alt="Master添加聚合报告的listener" title="Jmeter5.0 添加聚合报告的listener"><br> <img src="/img/jmeter/jmeter_aggregate_report.png" alt="Master添加聚合报告的listener" title="Jmeter5.0 添加聚合报告的listener"></p>
-</li>
-<li><p>在Master中启动远程机器测试（也可以直接点击Remote Start All开启已经配置的所有Slave机器）<br> <img src="/img/jmeter/jemter_start_remote_test.png" alt="Master开启Remote Test" title="Jmeter5.0 启动远程测试"></p>
-</li>
-<li><p>在Master中聚合报告中可以看到已经又测试数据过来<br> <img src="/img/jmeter/jmeter_aggregate_report_data.png" alt="Master聚合报告数据" title="Jmeter5.0 Master聚合报告数据"></p>
-</li>
-<li><p>在Slave机器中应该可以看到下面这样的信息，表示测试已经启动<br> <img src="/img/jmeter/remote_startedpng.png" alt="Slave测试开启" title="Jmeter5.0 测试开始"></p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2018/11/03/2018-11-03-Jmeter分布式测试/" data-id="cjw07keeq0008jsqngmyqtdx0" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2018/11/04/2018-11-04-Jmeter录制脚本/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          ApacheJmeter5.0 录制脚本
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2018/11/02/2018-11-02-Jmeter分布式测试配置/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Jmeter分布式测试（一）</div>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
+
 
 </section>
         
