@@ -70,6 +70,70 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-勇闯FreeBSD（四）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/03/07/勇闯FreeBSD（四）/" class="article-date">
+  <time datetime="2014-03-07T02:17:51.000Z" itemprop="datePublished">2014-03-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/03/07/勇闯FreeBSD（四）/">勇闯FreeBSD（四）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>本文原来发表在<a href="https://blog.csdn.net/autophyte" target="_blank" rel="noopener">CSDN</a>博客上面，CSDN上内容现在已迁出至<a href="https://autophyte.github.io">github page</a>上</strong></p>
+<h2 id="人生在世，折腾二字"><a href="#人生在世，折腾二字" class="headerlink" title="人生在世，折腾二字"></a>人生在世，折腾二字</h2><hr>
+<h2 id="初入PC-BSD"><a href="#初入PC-BSD" class="headerlink" title="初入PC-BSD"></a>初入PC-BSD</h2><p> 下载PC-BSD时又范了一个错误，没有看清楚，先下了一个IA64的，结果不言而喻，没有法安装了，重新下。</p>
+<p> PC-BSD（Mate Desktop，因为不喜欢KDE）安装没有什么新意，值得说的是PC-BSD前面分区的功能实在是弱爆了！但是安装很容易；网络配置也很顺利，没有出现问题，但是问题不是没有，输入法上面就出现问题了。</p>
+<hr>
+<h2 id="不能输入中文的iBus输入法"><a href="#不能输入中文的iBus输入法" class="headerlink" title="不能输入中文的iBus输入法"></a>不能输入中文的iBus输入法</h2><p> PC-BSD安装安装完成是默安装了iBus的，但是没有添加ibus-pinyin，需要自已添加，但是添加后，出现了下面的问题：</p>
+<ol>
+<li>ibus-pinyin的首选项打不开</li>
+<li>用ctrl+space没有办法切换到汉语输入状态</li>
+<li><p>用鼠标可以切换，但是输入任字，都是英文的，且输入法图标会变回去。 GOOGLE，而且检查过Python的Version，都是最新的，检查配置文件~/.cshrc有这些语句（csh，所以配置文件是~/.cshrc）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">setenv XIM ibus</span><br><span class="line">setenv GTK_IM_MODULE xim</span><br><span class="line">setenv QT_IM_MODULE ibus</span><br><span class="line">setenv XMODIFIERS @im=ibus</span><br><span class="line">setenv XIM_ARGS &quot;--daemonize --xim&quot;</span><br></pre></td></tr></table></figure>
+<p>网上各种方法试了一大堆，还是没有搞定，甚至都装了fcitx用了，准备将ibus完全册除掉，突然看到右上角有个软件升级的提示，就升级了，没有升级好了以后，ibus能用了，果然如FAQ上说的：“升级，升级能解决大部分问题”。后来在一个邮件中看到好像这个是ibus1.4.9的bug，和FreeBSD没有关系。目前iBus还有个问题，没有光标根随，还不知道怎么弄，另一个问题是没有找五笔输入法。</p>
+<p><strong>心得：</strong></p>
+</li>
+</ol>
+<ul>
+<li>升级，升级能解决大部分问题</li>
+</ul>
+<hr>
+<h2 id="轻量级的Xfce"><a href="#轻量级的Xfce" class="headerlink" title="轻量级的Xfce"></a>轻量级的Xfce</h2><p> 问题基本已经搞定了，但是总觉得Gnome（虽然目前装的是Mate）太占用资源，所以想换成Xfce试下，这还是第一次装Xfce，以前所用的都是Gnome家族的，PC-BSD下安装Xfce还是很简单的，在包管理器里面有，选上就OK了。</p>
+<p> 切换到Xfce上面后，惊喜啊，流畅，感觉确实比Mate省资源的多，速度不是一个级别的啊；界面也很漂亮，而且可以用Gnome的主题；以前在Gnome（ubuntu）上面不敢使用的界面也敢用了，赞啊！后悔以没有早试下这个。如果以后没有什么问题的话，就用这个了。</p>
+<p> <strong>心得：</strong></p>
+<ul>
+<li>还是要不断的尝新，可能就会有惊喜<strong><em>以上动作完成至2014-03-03，by Freedom Zhang</em></strong></li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://autophyte.github.io/2014/03/07/勇闯FreeBSD（四）/" data-id="cjw3fov1f001b40qnk6fnrp86" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FreeBSD/">FreeBSD</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-勇闯FreeBSD（六）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/03/06/勇闯FreeBSD（六）/" class="article-date">
@@ -105,7 +169,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2014/03/06/勇闯FreeBSD（六）/" data-id="cjw07kegq003xjsqn895vfrom" class="article-share-link">Share</a>
+      <a data-url="https://autophyte.github.io/2014/03/06/勇闯FreeBSD（六）/" data-id="cjw3fov1h001f40qnotquy8y6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FreeBSD/">FreeBSD</a></li></ul>
@@ -155,7 +219,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2014/03/05/勇闯FreeBSD（五）/" data-id="cjw07kegm003pjsqn138qf71j" class="article-share-link">Share</a>
+      <a data-url="https://autophyte.github.io/2014/03/05/勇闯FreeBSD（五）/" data-id="cjw3fov1g001d40qnk0k2p4s1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FreeBSD/">FreeBSD</a></li></ul>
@@ -201,7 +265,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2014/02/28/勇闯FreeBSD（三）/" data-id="cjw07kegp003vjsqnp7rl0owu" class="article-share-link">Share</a>
+      <a data-url="https://autophyte.github.io/2014/02/28/勇闯FreeBSD（三）/" data-id="cjw3fov1b001440qnfqasmbbb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FreeBSD/">FreeBSD</a></li></ul>
@@ -262,7 +326,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2014/02/27/勇闯FreeBSD（二）/" data-id="cjw07kego003sjsqnqt1zaer9" class="article-share-link">Share</a>
+      <a data-url="https://autophyte.github.io/2014/02/27/勇闯FreeBSD（二）/" data-id="cjw3fov1a001240qncsicdfwq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FreeBSD/">FreeBSD</a></li></ul>
@@ -322,7 +386,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2014/02/05/勇闯FreeBSD（一）/" data-id="cjw07kegk003ljsqnx96d31k0" class="article-share-link">Share</a>
+      <a data-url="https://autophyte.github.io/2014/02/05/勇闯FreeBSD（一）/" data-id="cjw3fov1c001740qn7xnja6g6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FreeBSD/">FreeBSD</a></li></ul>
@@ -374,7 +438,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2009/09/21/32位XP下硬盘安装64位Win7 RTM/" data-id="cjw07kegh003hjsqnbpo0scsp" class="article-share-link">Share</a>
+      <a data-url="https://autophyte.github.io/2009/09/21/32位XP下硬盘安装64位Win7 RTM/" data-id="cjw3fov16000v40qnjkd5qyds" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li></ul>
@@ -433,7 +497,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2009/09/21/使用fgets函数返回值而不是feof/" data-id="cjw07kegl003ojsqnqvur5c5n" class="article-share-link">Share</a>
+      <a data-url="https://autophyte.github.io/2009/09/21/使用fgets函数返回值而不是feof/" data-id="cjw3fov1d001840qn02gn2o78" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li></ul>
@@ -491,7 +555,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2008/11/08/STL中vector_list的几种赋值方法的速度比较/" data-id="cjw07kegd003ejsqnbv75st03" class="article-share-link">Share</a>
+      <a data-url="https://autophyte.github.io/2008/11/08/STL中vector_list的几种赋值方法的速度比较/" data-id="cjw3fov16000u40qnisdyqi5i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li></ul>
@@ -541,52 +605,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2008/11/07/在VS2005中设置Build Events/" data-id="cjw07kego003tjsqn2bwmf64e" class="article-share-link">Share</a>
+      <a data-url="https://autophyte.github.io/2008/11/07/在VS2005中设置Build Events/" data-id="cjw3fov1e001a40qnh68m1wm2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-WinCE下面的关机，重新启动和冷启动" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2008/11/06/WinCE下面的关机，重新启动和冷启动/" class="article-date">
-  <time datetime="2008-11-06T04:07:00.000Z" itemprop="datePublished">2008-11-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2008/11/06/WinCE下面的关机，重新启动和冷启动/">WinCE下面的关机，重新启动和冷启动</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> <strong>本文原来发表在<a href="https://blog.csdn.net/autophyte" target="_blank" rel="noopener">CSDN</a>博客上面，CSDN上内容现在已迁出至<a href="https://autophyte.github.io">github page</a>上</strong></p>
-<h3 id="本文地址：http-blog-csdn-net-autophyte-archive-2008-11-06-3240975-aspx"><a href="#本文地址：http-blog-csdn-net-autophyte-archive-2008-11-06-3240975-aspx" class="headerlink" title="本文地址：http://blog.csdn.net/autophyte/archive/2008/11/06/3240975.aspx"></a>本文地址：<a href="http://blog.csdn.net/autophyte/archive/2008/11/06/3240975.aspx" target="_blank" rel="noopener">http://blog.csdn.net/autophyte/archive/2008/11/06/3240975.aspx</a></h3><h3 id="1-关机"><a href="#1-关机" class="headerlink" title="1. 关机"></a>1. 关机</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*   </span></span><br><span class="line"><span class="comment">    模拟power键按下实现关机，因为关机以后应用程序处理器将会断电，所以关机以后，无法通过此种方式重新开机。   </span></span><br><span class="line"><span class="comment"> */</span>   </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SuspendWinCE</span><span class="params">()</span>   </span></span><br><span class="line"><span class="function"></span>&#123;   </span><br><span class="line">	::keybd_event(VK_OFF, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);   </span><br><span class="line">	::keybd_event(VK_OFF, <span class="number">0</span>, KEYEVENTF_KEYUP, <span class="number">0</span>);   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="2-重启"><a href="#2-重启" class="headerlink" title="2. 重启"></a>2. 重启</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">   调用IOCTL_HAL_REBOOT来实现重新启动。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">BOOL <span class="title">WarmBoot</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> KernelIoControl(IOCTL_HAL_REBOOT, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="3-冷启动"><a href="#3-冷启动" class="headerlink" title="3. 冷启动"></a>3. 冷启动</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">   通过设置clear标志位，然后重新启动的方式实现冷启动。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ClearBoot</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	SetCleanRebootFlag();</span><br><span class="line">	KernelIoControl(IOCTL_HAL_REBOOT, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2008/11/06/WinCE下面的关机，重新启动和冷启动/" data-id="cjw07kegj003jjsqnl1etjtxp" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSDN迁移/">CSDN迁移</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WinCE/">WinCE</a></li></ul>
 
     </footer>
   </div>
@@ -599,7 +621,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -623,7 +645,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/C/" style="font-size: 13.33px;">C++</a> <a href="/tags/CSDN迁移/" style="font-size: 18.33px;">CSDN迁移</a> <a href="/tags/FreeBSD/" style="font-size: 16.67px;">FreeBSD</a> <a href="/tags/Jmeter/" style="font-size: 18.33px;">Jmeter</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/WinCE/" style="font-size: 10px;">WinCE</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 11.67px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/加解密/" style="font-size: 11.67px;">加解密</a> <a href="/tags/压力测试/" style="font-size: 18.33px;">压力测试</a> <a href="/tags/性能测试/" style="font-size: 18.33px;">性能测试</a> <a href="/tags/测试/" style="font-size: 20px;">测试</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
+      <a href="/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/tags/CSDN迁移/" style="font-size: 17.14px;">CSDN迁移</a> <a href="/tags/FreeBSD/" style="font-size: 15.71px;">FreeBSD</a> <a href="/tags/Jmeter/" style="font-size: 18.57px;">Jmeter</a> <a href="/tags/Python/" style="font-size: 14.29px;">Python</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/WinCE/" style="font-size: 10px;">WinCE</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 11.43px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/加解密/" style="font-size: 11.43px;">加解密</a> <a href="/tags/压力测试/" style="font-size: 18.57px;">压力测试</a> <a href="/tags/性能测试/" style="font-size: 18.57px;">性能测试</a> <a href="/tags/测试/" style="font-size: 20px;">测试</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
     </div>
   </div>
 
@@ -632,7 +654,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">September 2009</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">November 2008</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">September 2009</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">November 2008</a></li></ul>
     </div>
   </div>
 
@@ -643,6 +665,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/05/25/Jmeter-Element介绍7/">Jmeter Element介绍7：Switch</a>
+          </li>
         
           <li>
             <a href="/2019/04/17/2019-04-17-Centos7下安装docker以及基于docker的数据库/">Centos7下安装docker以及基于docker的数据库</a>
@@ -658,10 +684,6 @@
         
           <li>
             <a href="/2019/04/11/2019-04-11-Jmeter各Element介绍5/">Jmeter各Element介绍5：交错控制器</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/10/2019-04-10-Jmeter各Element介绍4/">Jmeter各Element介绍4：ForEach控制器</a>
           </li>
         
       </ul>

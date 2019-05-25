@@ -70,6 +70,65 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Jmeter-Element介绍7" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/25/Jmeter-Element介绍7/" class="article-date">
+  <time datetime="2019-05-25T07:49:09.000Z" itemprop="datePublished">2019-05-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/25/Jmeter-Element介绍7/">Jmeter Element介绍7：Switch</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>学习jmeter最好的方式还是去看<a href="https://jmeter.apache.org/usermanual/get-started.html" target="_blank" rel="noopener">官方方档</a></p>
+<h3 id="switch控制器介绍"><a href="#switch控制器介绍" class="headerlink" title="switch控制器介绍"></a>switch控制器介绍</h3><p>switch控制器比较好理解，类似于C/语言中的switch，每一次只运行switch下的一个元件。</p>
+<ul>
+<li>当设置switch value为数字时<ol>
+<li>switch value会被当做子元件的位置来选择需要运行的元件</li>
+<li>子元件排序从0开始</li>
+<li>switch value超出元件位置时，switch会选择第0个元件</li>
+<li>switch支持有一个名字为default的子元件，但是在用数字来控制选择时，default是无效的，当作一个普通的子元件，超出范围时不选择default，二十选择0</li>
+<li>default仅在使用字符串选择时才有效，且default这个子元件不区分大小写</li>
+</ol>
+</li>
+<li>当使用字符串选择时<ol>
+<li>字符串是大小写敏感的</li>
+<li>如果字符串和所有元件名称不同，则会选择default（此时大小写不敏感）</li>
+</ol>
+</li>
+</ul>
+<p>用C++来模拟switch控制器</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> array_len(x) (sizeof(x)/sizeof(x[0]))</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">switch_controll</span><span class="params">(<span class="keyword">int</span> switch_value)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">switch</span>(switch_value) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">DEFAULT_SELECT:</span><br><span class="line">			<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"request baidu"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">			<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"request qq"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">			<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"request google"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			<span class="keyword">goto</span> DEFAULT_SELECT;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">switch_controll</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">string</span> switch_value)</span> </span>&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> key_index[] = &#123;</span><br><span class="line">		<span class="string">"get_baidu"</span>, <span class="string">"get_qq"</span>, <span class="string">"get_google"</span></span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> len = array_len(key_index); </span><br><span class="line">	<span class="keyword">int</span> switch_index = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> index=<span class="number">0</span>; index &lt; len; ++index) &#123;</span><br><span class="line">		<span class="keyword">if</span> (key_index[index] == switch_value) &#123;</span><br><span class="line">			switch_index = index;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"using :"</span> &lt;&lt; switch_value &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	switch_controll(switch_index);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如下图中，我们使用while控制器的<code></code>来控制switch时，运行结果如下：<br><img src="/img/jmeter/JmeterElements_controllers_switch_controller.png" alt="switch控制器"></p>
+<p><img src="/img/jmeter/JmeterElements_controllers_switch_controller_result.png" alt="switch控制器运行结果"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://autophyte.github.io/2019/05/25/Jmeter-Element介绍7/" data-id="cjw3fov15000s40qnqs3wteys" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2019-04-17-Centos7下安装docker以及基于docker的数据库" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/17/2019-04-17-Centos7下安装docker以及基于docker的数据库/" class="article-date">
@@ -115,7 +174,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2019/04/17/2019-04-17-Centos7下安装docker以及基于docker的数据库/" data-id="cjw07kef8000pjsqn9af4e4u3" class="article-share-link">Share</a>
+      <a data-url="https://autophyte.github.io/2019/04/17/2019-04-17-Centos7下安装docker以及基于docker的数据库/" data-id="cjw3fov17000x40qn6x791bir" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
@@ -317,7 +376,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2019/04/16/2019-04-16-Jmeter性能测试实例/" data-id="cjw07kefb000sjsqn3gfq5txz" class="article-share-link">Share</a>
+      <a data-url="https://autophyte.github.io/2019/04/16/2019-04-16-Jmeter性能测试实例/" data-id="cjw3fov10000o40qnp79fj03q" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
@@ -367,7 +426,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2019/04/12/2019-04-12-Jmeter各Element介绍6/" data-id="cjw07kefa000rjsqne998cyu6" class="article-share-link">Share</a>
+      <a data-url="https://autophyte.github.io/2019/04/12/2019-04-12-Jmeter各Element介绍6/" data-id="cjw3fov13000r40qnelhiiwi8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
@@ -408,7 +467,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2019/04/11/2019-04-11-Jmeter各Element介绍5/" data-id="cjw07kef8000ojsqna5368csm" class="article-share-link">Share</a>
+      <a data-url="https://autophyte.github.io/2019/04/11/2019-04-11-Jmeter各Element介绍5/" data-id="cjw3fov11000p40qnglr8cnpn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
@@ -452,7 +511,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2019/04/10/2019-04-10-Jmeter各Element介绍4/" data-id="cjw07kef6000njsqn5i93sczv" class="article-share-link">Share</a>
+      <a data-url="https://autophyte.github.io/2019/04/10/2019-04-10-Jmeter各Element介绍4/" data-id="cjw3fov0v000h40qn5bysmdas" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
@@ -518,7 +577,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2019/04/09/2019-04-09-Jmeter各Element介绍3/" data-id="cjw07kef4000ljsqnlyje55o5" class="article-share-link">Share</a>
+      <a data-url="https://autophyte.github.io/2019/04/09/2019-04-09-Jmeter各Element介绍3/" data-id="cjw3fov0t000f40qn36id66mg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
@@ -572,7 +631,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2019/04/01/2019-04-01-Python接口自动化测试工程模板/" data-id="cjw07kef2000jjsqns90jdwbv" class="article-share-link">Share</a>
+      <a data-url="https://autophyte.github.io/2019/04/01/2019-04-01-Python接口自动化测试工程模板/" data-id="cjw3fov0z000n40qn92cv2nxq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自动化/">自动化</a></li></ul>
@@ -616,7 +675,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2019/03/29/2019-03-29-gitlfs存储大文件/" data-id="cjw07keew000ejsqn5ikodw6n" class="article-share-link">Share</a>
+      <a data-url="https://autophyte.github.io/2019/03/29/2019-03-29-gitlfs存储大文件/" data-id="cjw3fov0y000l40qn5zy8y889" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -681,69 +740,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2019/03/16/2019-03-16-PYTHON实现RSA_AES混合加密2/" data-id="cjw07kegf003fjsqn9icvh0k1" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/加解密/">加解密</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-03-15-PYTHON实现RSA_AES混合加密" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/03/15/2019-03-15-PYTHON实现RSA_AES混合加密/" class="article-date">
-  <time datetime="2019-03-14T16:00:00.000Z" itemprop="datePublished">2019-03-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/15/2019-03-15-PYTHON实现RSA_AES混合加密/">Python3 RSA+AES混合加密（一）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>为啥要用RSA+AES混合加密？安全和速度的妥协呗，RSA更安全但是速度实在太慢</p>
-<h3 id="一般逻辑顺序"><a href="#一般逻辑顺序" class="headerlink" title="一般逻辑顺序"></a>一般逻辑顺序</h3><h4 id="加密过程"><a href="#加密过程" class="headerlink" title="加密过程"></a>加密过程</h4><ol>
-<li>准备好RSA公钥（假设为key_rsa_pub）</li>
-<li>随机生成AES加密密钥：key_aes_rand（这个会经过RSA加密发送给接收方）</li>
-<li>使用key_aes_rand对需要发送的数据msg进行AES加密（加密时需要对数据进行填充），得到encrypted_msg</li>
-<li>第3步aes加密后的数据有些是不可见数据，网络传输时可能会出错，此时会再进一步进行base64编码，得到base64ed_encrypted_msg</li>
-<li>对key_aes_rand使用key_rsa_pub进行RSA加密、base64，得到base64ed_encrypted_key_aes_rand</li>
-<li>把base64ed_encrypted_msg和base64ed_encrypted_key_aes_rand发送给接收方即可</li>
-</ol>
-<h4 id="解密过程"><a href="#解密过程" class="headerlink" title="解密过程"></a>解密过程</h4><ol>
-<li>准备好RSA私钥(key_rsa_pri)</li>
-<li>对接收到的数据拆分，得到base64ed_encrypted_msg和base64ed_encrypted_key_aes_rand</li>
-<li>对base64ed_encrypted_key_aes_rand进行base64解密，得到encrypted_key_aes_rand</li>
-<li>对encrypted_key_aes_rand，使用RSA私钥key_rsa_pri解密，得到key_aes_rand</li>
-<li>对base64ed_encrypted_msg进行base64解密，得到encrypted_msg</li>
-<li>对encrypted_msg，使用key_aes_rand进行AES解密得到msg</li>
-</ol>
-<h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><ol>
-<li>以上流程实际上就是用随机生成的AES密钥对原始信息加密，然后用RSA公钥对AES的随机密钥加密，将两个加密后的数据发给接收端</li>
-<li>相比较直接AES加密的方式，混合加密时AES的密钥时随机生成的。（通过RSA加密后再发送给接收端）</li>
-<li>RSA加密使用的公钥时公开的</li>
-</ol>
-<h3 id="上代码"><a href="#上代码" class="headerlink" title="上代码"></a>上代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># Crypto安装命令：`pip3 install -i https://pypi.douban.com/simple pycryptodome`</span></span><br><span class="line"><span class="keyword">from</span> Crypto <span class="keyword">import</span> Random</span><br><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> PKCS1_v1_5 <span class="keyword">as</span> Cipher_pkcs1_v1_5</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># AES根据16位对齐(即AES128)</span></span><br><span class="line">BLOCK_SIZE = <span class="number">16</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 伪随机数生成器</span></span><br><span class="line">random_generator = Random.new().read</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># RSA公钥，发送方使用</span></span><br><span class="line">public_key = <span class="string">b"""-----BEGIN PUBLIC KEY-----</span></span><br><span class="line"><span class="string">MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDW1aA3SG/czhFO+57bFVIMx390</span></span><br><span class="line"><span class="string">TMWXUY1ZTHW6gXTaK1gBfd7rHVaxLhmOsfIBaxBFfXg6lOfBQ+9mOZDY0LPzRRP2</span></span><br><span class="line"><span class="string">1pmW+DW/QvrAO1xL1t04zKzPNkslCpjQ3fSwwIyJnfQsRQxUxUv9j/OJdWh97XNc</span></span><br><span class="line"><span class="string">K4EyACqRC9eO9vJ18QIDAQAB</span></span><br><span class="line"><span class="string">-----END PUBLIC KEY-----"""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># RSA私钥，请保护好</span></span><br><span class="line">private_key = <span class="string">b"""-----BEGIN RSA PRIVATE KEY-----</span></span><br><span class="line"><span class="string">MIICWwIBAAKBgQDW1aA3SG/czhFO+57bFVIMx390TMWXUY1ZTHW6gXTaK1gBfd7r</span></span><br><span class="line"><span class="string">HVaxLhmOsfIBaxBFfXg6lOfBQ+9mOZDY0LPzRRP21pmW+DW/QvrAO1xL1t04zKzP</span></span><br><span class="line"><span class="string">NkslCpjQ3fSwwIyJnfQsRQxUxUv9j/OJdWh97XNcK4EyACqRC9eO9vJ18QIDAQAB</span></span><br><span class="line"><span class="string">AoGARzKGZbaJ7AFsVw1TY4PjV1Izo9VgPnp2f7uz4IV6tmWwRX5I3F6IFoa9TZRy</span></span><br><span class="line"><span class="string">LD970FZ5UTYmwDQa03lhzu5g/t4MBGZ+dEJ7hmcR4PJuLZSl59E2TzkEo9hE3DQ7</span></span><br><span class="line"><span class="string">bq4wSIeBcY61hiwGf8tCnWetJbAvj+HS29HIB8sl1fu0jekCQQDgwiJm3HkgkoNq</span></span><br><span class="line"><span class="string">mx5WliKvcGi+/eB9FXar9jn6762+mkge7htZbrM4tpIHl+5Vx+bn8E159FTcmgCS</span></span><br><span class="line"><span class="string">My/WCb37AkEA9LJbn9GLvxupAcXq35snnq5xkNAsgHJHQaeu/VT0T2Gz5pUO3iB4</span></span><br><span class="line"><span class="string">GLpWlia/E9eIDWj399Zs089AT72dAab0AwJAPtTmqxy9W+a5iEbe/1OvVJ43GhV8</span></span><br><span class="line"><span class="string">+VrTtxT5dnYkeyFEQilMSf8RaSxYvHizrxVYLsTV098DDjybJkPa/pnwmwJAXeJk</span></span><br><span class="line"><span class="string">5y/l92AseyKt2DdWfzqdFhvZRzsRfe5RZJ+I0UBCXxEH0FAS5CHygM/C9mD2sXZ5</span></span><br><span class="line"><span class="string">1ZxuyuG04iN1LyIYcwJAULISlX5ZR8y+V6B1E/vndPu4BdfX5QORqzIwTAWsAt8k</span></span><br><span class="line"><span class="string">uMsm5ubz+EEf4klTSVLhRZrxquVnTaBgiib6ngc9iA==</span></span><br><span class="line"><span class="string">-----END RSA PRIVATE KEY-----"""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 填充函数，填充模式：PKCS5Padding(填充内容等于缺少的字节数)</span></span><br><span class="line">pad = <span class="keyword">lambda</span> s: s + (BLOCK_SIZE - len(s) % BLOCK_SIZE) * \</span><br><span class="line">                chr(BLOCK_SIZE - len(s) % BLOCK_SIZE).encode()</span><br><span class="line"><span class="comment"># 返填充函数</span></span><br><span class="line">unpad = <span class="keyword">lambda</span> s: s[:-ord(s[len(s) - <span class="number">1</span>:])]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成随机密钥</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_random_key_readable</span><span class="params">(key_size=<span class="number">16</span>)</span>:</span></span><br><span class="line">    ulen = int(key_size/<span class="number">4</span>*<span class="number">3</span>)</span><br><span class="line">    key = base64.b64encode(os.urandom(ulen))</span><br><span class="line">    <span class="keyword">return</span> key</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encrypt</span><span class="params">(msg: bytes, key_rsa_pub: bytes)</span>:</span></span><br><span class="line">    <span class="comment"># 生成随机AES密钥</span></span><br><span class="line">    key_aes_rand = get_random_key_readable(BLOCK_SIZE)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 对原始信息进行AES加密再base64（需要网络传输选择urlsafe_b64encode）</span></span><br><span class="line">    encrypted_msg = AES.new(key_aes_rand, AES.MODE_ECB).encrypt(pad(msg))</span><br><span class="line">    base64ed_encrypted_msg = base64.urlsafe_b64encode(encrypted_msg)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 对AES随机密钥进行RSA加密</span></span><br><span class="line">    encrypted_key_aes_rand = Cipher_pkcs1_v1_5.new(</span><br><span class="line">        RSA.importKey(key_rsa_pub)).encrypt(key_aes_rand)</span><br><span class="line"></span><br><span class="line">    base64ed_encrypted_key_aes_rand = base64.urlsafe_b64encode(encrypted_key_aes_rand)</span><br><span class="line">    <span class="keyword">return</span> [base64ed_encrypted_msg, base64ed_encrypted_key_aes_rand]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">(source: list, key_rsa_pri: bytes)</span>:</span></span><br><span class="line">    <span class="comment"># 对接收到的数据拆分，得到base64ed_encrypted_msg和base64ed_encrypted_key_aes_rand</span></span><br><span class="line">    base64ed_encrypted_msg, base64ed_encrypted_key_aes_rand = source[<span class="number">0</span>], source[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 对base64ed_encrypted_key_aes_rand进行base64解密，得到encrypted_key_aes_rand</span></span><br><span class="line">    encrypted_key_aes_rand = base64.urlsafe_b64decode(base64ed_encrypted_key_aes_rand)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 对encrypted_key_aes_rand，使用RSA私钥key_rsa_pri解密，得到key_aes_rand</span></span><br><span class="line">    key_aes_rand = Cipher_pkcs1_v1_5.new(RSA.importKey(key_rsa_pri)).decrypt(</span><br><span class="line">        encrypted_key_aes_rand, random_generator)</span><br><span class="line"></span><br><span class="line">    encrypted_msg = base64.urlsafe_b64decode(base64ed_encrypted_msg)</span><br><span class="line">    msg = unpad(AES.new(key_aes_rand, AES.MODE_ECB).decrypt(encrypted_msg))</span><br><span class="line">    <span class="keyword">return</span> msg</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    message = <span class="string">"这是一个测试数据"</span></span><br><span class="line">    value = encrypt(message.encode(<span class="string">"utf-8"</span>), key_rsa_pub=public_key)</span><br><span class="line">    msg = decrypt(value, key_rsa_pri=private_key).decode()</span><br><span class="line"></span><br><span class="line">    print(<span class="string">"原始数据： &#123;origin_msg&#125;"</span>.format(origin_msg=message))</span><br><span class="line">    print(<span class="string">"密文数据： &#123;encrypt_msg&#125;"</span>.format(encrypt_msg=value))</span><br><span class="line">    print(<span class="string">"解密数据： &#123;decrypt_msg&#125;"</span>.format(decrypt_msg=msg))</span><br></pre></td></tr></table></figure>
-<h3 id="运行上面代码"><a href="#运行上面代码" class="headerlink" title="运行上面代码"></a>运行上面代码</h3><p><img src="/img/Python/python_rsa_aes_result.png" alt="RSA/AES混合加密"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://autophyte.github.io/2019/03/15/2019-03-15-PYTHON实现RSA_AES混合加密/" data-id="cjw07keer0009jsqnqkcibw0n" class="article-share-link">Share</a>
+      <a data-url="https://autophyte.github.io/2019/03/16/2019-03-16-PYTHON实现RSA_AES混合加密2/" data-id="cjw3fov2l005440qnkm32a3xf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/加解密/">加解密</a></li></ul>
@@ -759,7 +756,7 @@
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -783,7 +780,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/C/" style="font-size: 13.33px;">C++</a> <a href="/tags/CSDN迁移/" style="font-size: 18.33px;">CSDN迁移</a> <a href="/tags/FreeBSD/" style="font-size: 16.67px;">FreeBSD</a> <a href="/tags/Jmeter/" style="font-size: 18.33px;">Jmeter</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/WinCE/" style="font-size: 10px;">WinCE</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 11.67px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/加解密/" style="font-size: 11.67px;">加解密</a> <a href="/tags/压力测试/" style="font-size: 18.33px;">压力测试</a> <a href="/tags/性能测试/" style="font-size: 18.33px;">性能测试</a> <a href="/tags/测试/" style="font-size: 20px;">测试</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
+      <a href="/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/tags/CSDN迁移/" style="font-size: 17.14px;">CSDN迁移</a> <a href="/tags/FreeBSD/" style="font-size: 15.71px;">FreeBSD</a> <a href="/tags/Jmeter/" style="font-size: 18.57px;">Jmeter</a> <a href="/tags/Python/" style="font-size: 14.29px;">Python</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/WinCE/" style="font-size: 10px;">WinCE</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 11.43px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/加解密/" style="font-size: 11.43px;">加解密</a> <a href="/tags/压力测试/" style="font-size: 18.57px;">压力测试</a> <a href="/tags/性能测试/" style="font-size: 18.57px;">性能测试</a> <a href="/tags/测试/" style="font-size: 20px;">测试</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
     </div>
   </div>
 
@@ -792,7 +789,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">September 2009</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">November 2008</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">September 2009</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/11/">November 2008</a></li></ul>
     </div>
   </div>
 
@@ -803,6 +800,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/05/25/Jmeter-Element介绍7/">Jmeter Element介绍7：Switch</a>
+          </li>
         
           <li>
             <a href="/2019/04/17/2019-04-17-Centos7下安装docker以及基于docker的数据库/">Centos7下安装docker以及基于docker的数据库</a>
@@ -818,10 +819,6 @@
         
           <li>
             <a href="/2019/04/11/2019-04-11-Jmeter各Element介绍5/">Jmeter各Element介绍5：交错控制器</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/10/2019-04-10-Jmeter各Element介绍4/">Jmeter各Element介绍4：ForEach控制器</a>
           </li>
         
       </ul>
